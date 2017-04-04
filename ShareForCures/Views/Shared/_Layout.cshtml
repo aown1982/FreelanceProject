@@ -1,0 +1,598 @@
+﻿<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>SHARE For Cures</title>
+    <meta charset="utf-8" />
+    <meta name="fb_admins_meta_tag" content="SHAREForCures" />
+    <meta name="keywords" content="cures, disease, diseases, donate your data, epidemiology, illness, illnesses, nonprofit, patient, patients, research, sharing, sick" />
+    <meta name="description" content="Empowering the patient community to use their individual health data to advance medical research and save lives. More Cases. More Cures." />
+    <meta property="og:title" content="SHARE For Cures" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.shareforcures.org/" />
+    <meta property="og:site_name" content="SHARE For Cures" />
+    <meta property="fb:admins" content="SHAREForCures" />
+    <meta property="og:description" content="Empowering the patient community to use their individual health data to advance medical research and save lives. More Cases. More Cures." />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <meta name="alexaVerifyID" content="e3l1D-s2LjXUGX3KMMuvhXzNvsc" />
+    <meta name="msvalidate.01" content="AF0F7EA6E4D491BEF56C04833B60BEB0" />
+    <meta name="p:domain_verify" content="6016a86fc02518137b3e8899596b7815" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="shortcut icon" href="/images/icon.gif" type="image/png" />
+    <link rel="apple-touch-icon" href="/images/icon.gif" type="image/png" />
+    <link rel="canonical" href="https://www.shareforcures.org/" />
+
+    @Styles.Render("~/Bundle/assets/css") 
+    @Styles.Render("~/assets/revolutionCSS")
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,800" rel="stylesheet" property="stylesheet" type="text/css" media="all" />
+
+    @Scripts.Render("~/assets/MainJS")
+    @*<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer>*@
+    @*<script type="text/javascript">
+      (function() {
+       var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+       po.src = 'https://apis.google.com/js/client.js?onload=onLoadCallback';
+       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+     })();
+    </script>*@
+    <script>
+        $(window).on('load', function () {
+            $("#btnLoginMobile").animatedModal();
+            $("#btnSignupMobile").animatedModal();
+            $("#btnLoginMobile").click(function () {
+                $("#serverMsgContainer").hide();
+                $("#welcomeNewUserContainer").hide();
+                $("#resetPassword").hide();
+                $("#forgotPassword").hide();
+                $('#createAccount').hide();
+                $('#createAccountForm').find(".socialButtonCustomSize").addClass('socialButtonCustomSizeMobile');
+                $('#createAccountForm').find(".socialButtonCustomSize").removeClass('socialButtonCustomSize');
+                $('#createAccountForm').find(".right-inner-addon").addClass('right-inner-addon-mobile');
+                $('#createAccountForm').find(".right-inner-addon").removeClass('right-inner-addon');
+                $('#frmLogin').bootstrapValidator('resetForm', true);
+                $('#loginForm').removeClass('hidden');
+                $('#frmLogin').find(".width70").removeClass('width70');
+                $("#loginForm").show();
+
+            });
+            $("#btnSignupMobile").click(function () {
+                $('#loginForm').hide();
+                $('#serverMsgContainer').hide();
+                $("#welcomeNewUserContainer").hide();
+                $('#resetPassword').hide();
+                $('#forgotPassword').hide();
+                $('#createAccountForm').bootstrapValidator('resetForm', true);
+                $('#createAccount').removeClass('hidden');
+                $('#createAccountForm').find(".socialButtonCustomSize").addClass('socialButtonCustomSizeMobile');
+                $('#createAccountForm').find(".socialButtonCustomSize").removeClass('socialButtonCustomSize');
+                $('#createAccountForm').find(".right-inner-addon").addClass('right-inner-addon-mobile');
+                $('#createAccountForm').find(".right-inner-addon").removeClass('right-inner-addon');
+                $('#createAccount').show();
+
+
+            });
+
+        });
+        //$("#btnLogin").animatedModal();
+
+    </script>
+</head>
+<body>
+<div id="page-wrapper" style="margin: 0 auto;align-content: center;">
+    <input type="hidden" id="isUserLoggedIn" value="@ViewBag.Login" />
+    <!-- Header -->
+    <div class="logo-mobile">
+        <a href="/home/index"><img src="/images/logo.gif" width="50%"></a>
+</div>
+    <div id="header">
+        <table class="headerTable">
+            <tr style="margin:0px; padding: 0px; display:table-row;">
+                <td rowspan="2" style="width:500px;">
+                    <!-- Logo -->
+                    <div class="siteHeader-container">
+                        <a href="/home/index"><img src="/images/logo.gif"></a>
+                    </div>
+                </td>
+                <td style="margin:0px; padding: 0px; width: 100%;display:table-cell;">
+                    <!-- Icons -->
+                    <div class="SocialMenu">
+                        <ul class="icons">
+                            <li><a href="https://twitter.com/SHAREForCures" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+                            <li><a href="https://www.facebook.com/SHAREForCures" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+                        </ul>
+                    </div><br /><br />
+                    <div class="headerText">A nonprofit dedicated to crowdsourcing cures.</div>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    @if (ViewBag.Login == "yes")
+                    {
+                        <div class="LoginSignup">
+                            <form action="\home\Logout">
+                                @ViewBag.Message
+                                @*<a href="#animatedModal" id="lnkResetPassword" class="anchorcolor">Reset Password</a>*@
+                                | <a href="javascript:void(0)" id="btnLogout" class="anchorcolor">Logout</a>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="LoginSignup">
+                            <a id="btnLogin" href="#animatedModal" class="button">Login</a>
+                            <a id="btnSignup" href="#animatedModal" class="button">Signup</a>
+                        </div>
+                    }
+                </td>
+            </tr>
+        </table>
+
+    <!--Call your modal-->
+    <!--DEMO01-->
+    <!-- Nav -->
+    <nav id="nav">
+        <ul>
+            <li class="@(ViewBag.ActiveNav == "home" ? "current" : "")"><a href="/Home/Index">Home</a></li>
+            <li class="@(ViewBag.ActiveNav == "about" ? "current" : "")">
+                <a href="/Contents/AboutUs">About Us</a>
+                <ul>
+                    <li><a href="/Contents/Mission">Our Mission</a></li>
+                    <li><a href="http://shareforcures.blogspot.ba/">Our Blog</a></li>
+                    <li><a href="/Contents/Supporters">Our Supporters</a></li>
+                    <li><a href="/Contents/Board">Board of Directors</a></li>
+                    <li><a href="/Contents/Contact">Contact Us</a></li>
+                </ul>
+            </li>
+            <li class="@(ViewBag.ActiveNav == "hiw" ? "current" : "")">
+                <a href="/Contents/HowItWorks">How it Works</a>
+                <ul>
+                    <li><a href="/Contents/Problem">The Problem</a></li>
+                    <li><a href="/Contents/System">The SHARE System</a></li>
+                    <li><a href="/Contents/Moonshot">The Cancer Moonshot Project</a></li>
+                    <li><a href="/Contents/PrivacySecurity">Privacy and Security</a></li>
+                    <li><a href="/Contents/FAQ">FAQs</a></li>
+                </ul>
+            </li>
+            <li class="@(ViewBag.ActiveNav == "wts" ? "current" : "")">
+                <a href="/Contents/WaysToShare">Ways to SHARE</a>
+                <ul>
+                    <li><a href="/Contents/Data">SHARE Your Data</a></li>
+                    <li><a href="https://www.aplos.com/aws/give/SHAREForCures/donation" target="_blank">Support Us</a></li>
+                    <li><a href="/Contents/Volunteer">Volunteer</a></li>
+                    <li><a href="/Contents/Partner">Partner</a></li>
+                    <li><a href="/Contents/Research">Research</a></li>
+                </ul>
+
+            <li>
+                <a href="https://www.aplos.com/aws/give/SHAREForCures/donation" target="_blank">Donate</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div id="animatedModal">
+<!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID class="close-animatedModal" -->
+<div id="closebt-container" class="close-animatedModal">
+    <img class="closebt" src="/images/closebt.svg"  onclick="$('body, html').css({ 'overflow': 'auto' });">
+</div>
+<div class="container hidden" id="loginForm">
+    <form class="well form-horizontal" action=" " method="post" id="frmLogin">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend class="formHeading"><span>Log in to your SHARE For Cures Account</span></legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <div class="col-md-12 ">
+                    <div id="alertLogin" class="input-group right-inner-addon centered alert alert-danger" style="text-align: left; display: none;">
+                        <span class="glyphicon glyphicon-info-sign" style="color: #B40404"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="text" class="form-control" id="email" name="email" value="" placeholder="Email Address" require/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="password" class="form-control" name="password" id="password" value="" placeholder="Password" require/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="width70 centered">
+                        <div class="input-group pull-left">
+                            @*<button type="button" id="btnSignIn" href="#" onclick="Login();" class="button btn-white">SIGN IN</button>*@
+                            <button type="submit" id="btnSignIn" href="#" class="button btn-large">SIGN IN</button>
+                        </div>
+                        <div class="input-group pull-right">
+                            <input id="cbRememberMe" type="checkbox"/>&nbsp;Remember Me
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="width70 centered">
+                        <div class="input-group pull-left font9">
+                            <a id="btnForgot" href="#">Forgot Password</a>
+                        </div>
+                        <div class="input-group pull-right font9">
+                            <a id="btnCreateAccount" href="#">Create Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="width70 centered paddingLeft5percent">
+                        <svg style="max-width: 40%; height: 10px">
+                            <line x1="0" y1="0" x2="100%" y2="0" style="stroke: #4D4D4D; stroke-width: 10"/>
+                            Sorry, your browser does not support inline SVG.
+                        </svg>
+
+
+                        <span class="span-OR">OR</span>
+
+
+                        <svg style="max-width: 40%; height: 10px">
+                            <line x1="0" y1="0" x2="100%" y2="0" style="stroke: #4D4D4D; stroke-width: 10"/>
+                            Sorry, your browser does not support inline SVG.
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="width70 centered">
+                        <div class="col-md-12 col-sm-12 social-wrap text-center">
+                            <button type="button" id="facebook" class="center-block socialButtonCustomSizeLogin" onclick="facebookLogin();">Log In with Facebook</button>
+                        </div>
+                        <div class="col-md-12 col-sm-12 social-wrap text-center">
+                            <button id="google" type="button" class="center-block socialButtonCustomSizeLogin" onclick="location.href='@Url.Action("GoogleLogin", "Auth")'">Log In with Google</button>
+                        </div>
+                        <div class="col-md-12 col-sm-12 social-wrap text-center">
+                            <button id="twitter" type="button" class="center-block socialButtonCustomSizeLogin" onclick="twitterLogin();">Log In with Twitter</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class="container hidden" id="forgotPassword" >
+    <form class="well form-horizontal" id="forgotPasswordForm"  action="  " method="POST" data-validate="true">
+        <fieldset>
+
+            <!-- Form Name -->
+            <legend class="formHeading"><span>Forgot your password</span></legend>
+
+            <!-- Text input-->
+
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="text" class="form-control" id="forgotEmail" name="forgotEmail" value="" placeholder="Email Address" require/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 ">
+                    <div class="input-group right-inner-addon centered">
+                        <span>Enter the email address that is associated with your account, and if we found an account that matches we will send you a link to reset your password.</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered center">
+                        <button type="submit" id="btnFprgotPassword" href="#" class="button btn-white">Reset</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<div class="container hidden" id="createAccount">
+
+    <form class="well form-horizontal" action=" " method="post" id="createAccountForm">
+        <fieldset>
+            <input type="hidden" name="SocialUserId" value="">
+            <input type="hidden" name="SocialType" value="">
+            <input type="hidden" name="AccessToken" value="">
+            <input type="hidden" name="PublicToken" value="">
+            <input type="hidden" name="IdToken" value="">
+            <input type="hidden" name="RefreshToken" value="">
+            <input type="hidden" name="ExpiresIn" value="">
+            <!-- Form Name -->
+            <legend class="formHeading"><span style="font-size: larger;">Join SHARE For Cures</span></legend>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <hr style="background: #808080; border: 0; height:3px;" />
+                        @*
+                            <div class="numberCircle">
+        <div class="height_fix"></div>
+        <div class="content">1</div>
+    </div>*@
+                            <div class="note">
+                                <span>The SHARE platform is currently only open for select users. If you have an invitation code, please enter it 
+                                below to create an account. If you do not have an invitation code, <a href="/Contents/Data">please sign up</a> to be 
+                                notified when the system is available for public use.</span>
+                            </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="text" class="form-control" id="invitationCode" name="invitationCode" value="" placeholder="Invitation Code" require />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 ">
+                    <div class="input-group right-inner-addon centered" id="selectSignup">
+                        <hr style="background: #808080; border: 0; height:3px;" />
+                        @*<div class="numberCircle">
+    <div class="height_fix"></div>
+    <div class="content">2</div>
+                        </div>*@
+                        <span>Chose one of these easy sign up methods</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group col-md-12">
+                <div class="inputGroupContainer">
+                    <div class="col-md-12 input-group  social-wrap padleft15percent" id="socialMediaSignup">
+                        <button type="button" id="twitter" class="center-block socialButtonCustomSize" onclick="twitterSignup();">Twitter</button>
+                        @*<button type="button" id="facebook" class="center-block socialButtonCustomSize" onclick="location.href='@Url.Action("FacebookSignup", "User")'">Facebook</button>*@
+                        <button type="button" id="facebook" class="center-block socialButtonCustomSize" onclick="facebookSignup();">Facebook</button>
+                        <button type="button" id="google" class="center-block socialButtonCustomSize" onclick="location.href='@Url.Action("GoogleLogin", "Auth")'">Google</button>
+                    </div>
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class="form-group">
+                <div class="col-md-12 ">
+                    <div class="input-group right-inner-addon centered" id="titleHeading">
+                        <span>Or sign up using your email address below</span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 ">
+                    <div id="alert" class="input-group right-inner-addon centered alert alert-danger" style="text-align: left; display: none;">
+                        <span class="glyphicon glyphicon-info-sign" style="color: #B40404"></span> 
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="text" class="form-control" id="firstName" name="firstName" value="" placeholder="First Name" require/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="text" class="form-control" id="lastName" name="lastName" value="" placeholder="Last Name" require/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="text" class="form-control" id="signupEmail" name="signupEmail" value="" placeholder="Email" require/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="text" class="form-control" id="signupConfirmEmail" name="signupConfirmEmail" value="" placeholder="Confirm Email" require/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered">
+                        <input type="password" class="form-control" id="password" name="password" value="" placeholder="Password" require/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered ">
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" value="" placeholder="Confirm Password" require/>
+                    </div>
+                </div>
+            </div>
+            <div style="padding-left: 15%;padding-right: 15%;">
+                <div class="form-group">
+                    <div class="col-md-12 inputGroupContainer">
+                        <div class="input-group right-inner-addon centered">
+                            <input type="checkbox" style="-ms-transform: scale(.5); /* IE */  -moz-transform: scale(.5); /* FF */  -webkit-transform: scale(.5); /* Safari and Chrome */  -o-transform: scale(.5); /* Opera */  padding: 10px;" class="form-control" id="emailUpdate" name="emailUpdates" require /><strong>Email Updates</strong><br />Let me know when new updates or products are available
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12 inputGroupContainer">
+                        <div class="input-group right-inner-addon centered">
+                            <input type="checkbox" style="-ms-transform: scale(.5); /* IE */  -moz-transform: scale(.5); /* FF */  -webkit-transform: scale(.5); /* Safari and Chrome */  -o-transform: scale(.5); /* Opera */  padding: 10px;" class="form-control" id="tcConsent" name="tcConsent" require /><strong>Terms & Conditions, and Privacy Policy</strong><br />
+                            By checking this box and clicking "Create Account" you are agreeing to SHARE For Cures' <a href="terms.html" target="_blank">Terms & Conditions</a>, as well as our <a href="privacypolicy.html" target="_blank">Privacy Policy</a>.
+                        </div>
+                    </div>
+                    <div class="" style="margin-left:0!important" id="tcpErrMsg"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12 inputGroupContainer">
+                    <div class="input-group right-inner-addon centered center">
+                        <button type="submit" id="btnSubmitCreateAccount" href="#" class="button btn-large">CREATE ACCOUNT</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 inputGroupContainer">
+                <a href="#" id="lnkLogin" class="">Login</a>
+            </div>
+
+        </fieldset>
+    </form>
+
+</div>
+
+
+<div class="container hidden" id="welcomeNewUserContainer">
+    <div class="row">
+        <form class="well form-horizontal container" action=" " method="post">
+            <fieldset>
+                <legend class="formHeading"><span>Thank you for joining SHARE For Cures</span></legend>
+                <!--welcome slider-->
+                <section class="example">
+                    <article class="content">
+                        <div>SFC Consent Goes Here</div>
+                        <input type="checkbox" />
+                    </article>
+                </section>
+
+                <!-- below slider buttons-->
+
+                <div class="form-group">
+                    <div class="col-md-12 inputGroupContainer">
+                        <div class="clearfix margin-top-2"></div>
+                        <div class="input-group right-inner-addon centered center">
+                            <button type="button" id="btnSkipAddingAccount" class="button btn-white">Skip Adding Account</button>
+                            <button type="button" id="btnAddAccountNow" class="button btn-white">Add Account Now</button>
+
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+
+
+
+    <div class="container" id="serverMsgContainer">
+        <div class="row">
+            <form class="well form-horizontal container frmResetForm" action=" " method="post">
+                <fieldset>
+                    <legend><span id="msgInfo"></span></legend>
+                    <div class="clearfix"></div>
+                    <span class="colorYellow"><a href="/User/ResetForgotPassword?resetcode=Eesdfeop39k3k34lj234jn2mn2j3n4">Sample Link to change password</a></span>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $("#btnLogin").animatedModal();
+    //$("#lnkResetPassword").animatedModal();
+    $("#btnSignup").animatedModal();
+   
+
+    $(document).ready(function() {
+        $("#btnSignup2").animatedModal();
+        $("#btnLogin,#lnkLogin ").click(function () {
+            $('#frmLogin').bootstrapValidator('resetForm', true);
+            $("#serverMsgContainer").hide();
+            $("#welcomeNewUserContainer").hide();
+            $("#resetPassword").hide();
+            $("#forgotPassword").hide();
+            $('#createAccount').hide();
+            $('#loginForm').removeClass('hidden');
+            $("#loginForm").show();
+        });
+
+        $("#btnForgot").click(function () {
+            $("#loginForm").hide();
+            $("#serverMsgContainer").hide();
+            $("#welcomeNewUserContainer").hide();
+            $("#resetPassword").hide();
+            $('#createAccount').hide();
+//            $('#loginForm').addClass('hidden');
+            $('#forgotPassword').removeClass('hidden');
+            $('#forgotPasswordForm').bootstrapValidator('resetForm', false);
+            $("#forgotPassword").show();
+        });
+        $("#lnkResetPassword").click(function() {
+            $("#loginForm").hide();
+            $('#createAccount').hide();
+            $("#welcomeNewUserContainer").hide();
+            $("#serverMsgContainer").hide();
+            $("#forgotPassword").hide();
+            $('#resetPassword').removeClass('hidden');
+            $('#resetPasswordForm').bootstrapValidator('resetForm', true);
+            $('#resetPassword').show();
+        });
+        $("#btnSignup,#btnSignup2,#btnCreateAccount").click(function () {
+            $('#alert').css('display', 'none');
+            $('#loginForm').hide();
+            $('#serverMsgContainer').hide();
+            $("#welcomeNewUserContainer").hide();
+            $('#resetPassword').hide();
+            $('#forgotPassword').hide();            
+            $('#createAccountForm').bootstrapValidator('resetForm', true);
+            $('#createAccount').removeClass('hidden');
+            $('#createAccount').show();
+        });
+        $("#btnLogout").click(function() {
+            var form = $(this).closest("form");
+            form.submit();
+        });
+        $("#btnSkipAddingAccount").click(function() {
+            window.location.replace("/User");
+        });
+        $("#btnAddAccountNow").click(function() {
+            window.location.replace("/User/Share");
+        });
+    });
+</script>
+
+@RenderBody()
+<!-- Footer -->
+<div id="footer">
+    <div class="centered">
+        <a href="/Consent/ConditionsOfUse">Conditions of Use</a>&nbsp;|&nbsp;<a href="/Consent/PrivacyPolicy">Privacy Policy</a><br />
+    </div>
+
+    <!-- Copyright -->
+    <div>
+        <div class="copyright">
+            <span class="icon fa-copyright"> 2016 SHARE For Cures</span><sup class="icon fa-trademark"></sup>, Inc. All Rights Reserved.
+        </div>
+
+    </div>
+</div>
+
+</div>
+
+</body>
+</html>

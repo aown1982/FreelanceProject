@@ -1,0 +1,310 @@
+﻿@using ShareForCures.Models.Users
+<!DOCTYPE HTML>
+
+<html>
+<head>
+    <title>@ViewBag.Title - SHARE For Cures</title>
+    <meta charset="utf-8" />
+    <meta name="fb_admins_meta_tag" content="SHAREForCures" />
+    <meta name="keywords" content="cures, disease, diseases, donate your data, epidemiology, illness, illnesses, nonprofit, patient, patients, research, sharing, sick" />
+    <meta name="description" content="Empowering the patient community to use their individual health data to advance medical research and save lives. More Cases. More Cures." />
+    <meta property="og:title" content="SHARE For Cures" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.shareforcures.org/" />
+    <meta property="og:site_name" content="SHARE For Cures" />
+    <meta property="fb:admins" content="SHAREForCures" />
+    <meta property="og:description" content="Empowering the patient community to use their individual health data to advance medical research and save lives. More Cases. More Cures." />
+    <meta name="SKYPE_TOOLBAR" content="SKYPE_TOOLBAR_PARSER_COMPATIBLE" />
+    <meta name="alexaVerifyID" content="e3l1D-s2LjXUGX3KMMuvhXzNvsc" />
+    <meta name="msvalidate.01" content="AF0F7EA6E4D491BEF56C04833B60BEB0" />
+    <meta name="p:domain_verify" content="6016a86fc02518137b3e8899596b7815" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link rel="shortcut icon" href="/images/icon.gif" type="image/png" />
+    <link rel="apple-touch-icon" href="/images/icon.gif" type="image/png" />
+    <link rel="canonical" href="https://www.shareforcures.org/" />
+
+    @Styles.Render("~/Bundle/assets/css")
+    @Styles.Render("~/assets/revolutionCSS")
+    @Styles.Render("~/assets/UserCSS")
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500,800" rel="stylesheet" property="stylesheet" type="text/css" media="all" />
+
+    @Scripts.Render("~/assets/MainJS")
+    @Scripts.Render("~/assets/UserJS")
+    <script src='https://connect.humanapi.co/connect.js'></script>
+
+    @{
+        UserAuthLogin user = (UserAuthLogin)System.Web.HttpContext.Current.Session["User"];
+        string usersEmail = user.tUser.Email.ToString().Trim();
+        string usersName = user.tUser.FirstName.ToString().Trim() + " " + user.tUser.LastName.ToString().Trim();
+        string usersExternalId = user.tUser.ExternalID.ToString().Trim();
+    }
+
+    <script>
+        function OpenHumanDataApi(loadOption) {
+            var modeOption = "";
+            switch (loadOption) {
+                case 1:
+                    modeOption = "medical";
+                    break;
+                case 2:
+                    modeOption = "wellness";
+                    break;
+                default:
+                    modeOption = "medical";
+            }
+
+            $.ajax({
+                type: "GET",
+                url: "/User/GetUserPublicToken",
+                contentType: "application/json",
+                dataType: 'json'
+            })
+            .done(function (data) {
+                loadHumanApi(data, modeOption);
+            })
+            .fail(function (jqXHR, textStatus) {
+                alert(textStatus);
+            });
+        }
+
+        function loadHumanApi(publicToken, modeOption)
+        {
+
+            var options = {
+                clientUserId: encodeURIComponent('@usersExternalId'),
+                clientId: encodeURIComponent('@System.Configuration.ConfigurationManager.AppSettings["HumanApiClientId"]'),
+                publicToken: publicToken,
+                uiExcludeSplash: true,
+                mode: modeOption,
+                finish: function (err, sessionTokenObject) {
+                    if (publicToken.length == 0) {
+                        var newObject = new Object();
+                        newObject.clientId = sessionTokenObject.clientId;
+                        newObject.humanId = sessionTokenObject.humanId;
+                        newObject.sessionToken = sessionTokenObject.sessionToken;
+                        newObject.userId = sessionTokenObject.userId;
+
+                        $.ajax({
+                            type: "POST",
+                            data: JSON.stringify({ 'model': newObject }),
+                            url: "/User/PostHumanApi",
+                            contentType: "application/json",
+                            dataType: 'json'
+                        }).done(function (data) { });
+                    }
+                },
+                close: function () {
+                    /* (optional) Called when a user closes the popup
+                       without connecting any data sources */
+                },
+                error: function (err) {
+                    /* (optional) Called if an error occurs when loading
+                       the popup. */
+                }
+            }
+            HumanConnect.open(options);
+
+        }
+
+
+        function loadScript(url, callback) {
+
+            var script = document.createElement("script")
+            script.type = "text/javascript";
+
+            if (script.readyState) { //IE
+                script.onreadystatechange = function () {
+                    if (script.readyState == "loaded" ||
+                        script.readyState == "complete") {
+                        script.onreadystatechange = null;
+                        callback();
+                    }
+                };
+            } else { //Others
+                script.onload = function () {
+                    callback();
+                };
+            }
+
+            script.src = url;
+            document.getElementsByTagName("head")[0].appendChild(script);
+        }
+
+        function setDateRangeManually(setby) {
+            $("#txtDateRangeFilter").val = "";
+            //01/01/2015 - 01/31/2015
+            switch (setby) {
+                case 'today':
+                    $("#txtDateRangeFilter").val(dated(0) + " - " + dated(0));
+                    break;
+                case 'yesterday':
+                    $("#txtDateRangeFilter").val(dated(1) + " - " + dated(0));
+                    break;
+                case 'lastweek':
+                    $("#txtDateRangeFilter").val(dated(7) + " - " + dated(0));
+                    break;
+                case 'last30days':
+                    $("#txtDateRangeFilter").val(dated(30) + " - " + dated(0));
+                    break;
+            }
+        }
+
+        function dated(daysminus) {
+            return mydate(moment().add(-daysminus, 'days'));
+        }
+
+        function mydate(dobject) {
+            var today = new Date(dobject);
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0!
+
+            var yyyy = today.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            var ntoday = mm + '/' + dd + '/' + yyyy;
+            return ntoday;
+        }
+
+        function CloseModalManually(myModalTarget) {
+            $('body, html').css({ 'overflow': 'auto' });
+            var modalId = $('body').find('#' + myModalTarget);
+            if (modalId.hasClass(myModalTarget + '-on')) {
+                modalId.removeClass(myModalTarget + '-on');
+                modalId.addClass(myModalTarget + '-off');
+            }
+
+            if (modalId.hasClass(myModalTarget + '-off')) {
+                modalId.removeClass('zoomIn');
+                modalId.addClass('zoomOut');
+                modalId.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                    modalId.css({ 'z-index': -9999 });
+                });
+            };
+        }
+
+    </script>
+
+
+</head>
+<body>
+    <div id="page-wrapper">
+        <!-- Header -->
+        <input type="hidden" id="hIsUserLoggedIn" value="@ViewBag.Login" />
+        <div id="header" class="headerAdmin">
+            <!-- Nav -->
+            <nav id="nav" class="navbar navbar-inverse navbarcustom marginBottom0 height60">
+                <div class="container-fluid">
+                    <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-9" aria-expanded="false" style="height: 1px;">
+                        <ul class="nav navbar-nav pull-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle AddAccountLinkSubMenu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class=" fixVerticalMenu"></span>Add Accounts <span class="caret"></span></a>
+                                <ul class="dropdown-menu" id="userAccounts" style="padding-right: 7px;">
+                                    <li><a href="javascript:void(0);" onclick="OpenHumanDataApi(1);" class="AddAccountLinkButton">Medical Sources</a></li>
+                                    <li><a href="javascript:void(0);" onclick="OpenHumanDataApi(2);" class="AddAccountLinkButton">Apps/Devices</a></li>
+                                </ul>
+                            </li>
+                            <li></li>
+                            <li><a href="/User/Settings">Settings</a></li>
+                            <li><a href="#">Get Help</a></li>
+                            @*<li><a href="#">Take Tour</a></li>*@
+                            <li><a href="https://www.paypal.com/webapps/mpp/search-cause?charityId=113616&s=3" target="_blank">Donate</a></li>
+                            <li><a href="/Home/logout">Logout</a></li>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+            <div class="row" id="siteHeader">
+                <div class="col-md-4">
+                    <a href="/User"><img src="/images/logo.gif" class="fixLogoAdmin"></a>
+                </div>
+                <nav class="navbar  col-md-8 col-md-8 col-xs-12 col-sm-12 zindex10" role="navigation">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle navbar-custom" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar navbar-icon-bar" style=""></span>
+                            <span class="icon-bar navbar-icon-bar"></span>
+                            <span class="icon-bar navbar-icon-bar"></span>
+                        </button>
+                        @*<a class="navbar-brand" href="#">Brand</a>*@
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav egmenu">
+                            <li><a href="User" class="@(ViewBag.ActiveNav == "overview" ? "egmenuActive" : "")">Overview</a></li>
+                            <li>
+                                <a href="/User/MyData" class="@(ViewBag.ActiveNav == "mydata" ? "egmenuActive" : "")">My Data</a>
+                            </li>
+                            <li><a href="/User/Share" class="@(ViewBag.ActiveNav == "share" ? "egmenuActive" : "")">SHARE</a></li>
+                            <li><a href="/User/HealthGoals" class="@(ViewBag.ActiveNav == "healthgoals" ? "egmenuActive" : "")">Health Goals</a></li>
+                            <li><a href="/User/Trends" class="@(ViewBag.ActiveNav == "trends" ? "egmenuActive" : "")">Trends</a></li>
+                            <li><a href="/User/SurveysMain" class="@(ViewBag.ActiveNav == "surveys" ? "egmenuActive" : "")">Surveys</a></li>
+                        </ul>
+
+                    </div>
+                </nav>
+                @*<div class="col-md-2"></div>*@
+            </div>
+        </div>
+
+        <script>
+
+            $(document).ready(function () {
+
+                $("#btnLogout").click(function () {
+                    var form = $(this).closest("form");
+                    form.submit();
+                });
+
+
+                //egmenu
+                $('.has-sub').click(function (e) {
+                    e.preventDefault();
+                    $(this).parent().toggleClass('tap');
+                });
+            });
+        </script>
+
+        @RenderBody()
+        <!-- Footer -->
+        <div id="footer">
+            <div class="centered">
+                <a href="/Consent/ConditionsOfUse">Conditions of Use</a>&nbsp;|&nbsp;<a href="/Consent/PrivacyPolicy">Privacy Policy</a><br />
+            </div>
+            <!-- Copyright -->
+            <div>
+                <div class="copyright">
+                    <span class="icon fa-copyright"> 2016 SHARE For Cures</span><sup class="icon fa-trademark"></sup>, Inc. All Rights Reserved.
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    @*@{
+            UserAuthLogin user = (UserAuthLogin)System.Web.HttpContext.Current.Session["User"];
+            string usersEmail = user.tUser.Email.ToString().Trim();
+            string usersName = user.tUser.FirstName.ToString().Trim() + " " + user.tUser.LastName.ToString().Trim();
+
+        }*@
+
+    <script type="text/javascript">
+        window.doorbellOptions = {
+            email: "@usersEmail",
+            name: '@usersName',
+            appKey: 'IhcSFLFEd33q9oKm1GWLqQ2PDBMqU9yLMXyHZoAk3CBmD9qxTqY4g7W5vYLAUvLV'
+        };
+        (function (w, d, t) {
+            var hasLoaded = false;
+            function l() { if (hasLoaded) { return; } hasLoaded = true; window.doorbellOptions.windowLoaded = true; var g = d.createElement(t); g.id = 'doorbellScript'; g.type = 'text/javascript'; g.async = true; g.src = 'https://embed.doorbell.io/button/4407?t=' + (new Date().getTime()); (d.getElementsByTagName('head')[0] || d.getElementsByTagName('body')[0]).appendChild(g); }
+            if (w.attachEvent) { w.attachEvent('onload', l); } else if (w.addEventListener) { w.addEventListener('load', l, false); } else { l(); }
+            if (d.readyState == 'complete') { l(); }
+        }(window, document, 'script'));
+    </script>
+
+</body>
+</html>

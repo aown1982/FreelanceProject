@@ -1,0 +1,42 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+}
+
+<!-- Main -->
+<section class="wrapper style1">
+    <div class="container">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                    <center>
+                        <h2>Thank you for contacting us</h2>
+                    </center>
+
+                </header>
+                <div>
+                    <p>We encourage you to help us achieve our mission. Learn more, reach out, contribute your case, and support us.Share.<strong> Be part of a cure.</strong></p>
+                    <center>
+
+
+                        <section class="6u 12u(narrower)"></section>
+                    </center>
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>
+

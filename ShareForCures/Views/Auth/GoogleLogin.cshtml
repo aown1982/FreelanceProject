@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "GoogleLogin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GoogleLogin</h2>
+
+<script type="text/JavaScript">
+    $(window).bind("load", function () {
+        setTimeout(function() {
+            $( "#titleHeading" ).empty();
+            $( "#selectSignup" ).empty();
+            $( "#socialMediaSignup" ).empty();
+            $( "#titleHeading" ).append('<span id="completeSignup">Please complete the form below to finish the signup process</span>');
+            $("#btnSignup").click();
+            var modal = @Html.Raw(Json.Encode(this.Model));
+            $("#firstName").val(modal.FirstName);
+            $("#lastName").val(modal.LastName);
+            $("#signupEmail").val(modal.Email);
+            $("#signupConfirmEmail").val(modal.Email);
+            $('input:hidden[name=SocialUserId]').val(modal.SocialUserId);
+            $('input:hidden[name=SocialType]').val(modal.SocialType);
+            $('input:hidden[name=AccessToken]').val(modal.AccessToken);
+            $('input:hidden[name=PublicToken]').val(modal.PublicToken);
+            $('input:hidden[name=IdToken]').val(modal.SourceUserIDToken);
+            $('input:hidden[name=RefreshToken]').val(modal.RefreshToken);
+            $('input:hidden[name=ExpiresIn]').val(modal.ExpiresIn);
+            $("#invitationCode").val(modal.InvitationCode);
+
+            $(".close-animatedModal").on( "click", function() {
+                $.ajax({
+                    type: "GET",
+                    url: "https://graph.facebook.com/me/permissions?method=delete&access_token=" + modal.AccessToken,
+                    dataType: "json"
+                }).done(function (res) {
+                    document.location.href = "/Home/index";
+                });
+            });
+        }, 100);
+
+
+
+    });
+</script>
+

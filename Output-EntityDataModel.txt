@@ -1,0 +1,16 @@
+﻿Generated model file: WebApplicationModal.edmx.
+Loading metadata from the database took 00:00:03.2663011.
+Generating the model took 00:00:21.1106913.
+Added the connection string to the App.Config file.
+Generated model file: UserDataModel.edmx.
+Loading metadata from the database took 00:00:02.6236440.
+Generating the model took 00:01:10.6039214.
+Generated model file: UserDataModel.edmx.
+Loading metadata from the database took 00:00:02.3615430.
+Generating the model took 00:01:12.3703851.
+Generated model file: UsersModal.edmx.
+Loading metadata from the database took 00:00:02.7626791.
+Generating the model took 00:00:20.3261859.
+Generated model file: WebApplicationModal.edmx.
+Loading metadata from the database took 00:00:02.6277417.
+Generating the model took 00:00:22.1907079.

@@ -1,0 +1,748 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Trend Details";
+    ViewBag.ActiveNav = "trends";
+}
+
+<div style="background-color: #fff;">
+    <br />
+    <div class="row">
+
+        <div class="floatLeft width40">
+            <h3>Trend Topic Title Here</h3>
+        </div>
+        <div class="floatRight width40">
+            <input type="text" name="daterange" id="txtDateRangeFilter" class="input-sm customDataRange" />
+            <script type="text/javascript">
+                $(function () {
+                    $('input[name="daterange"]').daterangepicker(
+                        {
+                            locale: {
+                                format: 'MM-DD-YYYY'
+                            },
+                            startDate: moment().startOf('month'),
+                            endDate: moment().endOf('month'),
+                            alwaysShowCalendars: true,
+                            linkedCalendars: false,
+                            opens: 'left',
+                            ranges: {
+                                'Today': [moment(), moment()],
+                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                            }
+                        },
+                        function (start, end, label) {
+                            //  alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                            GetWeightGoal(start, end);
+                            GetDietGoal(start, end);
+                            GetExerciseGoal(start, end);
+                            GetSleepGoal(start, end);
+                        }
+                    );
+
+                });
+
+            </script>
+        </div>
+    </div>
+
+    <div class="row">
+            <div id="TrendDetailsTabs" class="width100Percent">
+                <div class="k-content">
+                    <div id="tabstrip">
+                        <ul>
+                            <li class="k-state-active" id="list">
+                                List
+                            </li>
+                            <li id="chart">
+                                Chart
+                            </li>
+                            <li id="accounts">
+                                Accounts
+                            </li>
+                        </ul>
+                        <div>
+                            <div class="views">
+                                <div id="grid"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="views">
+                                <div class="k-content wide">
+                                    <div id="lineChartHorizantal"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="views">
+                                <p>The following connected accounts have provided data for [trend topic name here]:</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .views {
+                        margin: 0 auto 0px;
+                    }
+
+                    .k-tabstrip .k-content {
+                        width: 100%;
+                        min-width: 500px;
+                        position:relative;
+                        margin:0px;
+                        padding:0px;
+                    }
+
+                    #tabstrip-parent,
+                    #tabstrip {
+                        width: 100%;
+                        margin: 0;
+                        padding: 0;
+                        border-width: 0;
+                    }
+
+                        #tabstrip h2 {
+                            font-weight: lighter;
+                            font-size: 5em;
+                            line-height: 1;
+                            margin: 0;
+                        }
+
+                            #tabstrip h2 span {
+                                background: none;
+                                font-size: .3em;
+                                vertical-align: top;
+                            }
+
+                        #tabstrip p {
+                            margin: 0;
+                            padding: 0;
+                        }
+                </style>
+
+                <script>
+                    $(document).ready(function () {
+                        $("#tabstrip").kendoTabStrip({
+                            animation: {
+                                open: {
+                                    effects: "fadeIn"
+                                }
+                            }
+                        });
+                    });
+
+                    // event handler for activate
+                    var onActivate = function (e) {
+                        // access the activated item via e.item (Element)
+                        switch(e.item.id) {
+                            case 'list':
+                               
+                                break;
+
+                            case 'chart':                                
+                               $(document).ready(createChart);
+                                $(document).bind("kendo:skinChange", createChart);
+
+                                /* $("#lineChartHorizantal").css("width", "100%")
+                                   .data("kendoChart").resize();*/
+                                break;
+
+                            case 'accounts':
+                                
+                                break;
+                        }
+
+                        // detach activate event handler via unbind()
+                        //tabStrip.unbind("activate", onActivate);
+                    };
+
+                    // attach activate event handler during initialization
+                    var tabStrip = $("#tabstrip").kendoTabStrip({
+                        activate: onActivate
+                    }).data("kendoTabStrip");
+                </script>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        var bpDSstats = [
+            { "value": 60, "date": new Date("2015/01/01") },
+            { "value": 62, "date": new Date("2015/01/10") },
+            { "value": 70, "date": new Date("2015/01/15") },
+            { "value": 55, "date": new Date("2015/01/25") },
+            { "value": 65, "date": new Date("2015/01/31") }
+        ];
+        var bpSystats = [
+            { "value": 108, "date": new Date("2015/01/01") },
+            { "value": 110, "date": new Date("2015/01/10") },
+            { "value": 115, "date": new Date("2015/01/15") },
+            { "value": 106, "date": new Date("2015/01/25") },
+            { "value": 111, "date": new Date("2015/01/31") }
+        ];
+        var bpBPstats = [
+            { "value": 68, "date": new Date("2015/01/01") },
+            { "value": 72, "date": new Date("2015/01/10") },
+            { "value": 75, "date": new Date("2015/01/15") },
+            { "value": 72, "date": new Date("2015/01/25") },
+            { "value": 72, "date": new Date("2015/01/31") }
+        ];
+
+        function createChart() {
+            $("#lineChartHorizantal").kendoChart(
+            {
+                title: {
+                    text: ""
+                },
+                legend: {
+                    position: "bottom"
+                },
+                chartArea: {
+                    background: "",
+                    height: 400
+                },
+                seriesDefaults: {
+                    type: "line",
+                    style: "smooth"
+                },
+                series: [
+                    {
+                        name: "Diastolic",
+                        data: bpDSstats,
+                        axis: "bp",
+                        color: "#00B5A3",
+                        field: "value",
+                        categoryField: "date"
+                    },
+                    {
+                        name: "Systolic",
+                        data: bpSystats,
+                        axis: "bp",
+                        color: "#4D4D4D",
+                        field: "value",
+                        categoryField: "date"
+                    },
+                    {
+                        name: "Pulse",
+                        data: bpBPstats,
+                        axis: "pulse",
+                        color: "#1a8cff",
+                        field: "value",
+                        categoryField: "date"
+                    }
+                ],
+                valueAxes: [{
+                    name: "bp",
+                    color: "#4D4D4D",
+                    min: 0,
+                    max: 200,
+                    line: {
+                        visible: true
+                    },
+                    minorGridLines: {
+                        visible: true
+                    },
+                    labels: {
+                        format: "{0} mmHg"
+                    }
+                }, {
+                    name: "pulse",
+                    color: "#1a8cff",
+                    min: 0,
+                    max: 100,
+                    line: {
+                        visible: true
+                    },
+                    minorGridLines: {
+                        visible: true
+                    },
+                    labels: {
+                        format: "{0} BPM"
+                    }
+                }],
+                categoryAxis: {
+                    axisCrossingValue: [0, 32],
+                    majorGridLines: {
+                        visible: false
+                    },
+                    labels: {
+                        rotation: "auto"
+                    },
+                    visible: true
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0}%",
+                    template: "#= series.name #: #= value #"
+                }
+            });
+        }
+    </script>
+
+    <style>
+        .k-grid {
+            font-size: 12px;
+        }
+
+            .k-grid td {
+                line-height: 2em;
+            }
+        /* Apply minimum width to the Grid when scrolling is disabled. */
+        #grid {
+            min-width: 500px;
+        }
+
+            /* Apply a minimum width to the tables when scrolling is enabled and nested tables (hierarchy) ARE NOT USED. */
+            #grid .k-grid-header-wrap > table, /* header table */
+            #grid .k-grid-content table, /* data table, no virtual scrolling */
+            #grid .k-virtual-scrollable-wrap table /* data table, with virtual scrolling */ {
+                min-width: 550px;
+            }
+    </style>
+    <script src="/assets/kendo/pako_deflate.min.js"></script>
+    <script src="~/assets/kendo/jszip.min.js"></script>
+    <script>
+        var wnd;
+        $(document).ready(function () {
+
+            $("#grid").kendoGrid({
+                toolbar: ["create", "pdf", "excel"],
+                pdf: {
+                    allPages: true,
+                    avoidLinks: true,
+                    paperSize: "A4",
+                    margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+                    landscape: true,
+                    repeatHeaders: true,
+                    template: $("#page-template").html(),
+                    scale: 0.8
+                },
+                excel: {
+                    fileName: "SHAREForCures_Grid_Export.xlsx",
+                    proxyURL: "",
+                    filterable: true
+                },
+                dataBound: OnGridDataBound,
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/GetUserDerivedNotes"
+                            , dataType: "json"
+                            , data: {
+                                categoryName: 'Allergies'
+                            }
+                        }
+                    },
+                    pageSize: 10
+                },
+                height: 550,
+                scrollable: true,
+                groupable: true,
+                sortable: true,
+                resizable: true,
+                filterable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+
+                columns: [
+                    { command: { text: "Edit", click: ShowEditWindow }, title: " ", width: "90px" },
+                    { command: { text: "Delete", click: DeleteItem }, title: " ", width: "90px" },
+
+                    {
+                        field: "StartDateTime",
+                        title: "Start Date",
+                        template: "#= kendo.toString(kendo.parseDate(StartDateTime, 'yyyy-MM-dd'), 'MM/dd/yyyy') #",
+                        width: "100px"
+                    },
+                    {
+                        field: "EndDateTime",
+                        title: "End Date",
+                        template: "#= kendo.toString(kendo.parseDate(EndDateTime, 'yyyy-MM-dd'), 'MM/dd/yyyy') #",
+                        width: "100px"
+                    },
+                    {
+                        field: "Allergen", title: "Allergen",
+                        width: "100px"
+                    },
+                    {
+                        field: "Reaction", title: "Reaction",
+                        width: "100px"
+                    },
+                    {
+                        field: "Status", title: "Status",
+                        width: "100px"
+                    },
+                    {
+                        field: "Severity", title: "Severity",
+                        width: "100px"
+                    },
+                    {
+                        field: "Source", title: "Source",
+                        width: "100px"
+                    },
+                    {
+                        field: "Note", title: "Note",
+                        width: "100px"
+                    }
+                ]
+            });
+            $('.k-grid-add').on('click', function () {
+                OpenAddWindow(0);
+            });
+
+            // create DropDownList from input HTML element
+            $("#ddl_Allergen").kendoDropDownList({
+                dataTextField: "Name",
+                dataValueField: "ID",
+                autoBind: false,
+                filter: "contains",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/GetAllAllergens"
+                            , dataType: "json"
+                        }
+                    }
+                },
+                serverFiltering: true,
+                index: 0
+            });
+            $("#ddl_Reaction").kendoDropDownList({
+                dataTextField: "Name",
+                dataValueField: "ID",
+                autoBind: false,
+                filter: "contains",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/GetAllReactions"
+                            , dataType: "json"
+                        }
+                    }
+                },
+                serverFiltering: true,
+                index: 0
+            });
+            $("#ddl_AllergyStatus").kendoDropDownList({
+                dataTextField: "Status",
+                dataValueField: "ID",
+                autoBind: false,
+                filter: "contains",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/GetAllAllergyStatus"
+                            , dataType: "json"
+                        }
+                    }
+                },
+                serverFiltering: true,
+                index: 0
+            });
+            $("#ddl_serverity").kendoDropDownList({
+                dataTextField: "Severity",
+                dataValueField: "ID",
+                autoBind: false,
+                filter: "contains",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/GetAllAllergyServerties"
+                            , dataType: "json"
+                        }
+                    }
+                },
+                serverFiltering: true,
+                index: 0
+            });
+            $("#dp_startdate").kendoDatePicker();
+            $("#dp_enddate").kendoDatePicker();
+        });
+        // id == 0 ? "Add new Item":"Edit Item"
+        function OpenAddWindow(id) {
+
+            var _title = "";
+            if (id == 0) {
+                _title = "Add New Item";
+            } else {
+                _title = "Edit Item";
+            }
+
+            wnd = $("#AddEditUserAllergies");
+            wnd.kendoWindow({
+                modal: false,
+                visible: false,
+                width: 450,
+                resizable: false
+            }).data("kendoWindow").center();
+            wnd = wnd.data("kendoWindow");
+            wnd.title(_title);
+            wnd.open();
+            kendo.ui.progress(wnd.element, true);
+            var ddl_Allergen = $("#ddl_Allergen").data("kendoDropDownList");
+            var ddl_Reaction = $("#ddl_Reaction").data("kendoDropDownList");
+            var ddl_AllergyStatus = $("#ddl_AllergyStatus").data("kendoDropDownList");
+            var ddl_serverity = $("#ddl_serverity").data("kendoDropDownList");
+            var startdatepicker = $("#dp_startdate").data("kendoDatePicker");
+            var enddatepicker = $("#dp_enddate").data("kendoDatePicker");
+            if (id > 0) // Edit Mode
+            {
+                jQuery.ajax({
+                    type: "GET",
+                    async: true,
+                    url: "GetUserDerivedNote",
+                    contentType: "application/json; charset=utf-8", // we are sending in JSON format so we need to specify this
+                    dataType: "json", // the data type we want back, so text.  The data will come wrapped in xml
+                    data: { id: id, categoryName: "Allergies" }, // the data in JSON format.  Note it is *not* a JSON object, is is a literal string in JSON format
+                    success: function (retval) {
+                        kendo.ui.progress(wnd.element, false);
+                        //Start - Load Data sources
+                        ddl_Allergen.dataSource.read();
+                        ddl_Allergen.value(retval.AllergenID);
+                        ddl_Reaction.dataSource.read();
+                        ddl_Reaction.value(retval.ReactionID);
+                        ddl_AllergyStatus.dataSource.read();
+                        ddl_AllergyStatus.value(retval.StatusID);
+                        ddl_serverity.dataSource.read();
+                        ddl_serverity.value(retval.SeverityID);
+                        startdatepicker.value(retval.StartDateTime);
+                        enddatepicker.value(retval.EndDateTime);
+                        $("#txt_note").val(retval.Note);
+                        // End - Load Data sources
+                        // Set Hidden Fields
+                        $("#itemId").val(retval.ID);
+                        $("#parentItemId").val(retval.ParentId);
+                        var validator = $("#AddEditUserAllergies").kendoValidator().data("kendoValidator");
+                        validator.validate();
+                    }
+                     , error: function (xmlHttpRequest, status, err) { alert(err); kendo.ui.progress(wnd.element, false); }
+                });
+
+            } else {
+                kendo.ui.progress(wnd.element, false);
+                //Start - Load Data sources
+                ddl_Allergen.dataSource.read();
+                ddl_Allergen.select(0);
+                ddl_Reaction.dataSource.read();
+                ddl_Reaction.select(0);
+                ddl_AllergyStatus.dataSource.read();
+                ddl_AllergyStatus.select(0);
+                ddl_serverity.dataSource.read();
+                ddl_serverity.select(0);
+                $("#txt_note").val('');
+                startdatepicker.value("");
+                enddatepicker.value("");
+                $("#itemId").val(0);
+                $("#parentItemId").val(0);
+                // End - Load Data sources
+                var validator = $("#AddEditUserAllergies").kendoValidator().data("kendoValidator");
+                validator.hideMessages();
+            }
+
+
+        }
+        function ShowEditWindow(e) {
+            e.preventDefault();
+            //var NoteID = e.sender.dataItem(e.container).ID;
+            var grid = $("#grid").data("kendoGrid");
+            var item = grid.dataItem($(e.target).closest("tr"));
+            OpenAddWindow(item.ID);
+        }
+        function DeleteItem(e) {
+            e.preventDefault();
+            var result = confirm("Are you sure ?");
+            if (result) {
+
+                var grid = $("#grid").data("kendoGrid");
+                kendo.ui.progress(grid.element, true);
+
+                var item = grid.dataItem($(e.target).closest("tr"));
+                jQuery.ajax({
+                    type: "GET",
+                    async: true,
+                    url: "DeleteUserDerivedNote",
+                    contentType: "application/json; charset=utf-8", // we are sending in JSON format so we need to specify this
+                    dataType: "json", // the data type we want back, so text.  The data will come wrapped in xml
+                    data: { id: item.ID, parentId: item.ParentId, categoryName: "Allergies" }, // the data in JSON format.  Note it is *not* a JSON object, is is a literal string in JSON format
+                    success: function (retval) {
+                        var grid = $("#grid").data("kendoGrid");
+                        kendo.ui.progress(grid.element, false);
+                        grid.dataSource.read();
+                    }
+                       , error: function (xmlHttpRequest, status, err) { alert(err); kendo.ui.progress(grid.element, false); }
+                });
+            }
+
+        }
+        function OnGridDataBound() {
+            $(".k-grid-Edit span").addClass("k-icon k-edit");
+            $(".k-grid-Delete span").addClass("k-icon k-delete");
+        }
+        function ClosePopup() {
+            wnd.close();
+        }
+        function SaveItem() {
+            var validator = $("#AddEditUserAllergies").kendoValidator().data("kendoValidator");
+            if (validator.validate()) {
+                kendo.ui.progress(wnd.element, true);
+                var ddl_Allergen = $("#ddl_Allergen").data("kendoDropDownList");
+                var ddl_Reaction = $("#ddl_Reaction").data("kendoDropDownList");
+                var ddl_AllergyStatus = $("#ddl_AllergyStatus").data("kendoDropDownList");
+                var ddl_serverity = $("#ddl_serverity").data("kendoDropDownList");
+                var startdatepicker = $("#dp_startdate").data("kendoDatePicker");
+                var enddatepicker = $("#dp_enddate").data("kendoDatePicker");
+
+                var NewItem = new Object();
+                NewItem.ID = $("#itemId").val();
+                NewItem.ParentId = $("#parentItemId").val();
+
+                NewItem.AllergenID = ddl_Allergen.value();
+                NewItem.ReactionID = ddl_Reaction.value();
+                NewItem.SeverityID = ddl_serverity.value();
+                NewItem.StatusID = ddl_AllergyStatus.value();
+                NewItem.Note = $("#txt_note").val();
+                NewItem.StartDateTime = startdatepicker.value();
+                NewItem.EndDateTime = enddatepicker.value();
+
+                jQuery.ajax({
+                    type: "POST",
+                    async: true,
+                    url: "SaveDerivedNote",
+                    contentType: "application/json; charset=utf-8", // we are sending in JSON format so we need to specify this
+                    dataType: "json", // the data type we want back, so text.  The data will come wrapped in xml
+                    data: JSON.stringify({ 'model': NewItem }), // the data in JSON format.  Note it is *not* a JSON object, is is a literal string in JSON format
+                    success: function (retval) {
+                        kendo.ui.progress(wnd.element, false);
+                        if (retval == "SUCCESS") {
+                            wnd.close();
+                            var grid = $("#grid").data("kendoGrid");
+                            grid.dataSource.read();
+                        }
+                    }
+               , error: function (xmlHttpRequest, status, err) { alert(err); kendo.ui.progress(wnd.element, false); }
+                });
+            }
+        }
+    </script>
+    <style>
+        /* Page Template for the exported PDF */
+        .page-template {
+            font-family: "Arial", sans-serif;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+            .page-template .header {
+                position: absolute;
+                top: 30px;
+                left: 30px;
+                right: 30px;
+                border-bottom: 1px solid #888;
+                color: #888;
+            }
+
+            .page-template .footer {
+                position: absolute;
+                bottom: 30px;
+                left: 30px;
+                right: 30px;
+                border-top: 1px solid #888;
+                text-align: center;
+                color: #888;
+            }
+
+            .page-template .watermark {
+                font-weight: bold;
+                font-size: 400%;
+                text-align: center;
+                margin-top: 30%;
+                color: #aaaaaa;
+                opacity: 0.1;
+                transform: rotate(-35deg) scale(1.7, 1.5);
+            }
+    </style>
+    <div id="AddEditUserAllergies" class="k-popup-edit-form k-window-content k-content" style="display:none">
+        <div class="k-edit-form-container">
+            <div>
+                <div class="k-edit-label">
+                    <label>Allergen: </label>
+
+                </div>
+                <div class="k-edit-field">
+                    <input id="ddl_Allergen" name="ddl_Allergen" />
+                </div>
+            </div>
+            <div>
+                <div class="k-edit-label">
+                    <label>Reaction: </label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="ddl_Reaction" name="ddl_Reaction" />
+                </div>
+            </div>
+            <div>
+                <div class="k-edit-label">
+                    <label>Allergy Status: </label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="ddl_AllergyStatus" name="ddl_AllergyStatus" />
+                </div>
+            </div>
+            <div>
+                <div class="k-edit-label">
+                    <label>Serverity: </label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="ddl_serverity" name="ddl_serverity" />
+                </div>
+            </div>
+            <div>
+                <div class="k-edit-label">
+                    <label>Start Date: </label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="dp_startdate" style="color:black" name="dp_startdate" required validationMessage="Required" />
+                </div>
+            </div>
+            <div>
+                <div class="k-edit-label">
+                    <label>End Date: </label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="dp_enddate" style="color:black" name="dp_enddate" required validationMessage="Required" />
+                </div>
+            </div>
+            <div>
+                <div class="k-edit-label">
+                    <label>Note: </label>
+                </div>
+                <div class="k-edit-field">
+                    <input id="txt_note" name="txt_note" class="k-textbox" required validationMessage="Required" />
+                </div>
+            </div>
+            <div class="k-edit-buttons k-state-default">
+                <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveItem()">
+                    <span class="k-icon k-update"></span>
+                    Save
+                </a>
+                <a class="k-button k-button-icontext k-grid-cancel" onclick="ClosePopup()">
+                    <span class="k-icon k-cancel"></span>
+                    Cancel
+                </a>
+
+            </div>
+        </div>
+        <input type="hidden" id="itemId" />
+        <input type="hidden" id="parentItemId" />
+    </div>

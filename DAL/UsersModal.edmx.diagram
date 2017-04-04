@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7f122783292c414e82f90340d90815bd" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="Models.Users.tAccountStatu" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tCountry" Width="1.5" PointX="3.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tEthnicity" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tGender" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tLanguage" Width="1.5" PointX="0.75" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tMaritalStatus" Width="1.5" PointX="3" PointY="17.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tRace" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tSalt" PointX="0.75" PointY="9.5" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tSex" Width="1.5" PointX="0.75" PointY="18.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tState" Width="1.5" PointX="6" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tTimeZone" Width="1.5" PointX="6" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tUser" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tUsersAddressHistory" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tUsersAudit" Width="1.5" PointX="5.25" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tUsersErrLog" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Users.tXrefUsersMaritalStatu" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="Models.Users.FK_tUsers_tAccountStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tStates_tCountry" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsers_tEthnicity" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsers_tGender" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsers_tLanguage" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tXrefUsersMaritalStatus_tMaritalStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsers_tRace" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="Models.Users.FK_tUsers_tSalts" />
+        <AssociationConnector Association="Models.Users.FK_tUsers_tSex" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsersAddressHistory_tStates" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsersAddressHistory_tTimeZone" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsersAddressHistory_tUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsersAudit_tUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tUsersErrLog_tUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="Models.Users.FK_tXrefUsersMaritalStatus_tUsers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Models.Users.tUserLoginAuth" Width="1.5" PointX="5.25" PointY="18.375" />
+        <AssociationConnector Association="Models.Users.FK_tUserLoginAuths_tUsers" />
+        <EntityTypeShape EntityType="Models.Users.tUsersAuditType" Width="1.5" PointX="6.875" PointY="1.5" />
+        <EntityTypeShape EntityType="Models.Users.tUserPasswordReset" Width="1.5" PointX="8.25" PointY="4.5" />
+        <AssociationConnector Association="Models.Users.FK_tUserPasswordResets_tUsers" />
+        <AssociationConnector Association="Models.Users.FK_tUsersAudit_tUsersAuditTypes1" />
+        <EntityTypeShape EntityType="Models.Users.tSystemStatus" Width="1.5" PointX="9.25" PointY="1.5" />
+        <AssociationConnector Association="Models.Users.FK_tUsersAuditTypes_tSystemStatuses" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

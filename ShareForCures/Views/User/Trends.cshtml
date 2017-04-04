@@ -1,0 +1,316 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Trends";
+    ViewBag.ActiveNav = "trends";
+}
+<div style="background-color: #fff;">
+
+    <br />
+    <div class="row floatRight width70" style="display: inline-block; position:relative;">
+        <div style="font-size:small; font-weight:bold;">
+            <input type="radio" name="entries" id="last5Radio" value="last5Radio" checked="checked" onchange="GetTrendsLast5();" />&nbsp;Show last 5 entries&nbsp;&nbsp;
+            <input type="radio" name="entries" id="customRadio" value="customRadio" />&nbsp;Custom date range:
+        </div>
+        <div class="width40">
+            <input type="text" name="daterange" id="txtDateRangeFilter" class="input-sm customDataRange" />
+            <script type="text/javascript">
+                $(function () {
+
+                    $('input[name="daterange"]').daterangepicker(
+                        {
+                            locale: {
+                                format: 'MM-DD-YYYY'
+                            },
+                            startDate: moment().startOf('month'),
+                            endDate: moment().endOf('month'),
+                            alwaysShowCalendars: true,
+                            linkedCalendars: false,
+                            opens: 'left',
+                            ranges: {
+                                'Today': [moment(), moment()],
+                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                            }
+                        },
+                        function (start, end, label) {
+                            var radiobtn = document.getElementById("customRadio");
+                            radiobtn.checked = true;
+
+                            GetBloodGlucoseChart(start,end);
+                            GetBloodPressureChart(start,end);
+                            GetStepsChart(start,end);
+                            GetWeightTrendChart(start,end);
+                            GetDietTrendChart(start,end);
+                            GetBodyCompositionTrendChart(start,end);
+                            GetCholesterolChart(start,end);
+                        }
+                    );
+
+                });
+
+            </script>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="" style="padding: 12px 0 0 30px !important;">
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="floatRight"><span><a href="/User/BloodGlucose">...</a></span></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6 ">
+                            <div>
+                                <h1>Blood Glucose</h1>
+
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartBloodGlucose"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createBloodGlucoseChart);
+                                    $(document).bind("kendo:skinChange", createBloodGlucoseChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+                            <div class="">
+                                <br />
+                                <span class="text-primary textAlignCenter"> <span id="currentBloodGlucose"></span> <span class="font9pt">mg/dl</span> </span>
+                                <div class="padding-12">
+                                    <span class="font9pt"><span id="bgDate"></span></span>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="floatRight"><span><a href="/User/Bloodpresure">...</a></span></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6 ">
+                            <div>
+                                <h1>Blood Pressure</h1>
+
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartBloodPressure"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createBloodPressureChart);
+                                    $(document).bind("kendo:skinChange", createBloodPressureChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+                            <div class="">
+                                <br />
+                                <span class="text-primary textAlignCenter"> <span id="bloodPressure"></span> <span class="font9pt">mmHg</span> </span>
+                                
+                                    <span class="font9pt"><span id="heartRate">0</span> beats/minute</span>
+                                <div class="padding-12">
+                                    <span class="font9pt"><span id="bpDate"></span></span>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="floatRight"><span><a href="/User/BodyComposition">...</a></span></div>
+                        <div class="col-lg-7 col-md-7 col-sm-7 col-sx-7 ">
+                            <div>
+                                <h1>Body Composition</h1>
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartBodyCompositionTrend"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createBodyCompositionTrendChart);
+                                    $(document).bind("kendo:skinChange", createBodyCompositionTrendChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 col-sm-5 col-sx-5">
+                            <div class="">
+                                <br />
+                                <span class="text-primary textAlignCenter"> <span id="bodyFat"></span> <span class="font9pt">body fat  </span> </span>
+                                <br />
+                                <span class="text-primary textAlignCenter"> <span id="leanTissue"></span> <span class="font9pt">lean tissue</span> </span>
+                                <br />
+                                <span class="font9pt"><span id="bodyDate"></span></span>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="floatRight"><span><a href="/User/Cholesterol">...</a></span></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6 ">
+                            <div>
+                                <h1>Cholesterol</h1>
+
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartCholesterol"></div>
+                                </div>
+                                <script>
+
+                                    $(document).ready(createCholesterolChart);
+                                    $(document).bind("kendo:skinChange", createCholesterolChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+                            <div class="">
+                                <br />
+                                <span class="text-primary textAlignCenter"><span class="font9pt">LDL </span><span id="ldl"></span> <span class="font9pt"> HDL </span><span id="hdl"></span></span>
+                                <br />
+                                <span class="text-primary textAlignCenter"><span class="font9pt">Total </span><span id="cholesterol"></span><span class="font9pt">mg/dl</span></span>
+                                <br />
+                                <span class="font9pt"><span id="dateCholesterol"></span></span>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="floatRight"><span><a href="/User/Diet">...</a></span></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6 ">
+                            <div>
+                                <h1>Food & Drink</h1>
+
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartDietTrend"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createDietTrendChart);
+                                    $(document).bind("kendo:skinChange", createDietTrendChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+                            <div class="">
+                                <br />
+                                <span class="text-primary textAlignCenter"> <span id="diet"></span> <span class="font9pt"> Kcals</span> </span>
+                                <div class="padding-12">
+                                    <span class="font9pt"><span id="dietDate"></span></span>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="floatRight"><span><a href="/User/Activity">...</a></span></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6 ">
+                            <div>
+                                <h1>Steps</h1>
+
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartSteps"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createStepsChart);
+                                    $(document).bind("kendo:skinChange", createStepsChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+                            <div class="">
+                                <br />
+                                <span class="text-primary textAlignCenter"> <span id="steps"></span> <span class="font9pt"></span> </span>
+                                <div class="padding-12">
+                                    <span class="font9pt"><span id="stepsDate"></span></span>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="floatRight"><span><a href="/User/Weight">...</a></span></div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6 ">
+                            <div>
+                                <h1>Weight</h1>
+
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartWeightTrend"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createWeightTrendChart);
+                                    $(document).bind("kendo:skinChange", createWeightTrendChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6 col-sx-6">
+                            <div class="">
+                                <br />
+                                <span class="text-primary textAlignCenter"> <span id="weight"></span> <span class="font9pt">lbs</span> </span>
+                                <br />
+                                <span class="font9pt"><span id="weightResultDate"></span></span>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

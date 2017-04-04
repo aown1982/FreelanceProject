@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9474482deb9f43fc928ae971f38f6d77" Name="Diagram1" ZoomLevel="67">
+        <EntityTypeShape EntityType="UserDataModel.tActivity" Width="1.5" PointX="11.25" PointY="97.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tAllergen" Width="2.125" PointX="32.75" PointY="85.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tAllergySeverity" Width="1.5" PointX="33.25" PointY="88.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tAllergyStatus" Width="1.5" PointX="35.5" PointY="88.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tCode" Width="1.5" PointX="10.5" PointY="58.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tCredential" Width="1.5" PointX="6" PointY="74.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tDietCategory" Width="1.5" PointX="19.25" PointY="60.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tGeneticTrait" Width="1.5" PointX="11.25" PointY="100.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tInstructionType" Width="1.5" PointX="8.25" PointY="69.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tMedicationForm" Width="1.75" PointX="17" PointY="47.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tMedicationRoute" Width="1.875" PointX="16.875" PointY="50.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tNutrient" Width="1.5" PointX="24.5" PointY="90.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tNutrientType" Width="1.5" PointX="22.25" PointY="90.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tOrderType" Width="1.5" PointX="22.75" PointY="94" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tOrganization" Width="1.5" PointX="8.375" PointY="64.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tPharmacy" Width="1.5" PointX="17.25" PointY="95" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tProviderPhoneNumber" Width="2.125" PointX="19.5" PointY="45.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tProvider" Width="1.5" PointX="17.25" PointY="53.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tReaction" Width="1.5" PointX="30.75" PointY="88.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tReactionType" Width="1.5" PointX="30.75" PointY="92.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSHAREPurpose" Width="2.125" PointX="21.875" PointY="104.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSHARESetting" Width="1.875" PointX="13.875" PointY="101" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSNPAvailability" Width="2.125" PointX="21.875" PointY="54.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSourceOrganization" Width="2.125" PointX="7.625" PointY="61" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSource" Width="1.5" PointX="2.625" PointY="65.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSourceServiceDevice" Width="2" PointX="10.75" PointY="48.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSourceService" Width="1.5" PointX="5.375" PointY="72.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tSystemStatus" Width="1.5" PointX="0.75" PointY="73.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tTestResultStatus" Width="1.875" PointX="19.875" PointY="58" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUnitsOfMeasure" Width="2" PointX="16.75" PointY="57.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUOMRelationship" Width="2.375" PointX="19.5" PointY="48.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserActivity" Width="1.5" PointX="13.5" PointY="79.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserAllergy" Width="1.5" PointX="33.375" PointY="79.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserCarePlan" Width="1.5" PointX="16.5" PointY="74" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserCarePlanSpecialty" Width="1.5" PointX="14.25" PointY="98.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserCarePlanType" Width="1.5" PointX="14.25" PointY="57.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserDataAudit" Width="1.5" PointX="6" PointY="86.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserDataErrLog" Width="1.5" PointX="6" PointY="82.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserDiet" Width="1.5" PointX="21.5" PointY="74.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserEncounterReason" Width="1.5" PointX="28" PointY="80.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserEncounter" Width="1.5" PointX="18.75" PointY="73.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserEvent" Width="1.5" PointX="3" PointY="75.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserFunctionalStatus" Width="1.5" PointX="10.5" PointY="62.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserGeneticTrait" Width="2.125" PointX="13.5" PointY="86.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserID" Width="1.5" PointX="3.75" PointY="79" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserImmunization" Width="1.5" PointX="10.5" PointY="86.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserImmunizationsDate" Width="2.375" PointX="9.25" PointY="91.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserInstruction" Width="1.5" PointX="10.5" PointY="74.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserLocation" Width="1.5" PointX="13.5" PointY="74.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserNarrativeEntry" Width="1.5" PointX="18.75" PointY="87.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserNarrative" Width="1.5" PointX="16.5" PointY="86.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserOrder" Width="1.5" PointX="25" PointY="79.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserPrescription" Width="1.5" PointX="19.5" PointY="63.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserProblem" Width="1.5" PointX="19.5" PointY="81.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserProcedureDeviceCode" Width="2.25" PointX="13.5" PointY="49.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserProcedureDevice" Width="1.5" PointX="11.25" PointY="55.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserProcedure" Width="1.5" PointX="13.5" PointY="65" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSleep" Width="1.5" PointX="10.5" PointY="80" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSNPProbe" Width="1.5" PointX="16.5" PointY="68.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSourceService" Width="1.875" PointX="7.875" PointY="72.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSourceServiceStatus" Width="1.5" PointX="6" PointY="79.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSpecimenCode" Width="1.875" PointX="13.5" PointY="52.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSpecimen" Width="1.5" PointX="11.25" PointY="52" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSurveyResult" PointX="6" PointY="91" Width="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserTestResultComponent" Width="1.5" PointX="24.75" PointY="71.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserTestResult" Width="1.5" PointX="22.5" PointY="66.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserVital" Width="1.5" PointX="10.5" PointY="68" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tVisitType" Width="1.5" PointX="16.5" PointY="98.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefAllergensCode" Width="2" PointX="30.5" PointY="79.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefMedicationFormsCode" Width="2.375" PointX="22.5" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefMedicationRoutesCode" Width="2.25" PointX="19.5" PointY="51.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefReactionsCode" Width="1.5" PointX="30.5" PointY="82.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefReactionTypesCode" Width="1.5" PointX="28.5" PointY="92.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserAllergiesCode" Width="1.5" PointX="27.75" PointY="83.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserCarePlansCode" Width="1.5" PointX="23.75" PointY="76.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserDietNutrient" Width="1.5" PointX="26.75" PointY="76.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserEncountersCode" Width="1.5" PointX="29" PointY="75.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserEncountersPrescription" Width="1.5" PointX="27.75" PointY="65.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserEncountersProblem" Width="1.5" PointX="24.75" PointY="84.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserEncountersVital" Width="1.5" PointX="27" PointY="73" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserFunctionalStatusesCode" Width="1.5" PointX="12.75" PointY="61.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserImmunizationsCode" Width="1.5" PointX="15.75" PointY="91.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserInstructionsCode" Width="1.5" PointX="21.75" PointY="86.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserPrescriptionsCode" Width="1.5" PointX="21.75" PointY="63.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserProblemsCode" Width="1.5" PointX="27.75" PointY="86.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserProceduresCode" Width="1.5" PointX="15.75" PointY="60.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserSHARESettingsPurpos" Width="1.875" PointX="24.75" PointY="87.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserSNPProbesSNPAvailability" Width="1.5" PointX="24.75" PointY="64.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserSourceServiceDevice" Width="1.5" PointX="13.5" PointY="71.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserTestResultComponentsCode" Width="1.5" PointX="30" PointY="72.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserTestResultRecipientsProvider" Width="1.5" PointX="27.75" PointY="68.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserTestResultsCode" Width="1.5" PointX="24.75" PointY="67.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefUserVitalsCode" Width="1.5" PointX="21.75" PointY="60.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSleepDetail" Width="1.75" PointX="12.75" PointY="91.75" IsExpanded="true" />
+        <AssociationConnector Association="UserDataModel.FK_tUserActivities_tActivities" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tAllergens" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="UserDataModel.FK_tXrefAllergensCodes_tAllergens" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tAllergySeverities" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tAllergyStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserOrders_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefAllergensCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefMedicationFormsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefMedicationRoutesCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefReactionsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefReactionTypesCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserAllergiesCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserCarePlansCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserFunctionalStatusesCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserImmunizationsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserInstructionsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserPrescriptionsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserProblemsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserProceduresCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserTestResultComponentsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserTestResultsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserVitalsCodes_tCodes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tCredentials_tCredentialSources" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tCredentials_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tCredentials_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSourceServices_tCredentials" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDiet_tDietCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserGeneticTraits_tGeneticTraits" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserInstructions_tInstructionTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tMedDosageForms" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefMedicationFormsCodes_tMedicationForms" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tMedRoutes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefMedicationRoutesCodes_tMedicationRoutes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tNutrients_tNutrientType" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserDietNutrients_tNutrients" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserOrders_tOrderTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tProviders_tOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tSourceOrganizations_tOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tPharmacies" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tProviderPhoneNumbers_tProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserNarratives_tProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResults_tProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserVitals_tProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserTestResultRecipientsProviders_tProviders" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tReactions_tReactionTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tReactions" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefReactionsCodes_tReactions" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefReactionTypesCodes_tReactionTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserSHARESettingsPurposes_tSHAREPurposes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tSNPAvailability_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserSNPProbesSNPAvailability_tSNPAvailability" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserCarePlans_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserFunctionalStatuses_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserImmunizations_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserInstructions_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserNarratives_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProblems_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProcedures_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProcedures_tSourceOrganizations1" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="UserDataModel.FK_tUserTestResults_tSourceOrganizations" />
+        <AssociationConnector Association="UserDataModel.FK_tUserVitals_tSourceOrganizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tSourceServices_tCredentialSources" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserSourceServiceDevices_tSourceServiceDevices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSourceServices_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserActivities_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserCarePlans_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDiet_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounterReasons_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEvents_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserFunctionalStatuses_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserGeneticTraits_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserImmunizations_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserInstructions_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserLocations_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserNarratives_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserOrders_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProblems_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProcedures_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSleep_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSNPProbes_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="UserDataModel.FK_tUserSurveyResults_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResultComponents_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResults_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserVitals_tSystemStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResults_tTestResultStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUOMRelationships_tUnitsOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUOMRelationships_tUnitsOfMeasure1" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserActivities_tUnitsOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserActivities_tUnitsOfMeasure1" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDiet_tUnitsOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tUnitsOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tUnitsOfMeasure1" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResultComponents_tUnitsOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserVitals_tUnitsOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserDietNutrients_tUnitsOfMeasure" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserActivities_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserActivities_tUserSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserAllergies_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserAllergiesCodes_tUserAllergies" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserCarePlans_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserCarePlans_tUserCarePlanSpecialties" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserCarePlans_tUserCarePlanTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserCarePlans_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserCarePlansCodes_tUserCarePlans" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDataAudit_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDataErrLog_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDiet_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDiet_tUserSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserDietNutrients_tUserDiet" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounterReasons_tUserEncounters" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tUserInstructions" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tUserInstructions1" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEncounters_tVisitTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserOrders_tUserEncounters" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersCodes_tUserEncounters" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersPrescriptions_tUserEncounters" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersProblems_tUserEncounters" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersVitals_tUserEncounters" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEvents_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserFunctionalStatuses_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserFunctionalStatuses_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserFunctionalStatusesCodes_tUserFunctionalStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserGeneticTraits_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserGeneticTraits_tUserSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserImmunizations_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserInstructions_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserLocations_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserNarratives_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProblems_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProcedures_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSleep_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSNPProbes_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSourceServices_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector ManuallyRouted="false" Association="UserDataModel.FK_tUserSurveyResults_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResults_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserVitals_tUserIDs" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserImmunizations_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserImmunizationsDates_tUserImmunizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserImmunizationsCodes_tUserImmunizations" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserInstructions_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserInstructionsCodes_tUserInstructions" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserLocations_tUserSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserNarrativeEntries_tUserNarratives" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserNarratives_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPrescriptions_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersPrescriptions_tUserPrescriptions" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserPrescriptionsCodes_tUserPrescriptions" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProblems_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersProblems_tUserProblems" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserProblemsCodes_tUserProblems" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDeviceCodes_tUserDevices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProcedures_tUserDevices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProcedures_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserProcedures_tUserSpecimens" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserProceduresCodes_tUserProcedures" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSleep_tUserSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSleepDetails_tUserSleep" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSNPProbes_tUserSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserSNPProbesSNPAvailability_tUserSNPProbes" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSourceServiceDevices_tUserSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSourceServices_tUserSourceServiceStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResults_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserVitals_tSourceServices" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSpecimenCodes_tUserSpecimens" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tUserTestResultComponents_tUserTestResults" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserTestResultComponentsCodes_tUserTestResultComponents" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserTestResultRecipientsProviders_tUserTestResults" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserTestResultsCodes_tUserTestResults" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserEncountersVitals_tUserVitals" ManuallyRouted="false" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserVitalsCodes_tUserVitals" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="UserDataModel.tSourceServiceType" Width="1.5" PointX="3.75" PointY="68.75" />
+        <AssociationConnector Association="UserDataModel.FK_tSourceOrganizations_tSourceServices" />
+        <AssociationConnector Association="UserDataModel.FK_tSourceServices_tSourceServiceTypes" />
+        <EntityTypeShape EntityType="UserDataModel.tHealthGoalType" Width="1.5" PointX="3.125" PointY="73" />
+        <EntityTypeShape EntityType="UserDataModel.tUserHealthGoal" Width="1.5" PointX="6" PointY="68.875" />
+        <AssociationConnector Association="UserDataModel.FK_tUserHealthGoals_tHealthGoalTypes" />
+        <AssociationConnector Association="UserDataModel.FK_tUserHealthGoals_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserHealthGoals_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tAllergens_tAllergens" />
+        <AssociationConnector Association="UserDataModel.FK_tAllergySeverities_tAllergySeverities" />
+        <AssociationConnector Association="UserDataModel.FK_tAllergyStatuses_tAllergyStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tReactions_tReactions" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSourceServices_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserNarrativeEntries_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserImmunizationsDates_tSystemStatuses" />
+        <EntityTypeShape EntityType="UserDataModel.tConsent" Width="1.5" PointX="19.625" PointY="103.875" />
+        <EntityTypeShape EntityType="UserDataModel.tSHAREPurposeCategory" Width="1.5" PointX="19.625" PointY="106.625" />
+        <AssociationConnector Association="UserDataModel.FK_tSHAREPurposes_tConsent" />
+        <AssociationConnector Association="UserDataModel.FK_tSHAREPurposes_tSHAREPurposeCategories" />
+        <EntityTypeShape EntityType="UserDataModel.tUserDataAuditType" Width="1.5" PointX="3" PointY="90" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDataAuditTypes_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserDataAudit_tUserDataAuditTypes" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSHARESetting" Width="1.5" PointX="16.5" PointY="80.375" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSHARESettings_tSHARESettings" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSHARESettings_tSourceOrganizations" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSHARESettings_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSHARESettings_tUserEvents" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSHARESettings_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSHARESettings_tUserSourceServices1" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserSHARESettingsPurposes_tUserSHARESettings" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefUserDietNutrients_tSystemStatuses" />
+        <EntityTypeShape EntityType="UserDataModel.tEmploymentIndustry" Width="1.5" PointX="3" PointY="97.125" />
+        <EntityTypeShape EntityType="UserDataModel.tRelationshipPersonType" Width="1.5" PointX="3" PointY="62" />
+        <EntityTypeShape EntityType="UserDataModel.tReligion" Width="1.5" PointX="3" PointY="94" />
+        <EntityTypeShape EntityType="UserDataModel.tUserEducation" Width="1.5" PointX="22.5" PointY="79.875" />
+        <EntityTypeShape EntityType="UserDataModel.tUserEmployment" Width="1.5" PointX="22.5" PointY="96.875" />
+        <EntityTypeShape EntityType="UserDataModel.tUserPolitic" Width="1.5" PointX="25.5" PointY="94" />
+        <EntityTypeShape EntityType="UserDataModel.tUserRelationship" Width="1.5" PointX="16.5" PointY="63.375" />
+        <EntityTypeShape EntityType="UserDataModel.tUserReligion" Width="1.5" PointX="19.5" PointY="96.875" />
+        <EntityTypeShape EntityType="UserDataModel.tUserSocialPost" Width="1.5" PointX="19.5" PointY="92" />
+        <EntityTypeShape EntityType="UserDataModel.tXrefReligionsCode" Width="1.5" PointX="24.75" PointY="61.375" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefReligionsCodes_tCodes" />
+        <AssociationConnector Association="UserDataModel.FK_tEmploymentIndustries_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEmployment_tEmploymentIndustries" />
+        <AssociationConnector Association="UserDataModel.FK_tRelationshipPersonTypes_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserRelationships_tRelationshipPersonTypes" />
+        <AssociationConnector Association="UserDataModel.FK_tReligions_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserReligion_tReligions" />
+        <AssociationConnector Association="UserDataModel.FK_tXrefReligionsCodes_tReligions" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEducation_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEmployment_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPolitics_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserRelationships_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserReligion_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSocialPosts_tSystemStatuses" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEducation_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEducation_tUserSourceServices" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEmployment_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserEmployment_tUserSourceServices" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPolitics_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserRelationships_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserReligion_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSocialPosts_tUserIDs" />
+        <AssociationConnector Association="UserDataModel.FK_tUserPolitics_tUserSourceServices" />
+        <AssociationConnector Association="UserDataModel.FK_tUserRelationships_tUserSourceServices" />
+        <AssociationConnector Association="UserDataModel.FK_tUserReligion_tUserSourceServices" />
+        <AssociationConnector Association="UserDataModel.FK_tUserSocialPosts_tUserSourceServices" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

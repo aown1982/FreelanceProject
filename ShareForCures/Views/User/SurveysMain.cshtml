@@ -1,0 +1,502 @@
+﻿@using ShareForCures.Models.UserData
+@model SurveysData
+
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Surveys";
+    ViewBag.ActiveNav = "surveys";
+}
+
+<div style="background-color: #fff;display: inline-block;padding: 10px;">
+    <style>
+        #prgBar1 {
+            width: 100%;
+        }
+
+        .popup_custom .modal-dialog {
+            width: 680px !important;
+        }
+
+            .popup_custom .modal-dialog .question_list span {
+                background-color: #fafafa !important;
+                height: 35px;
+                float: left;
+                line-height: 20px;
+                margin-right: 10px;
+            }
+
+            .popup_custom .modal-dialog .question_list label {
+                margin: 10px 0px 0px 25px;
+                font-weight: lighter;
+            }
+
+            .popup_custom .modal-dialog .question_list li {
+                border-bottom: 1px solid #ccc !important;
+                font-weight: bold !important;
+            }
+    </style>
+    <p />
+    <input type="hidden" id="hfSurveyId" />
+    <ul class="list">
+        <li>
+            <p>SHARE For Cures partners with leading researchers around the world to conduct extensive research on the data you choose to share with them. By completing each survey, you join other  participants in driving discoveries with the potential to lead to life-changing treatments.</p>
+            <div class="row">
+                <div class="col-sm-8"><strong>You have completed <span>@Model.SurveysCompletedCount</span> out of the @Model.TotalSurveysCount surveys available to you.</strong></div>
+                <div class="col-sm-4">
+                    <div id="prgBar1">
+                    </div>
+                </div>
+            </div>
+        </li>
+
+        @if (Model != null && Model.Surveys != null && Model.Surveys.Count > 0)
+            {
+                foreach (var item in Model.Surveys)
+                {
+                <li>
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h3>@item.PublicName</h3>
+                            <span class="font12pt">@item.PublicDescription</span>
+                            <p>Please complete this brief survey. <a href="#">@item.MoreInfoLink</a></p>
+                        </div>
+                        <div class="col-sm-3">
+                            <p class="timer"><i class="fa fa-clock-o" aria-hidden="true"></i> @item.AvgLengthofTime</p>
+                            @if (item.IsAllCompleted)
+                            {
+                                <input class="btn btn-large btn-completed" type="button" value="Completed" />
+                                    <p class="view_submission"><a href="#" data-toggle="modal" onclick="BindSubmissionForm(@item.ID)">View Submission</a></p>
+                            }
+                            else
+                            {
+                                <input class="btn btn-large btn-start" type="button" value="Start" data-toggle="modal" onclick="BindSurveyQuestion(@item.ID)" />
+                            }
+                        </div>
+                    </div>
+                </li>
+            }
+        }
+        @*<li>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h3>Sleep Survey</h3>
+                        <h4>Sleep Apnea Institute</h4>
+                        <p>Please complete this brief survey about your sleep habits. <a href="#">More info...</a></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p class="timer"><i class="fa fa-clock-o" aria-hidden="true"></i> 5 minutes</p>
+                        <input class="btn btn-xs btn-start" value="Start" data-toggle="modal" data-target="#myModal1" />
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="row">
+                    <div class="col-sm-9">
+                        <h3>Sleep Survey</h3>
+                        <h4>Sleep Apnea Institute</h4>
+                        <p>Please complete this brief survey about your sleep habits. <a href="#">More info...</a></p>
+                    </div>
+                    <div class="col-sm-3">
+                        <p class="timer"><i class="fa fa-clock-o" aria-hidden="true"></i> 15 minutes</p>
+                        <input class="btn btn-xs btn-completed" value="Completed" />
+                        <p class="view_submission"><a href="#" data-toggle="modal" data-target="#myModal2">View Submission</a></p>
+                    </div>
+                </div>
+            </li>*@
+    </ul>
+    <!-- Modal -->
+    <input type="hidden" id="hfPassedQuestions" value="" />
+    <div id="myModal1" class="modal fade in" role="dialog" style="display:none;">
+        <div class="modal-dialog">
+            <input type="hidden" id="hfQuestionID" />
+            <input type="hidden" id="hfQuestionTypeID" />
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Family Survey</h4>
+                </div>
+                <div class="modal-body">
+                    <p id="questionTitle">Are your parents still alive?</p>
+                    <div class="row" id="answerDiv">
+                        @*<div class="col-sm-3"><input type="radio" id="userAnswer"  /> <span id="an1">Yes</span></div>
+                            <div class="col-sm-3"><input type="radio" /> No</div>*@
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" id="btnSkipQuestion">Skip</button>
+                    <button type="button" class="btn btn-default" id="btnNext">Next</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modal -->
+
+    <div id="mySubmissionModel" class="modal fade popup_custom" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Submission</h4>
+                </div>
+                <div class="modal-body" id="answerMainDiv1">
+                    <ul class="question_list"></ul>
+
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-left">Skip</button>
+                        <button type="button" class="btn btn-default">Next</button>
+                    </div>*@
+            </div>
+
+        </div>
+    </div>
+</div>
+
+        <script>
+            $(function () {
+                var pb = $("#prgBar1").kendoProgressBar({
+                    type: "chunk",
+                    chunkCount: @Model.TotalSurveysCount,
+                    min: 0,
+                    max: @Model.TotalSurveysCount,
+                    value: @Model.SurveysCompletedCount,
+                }).data("kendoProgressBar");
+
+                $("#hfPassedQuestions").val('');
+
+
+                $("#btnNext").click(function(){
+                    SaveAndBindSurveyQuestion(false);
+                });
+
+                $("#btnSkipQuestion").click(function(){
+                    SaveAndBindSurveyQuestion(true);
+                });
+            });
+
+            //function SaveSurveyQuestion() {
+            //    var selected = [];
+            //    $('#questionTitle input:checked').each(function() {
+            //        selected.push($(this).attr('name'));
+            //    });
+            //    if(selected==[])
+            //        alert("Please select any one option");
+
+            //    var qId= $("#hfQuestionID").val();
+            //    var skipValue=  $("#hfPassedQuestions").val();
+            //    var arry=[];
+            //    if(skipValue!='' || skipValue!= undefined)
+            //        arry.push(skipValue);
+
+            //    arry.push(qId)
+            //    $("#hfPassedQuestions").val(arry);
+            //    var jsonData=JSON.stringify({
+            //        QuestionID:  $("#hfQuestionID").val(),
+            //        Answer: $("#userAnswer").prop("checked"),
+            //        SurveyID: $("#hfSurveyId").val()
+            //    });
+            //    $.ajax({
+            //        type: "POST",
+            //        url: '/User/SaveSurveyQuestionAnswer',
+            //        contentType: "application/json; charset=utf-8",
+            //        data: jsonData,
+            //        dataType: "json",
+            //        async: false,
+            //        success: function (response) {
+            //            if(response!='' || responce.length > 0)
+            //                $("#hfQuestionID").val(response.ID);
+            //            $('#questionTitle').text(response.Question);
+            //            $('#myModal1').modal('show');
+            //        }
+            //    });
+            //}
+
+            //function SkipQuestion(){
+            //    var qId= $("#hfQuestionID").val();
+            //    var skipVal=  $("#hfPassedQuestions").val();
+            //    var arry=[];
+            //    if(skipVal!='' || skipVal!= undefined)
+            //    {
+            //        arry.push(skipVal);
+            //    }
+            //    arry.push(qId)
+            //    $("#hfPassedQuestions").val(arry);
+
+            //    BindSurveyskipQuestion();
+            //}
+
+            //function BindSurveyskipQuestion() {
+            //    var hfPassedQuestion= $("#hfPassedQuestions").val();
+            //    var finalPassArray=hfPassedQuestion.replace(/^,|,$/g,'');
+            //    var sId=$("#hfSurveyId").val();
+            //    var jsonData=JSON.stringify({
+            //        surveyId: sId,
+            //        skippedQuestions :finalPassArray
+            //    });
+            //    $.ajax({
+            //        type: "POST",
+            //        url: '/User/GetSurveyQuestion',
+            //        contentType: "application/json; charset=utf-8",
+            //        data: jsonData,
+            //        dataType: "json",
+            //        async: false,
+            //        success: function (response) {
+            //            $('#radio input').removeAttr('checked');
+            //            if(response!='' || responce.length > 0)
+            //                $("#hfQuestionID").val(response.ID);
+            //            $('#questionTitle').text(response.Question);
+            //            //$('#answerDiv div').html('');
+            //            //$('#answerDiv div').empty();
+            //            $('#answerDiv').empty();
+            //            if(response.QuestionTypeID ==1 || response.QuestionTypeID ==4)
+            //            {
+            //                if (response.tMCAnswers !=null && response.tMCAnswers.length > 0) {
+            //                    var divAnswerHtml = "";
+            //                    $.each(response.tMCAnswers, function(i,obj) {
+            //                        divAnswerHtml  += "<div class=\"col-sm-3\"><input type=\"checkbox\" class='checkBox_Answers' id=\"ans_" + obj.ID + "\" value=\"" + obj.ID + "\"  /> <span id=\"an1\">"+obj.AnswerText+"</span></div>";
+            //                    });
+            //                    $('#answerDiv').empty();
+            //                    $('#answerDiv').append(divAnswerHtml);
+            //                }
+            //            }
+            //            if(response.QuestionTypeID ==2)
+            //            {
+            //                var divAnswer="<div class=\"col-sm-3\"><input type=\"radio\" id=\"userAnswer\"  /> <span id=\"an1\">Yes </span></div>";
+            //                divAnswer+= "<div class=\"col-sm-3\"><input type=\"radio\" /><span id=\"an1\">No</span></div>"
+            //                $('#answerDiv').append(divAnswer);
+            //            }
+
+            //            if(response.QuestionTypeID ==3)
+            //            {
+            //                "<input type=\"text\" id=\"txtAnswer\" />";
+            //            }
+            //            if(!response.CanSkip)
+            //            {
+            //                $("#btnSkipQuestion").attr('disabled','disabled');
+            //            }
+            //            else
+            //            {
+            //                $("#btnSkipQuestion").removeAttr('disabled');
+
+            //            }
+            //            if(response.IsLast)
+            //            {
+            //                $("#btnNext").attr('value', 'Finish');
+            //            }
+            //            else
+            //            {
+            //                $("#btnNext").attr('value', 'Next');
+
+            //            }
+
+            //            $('#myModal1').modal('show');
+            //        }
+            //    });
+            //}
+
+
+
+            function SaveAndBindSurveyQuestion(isSkipped) {
+                //debugger;
+                var selected = [];
+                $('#questionTitle input:checked').each(function() {
+                    selected.push($(this).attr('name'));
+                });
+
+                if(selected==[])
+                    alert("Please select any one option");
+
+                var passedQuestions = $("#hfPassedQuestions").val() =='' ? $("#hfQuestionID").val() : (','+ $("#hfQuestionID").val());
+                $("#hfPassedQuestions").val($("#hfPassedQuestions").val() + passedQuestions);
+
+                var qAnswer = "";
+
+                if (!isSkipped) {
+                    var qType = $("#hfQuestionTypeID").val();
+                    var qTypeId=  parseInt(qType,10);
+                    if(qTypeId > 0)
+                    {
+                        switch(qTypeId)
+                        {
+                            case 1:
+                                $('#answerDiv input:checked').each(function () {
+                                    if(qAnswer =='')
+                                        qAnswer = $(this)[0].value;
+                                    else
+                                        qAnswer += ',' + $(this)[0].value;
+                                });
+                                break;
+                            case 2:
+                                var valid=$("input[name='radioCheck']:checked").val();
+                                if(valid!='on')
+                                {
+                                    alert("Please select atleast one option.")
+                                    return false;
+
+                                }
+                                var isChecked=$('#userAnswerYes').is(':checked');
+                                if(isChecked)
+                                {
+                                    qAnswer='Yes';
+                                }else
+                                {
+                                    qAnswer='NO'
+                                }
+                                //qAnswer = $("input[name='radioCheck']:checked").val();
+                                break;
+                            case 4:
+                                $('#answerDiv input:checked').each(function () {
+                                    if(qAnswer =='')
+                                        qAnswer = $(this)[0].value;
+                                    else
+                                        qAnswer += ',' + $(this)[0].value;
+                                });
+                                break;
+                            case 3:
+                                qAnswer = $('#txtAnswer').val();
+                                break;
+                        }
+                    }
+                }
+
+
+                var jsonData=JSON.stringify({
+                    QuestionID:  $("#hfQuestionID").val(),
+                    Answer: qAnswer,
+                    SurveyID: $("#hfSurveyId").val(),
+                    QuestionIDsPassed : $("#hfPassedQuestions").val(),
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '/User/SaveAndBindQuestion',
+                    contentType: "application/json; charset=utf-8",
+                    data: jsonData,
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        if (response !=null) {
+                            //debugger;
+                            if(response.ID==0 && response.IsLast)
+                            {
+                                $('#myModal1').modal('hide');
+                                alert('Thanks for your time in completing the Survey. We will get back to you with the results shortly!!');
+                                location.reload();
+                            }
+                            else
+                                BindAnswersHtml(response);
+                        }
+                    }
+                });
+            }
+
+            function BindSurveyQuestion(surveyId) {
+                $("#hfSurveyId").val(surveyId);
+                var jsonData=JSON.stringify({
+                    surveyId: surveyId,
+                    skippedQuestions : $("#hfPassedQuestions").val()
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '/User/GetSurveyQuestion',
+                    contentType: "application/json; charset=utf-8",
+                    data: jsonData,
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        if (response !=null) {
+                            //debugger;
+                            BindAnswersHtml(response);
+                            $('#myModal1').modal('show');
+                        }
+                    }
+                });
+            }
+
+            function BindAnswersHtml(data)
+            {
+                //debugger;
+                var divAnswerHtml = "";
+                $('#radio input').removeAttr('checked');
+                $("#hfQuestionID").val(data.ID);
+                $('#questionTitle').text(data.Question);
+                $("#hfQuestionTypeID").val(data.QuestionTypeID)
+                $("#answerDiv").empty();
+                var qTypeId = data.QuestionTypeID;
+
+                if(qTypeId > 0)
+                {
+                    switch(qTypeId)
+                    {
+                        case 1:
+                            $.each(data.tMCAnswers, function(i,obj) {
+                                divAnswerHtml  += "<div class=\"col-sm-4\"><input type=\"radio\" class='checkBox_Answers' name=\"rdMCQ\" id=\"ans_" + obj.ID + "\" value=\"" + obj.ID + "\"  /> <span id=\"an1\">"+obj.AnswerText+"</span></div>";
+                            });
+                            break;
+                        case 4:
+                            $.each(data.tMCAnswers, function(i,obj) {
+                                divAnswerHtml  += "<div class=\"col-sm-4\"><input type=\"checkbox\" class='checkBox_Answers' id=\"ans_" + obj.ID + "\" value=\"" + obj.ID + "\"  /> <span id=\"an1\">"+obj.AnswerText+"</span></div>";
+                            });
+                            break;
+                        case 2:
+                            divAnswerHtml = "<div class=\"col-sm-4\"><input type=\"radio\" id=\"userAnswerYes\"  name=\"radioCheck\"/> <span id=\"an1\"> Yes </span></div>";
+                            divAnswerHtml += "<div class=\"col-sm-4\"><input type=\"radio\" name=\"radioCheck\" /> <span id=\"an1\"> No </span></div>"
+                            break;
+                        case 3:
+                            divAnswerHtml = "<div class=\"col-sm-4\"><input type=\"text\" id=\"txtAnswer\" /></div>";
+                            break;
+                    }
+                    BindList("#answerDiv",divAnswerHtml);
+                }
+
+
+                if(!data.CanSkip)
+                    $("#btnSkipQuestion").attr('disabled','disabled');
+
+                if(data.IsLast)
+                    $("#btnNext").val('Finish');
+            }
+        </script>
+        <script>
+            function BindList(htmlSelector, data) {
+                /// <summary>
+                /// Binds the list.
+                /// </summary>
+                /// <param name="htmlSelector">The HTML selector.</param>
+                /// <param name="data">The data.</param>
+                /// <returns></returns>
+                $(htmlSelector).empty();
+                $(htmlSelector).html(data);
+            }
+
+            function BindSubmissionForm(surveyId) {
+                var jsonData=JSON.stringify({
+                    surveyId: surveyId, //need to set s;urvey ID.
+                });
+                $.ajax({
+                    type: "POST",
+                    url: '/User/ViewSubmissions',
+                    contentType: "application/json; charset=utf-8",
+                    data: jsonData,
+                    dataType: "json",
+                    async: false,
+                    success: function (response) {
+                        var divAnswerHtml="";
+                        if (response !=null) {
+                            $.each(response, function(i,obj) {
+                                divAnswerHtml  += " <li><span class=\"glyphicon glyphicon-question-sign\" aria-hidden=\"true\"></span>"+ obj.QuestionDescription+""
+                                $.each(obj.MCAnswers, function(a,obj1) {
+                                    divAnswerHtml+="<label id=\"lblAnswers\">"+obj1+"</label>"
+                                });
+                                divAnswerHtml  +="</li>"
+                            });
+                            BindList("#answerMainDiv1 ul",divAnswerHtml);
+                            $('#mySubmissionModel').modal('show');
+                        }
+                    }
+                });
+            }
+        </script>

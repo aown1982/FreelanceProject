@@ -1,0 +1,538 @@
+﻿@using ShareForCures.Models.UserData
+@using ShareForCures.Models.WebApp
+@model UserDataViewModel
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Overview";
+    ViewBag.ActiveNav = "overview";
+
+    var current = Model != null && Model.AdsList.Any() ? Model.AdsList.FirstOrDefault() : new tAdsSponsoredViewModel();
+}
+<div class="alert alert-success adminTopAlert" role="alert">
+    <img src="/images/SyncAniPreLoader_small.gif" />
+    To give you the freshest possible view, your accounts are now updating. This may take a few minutes...
+</div>
+<div style="background-color: #fff;">
+    @if (current != null && current.ID > 0)
+    {
+        <div class="alert alert-success alert-dismissible fade in adminPromotionAlert" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <div class="row col-md-12 col-sm-12 col-xs-12 col-lg-12">
+                <div class="col-md-3 col-sm-3 col-xs-3 col-lg-3 paddingLeft45">
+                    <img src="@current.ImagePath" width="75%" />
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9 padding0" style="font-size: 85%;">
+                    @Html.HiddenFor(a => current.ID)
+                    @Html.Raw(current.Text)
+                    <div class="clearfix"></div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-3 col-xs-12 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Accounts
+                    @*<div style="float: right;">
+                            <a href="javascript:void(0);" id="btnRefreshAccounts"><span class="glyphicon glyphicon-repeat"></span></a>
+                            <a href="javascript:void(0);" id="btnEditAccounts"><span class="glyphicon glyphicon-edit"></span></a>
+                        </div>*@
+                </div>
+                <div class="panel-body">
+                    <nav>
+                        <ul class="nav">
+                            @if (Model != null && Model.SourceServiceTypeData != null)
+                            {
+                                foreach (var item in Model.SourceServiceTypeData)
+                                {
+                                    <li>
+                                        <a data-toggle="collapse" href="#@("collapse" + item.ID)"><span class="glyphicon glyphicon-chevron-right fixVerticalMenu"></span>@item.Type</a>
+                                        @if (item.SourcesList.Any())
+                                        {
+                                            <div id="@("collapse" + item.ID)" class="panel-collapse collapse">
+                                                <ul class="list-group">
+                                                    @foreach (var subItem in item.SourcesList)
+                                                    {
+                                                        <li class="list-group-item"><a href="@Url.Action("MyData")">@subItem.ServiceName</a></li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    </li>
+                                }
+                            }
+
+                            @*<li><a href="#"><span class="glyphicon glyphicon-chevron-right fixVerticalMenu"></span>Medical</a></li>*@
+                            @*<li>
+                                <a href="javascript:void(0);" id="btn-1" data-toggle="collapse" data-target="#submenu1" aria-expanded="false">*@
+                            @*<span id="darrow" class="glyphicon glyphicon-chevron-right fixVerticalMenu"></span>Apps/Devices*@
+                            @*</a>
+                                <ul class="nav collapse" id="submenu1" role="menu" aria-labelledby="btn-1">*@
+                            @*<li class="marginLeft18"><a href="#"><span class="glyphicon glyphicon-chevron-right fixVerticalMenu"></span>FitBit</a></li>*@
+                            @*</ul>
+                                </li>*@
+                            @*<li><a href="#"><span class="glyphicon glyphicon-chevron-right fixVerticalMenu"></span>Social</a></li>*@
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 col-sm-12 col-xs-12 ">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Account Status
+                </div>
+                <div class="panel-body" style="text-align: center; padding: 0px;">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="k-content wide">
+                                    <div id="sourceschart" class="small-chart"></div>
+                                </div>
+                                <style>
+                                    .k-chart.small-chart {
+                                        display: inline-block;
+                                        width: 200px;
+                                        height: 200px;
+                                    }
+                                </style>
+                                <script>
+                                    //function createChart() {
+                                    //    $("#sourceschart").kendoChart({
+                                    //        title: {
+                                    //            position: "bottom",
+                                    //            text: "Sources Connected"
+                                    //        },
+                                    //        legend: {
+                                    //            visible: false
+                                    //        },
+                                    //        chartArea: {
+                                    //            background: ""
+                                    //        },
+                                    //        seriesDefaults: {
+                                    //        },
+                                    //        series: [{
+                                    //            type: "pie",
+                                    //            startAngle: 150,
+                                    //            data: [{
+                                    //                category: "Apps & Devices",
+                                    //                value: 5,
+                                    //                color: "#00B5A3"
+                                    //            }, {
+                                    //                category: "Medical",
+                                    //                value: 2,
+                                    //                color: "#0071BB"
+                                    //            }, {
+                                    //                category: "Social",
+                                    //                value: 1,
+                                    //                color: "#4D4D4D"
+                                    //            }]
+                                    //        }],
+                                    //        tooltip: {
+                                    //            visible: true,
+                                    //            template: "#= category # : #= kendo.format('{0}', value) #"
+                                    //        }
+                                    //    });
+                                    //}
+
+                                    function createChart(rData) {
+                                        $("#sourceschart").kendoChart({
+                                            title: {
+                                                position: "bottom",
+                                                text: "Sources Connected"
+                                            },
+                                            legend: {
+                                                visible: false
+                                            },
+                                            chartArea: {
+                                                background: ""
+                                            },
+                                            seriesDefaults: {
+                                            },
+                                            series: [{
+                                                type: "pie",
+                                                startAngle: 150,
+                                                data: rData
+                                            }],
+                                            tooltip: {
+                                                visible: true,
+                                                template: "#= category # : #= kendo.format('{0}', value) #"
+                                            }
+                                        });
+                                    }
+
+                                </script>
+                            </td>
+                            <td>
+                                <div class="k-content wide">
+                                    <div id="surveyschart"></div>
+                                </div>
+                                <script>
+                                    function createChart2(rData) {
+                                        //$("#surveyschart").kendoChart({
+                                        //    title: {
+                                        //        text: "Surveys Completed",
+                                        //        position: "bottom"
+                                        //    },
+                                        //    legend: {
+                                        //        visible: false
+                                        //    },
+                                        //    series: [{
+                                        //        type: "funnel",
+                                        //        labels: {
+                                        //            visible: true,
+                                        //            background: "transparent",
+                                        //            color:"white",
+                                        //            format: "N0"
+                                        //        },
+                                        //        dynamicSlope: false,
+                                        //        dynamicHeight: false,
+                                        //        field: "value",
+                                        //        categoryField: "category",
+                                        //        data: [{
+                                        //            category: "September",
+                                        //            value: 11,
+                                        //            color: "#0e5a7e"
+                                        //        }, {
+                                        //            category: "August",
+                                        //            value: 1,
+                                        //            color: "#166f99"
+                                        //        }, {
+                                        //            category: "July",
+                                        //            value: 1,
+                                        //            color: "#2185b4"
+                                        //        }, {
+                                        //            category: "June",
+                                        //            value: 1,
+                                        //            color: "#319fd2"
+                                        //        }]
+                                        //    }],
+                                        //    tooltip: {
+                                        //        visible: true,
+                                        //        template: "#= category #"
+                                        //    }
+                                        //});
+
+
+
+                                        $("#surveyschart").kendoChart({
+                                            title: {
+                                                text: "Surveys Completed",
+                                                position: "bottom"
+                                            },
+                                            legend: {
+                                                visible: false
+                                            },
+                                            seriesColors: ["#319fd2", "#2185b4", "#166f99", "#0e5a7e"],
+                                            series: [{
+                                                type: "funnel",
+                                                labels: {
+                                                    visible: true,
+                                                    background: "transparent",
+                                                    color: "white",
+                                                    format: "N0"
+                                                },
+                                                dynamicSlope: false,
+                                                dynamicHeight: false,
+                                                field: "value",
+                                                categoryField: "category",
+                                                data: rData
+                                            }],
+                                            tooltip: {
+                                                visible: true,
+                                                template: "#= category #"
+                                            }
+                                        });
+                                    }
+
+                                </script>
+                                <style>
+                                    #surveyschart {
+                                        display: inline-block;
+                                        width: 180px;
+                                        height: 198px;
+                                        padding-top: 5px;
+                                    }
+
+                                    .box-col {
+                                        width: 15%;
+                                    }
+                                </style>
+                            </td>
+                            <td>
+                                <div id="gauge-content" class="k-content">
+                                    <div id="gauge-container">
+                                        <div id="gauge"></div>
+                                        <div><span style="font:16px Arial,Helvetica,sans-serif; color: #8e8e8e; margin: 0; padding: 0;" x="20.5" y="176">% of Data Shared</span></div>
+                                    </div>
+                                    <script>
+                                        function createGauge() {
+                                            $("#gauge").kendoRadialGauge({
+                                                pointer: {
+                                                    value: 50,
+                                                    color: "#0071BB",
+                                                    cap: {
+                                                        color: "#0071BB"
+                                                    }
+                                                },
+                                                scale: {
+                                                    minorUnit: 5,
+                                                    startAngle: -30,
+                                                    endAngle: 210,
+                                                    max: 100,
+                                                    ranges:
+                                                        [{
+                                                            from: 0,
+                                                            to: 20,
+                                                            color: "#D3D4CD"
+                                                        }, {
+                                                            from: 20,
+                                                            to: 40,
+                                                            color: "#D4D6C1"
+                                                        }, {
+                                                            from: 40,
+                                                            to: 60,
+                                                            color: "#D2D993"
+                                                        }, {
+                                                            from: 60,
+                                                            to: 80,
+                                                            color: "#B5D99E"
+                                                        }, {
+                                                            from: 80,
+                                                            to: 100,
+                                                            color: "#93D9A3"
+                                                        }]
+                                                }
+                                            });
+                                        }
+                                    </script>
+                                    <style>
+                                        #gauge-container {
+                                            background: transparent url("/images/gauge-container-partial.png") no-repeat 50% 50%;
+                                            background-size: 180px 180px;
+                                            width: 200px;
+                                            height: 200px;
+                                            text-align: center;
+                                            margin: 0 auto 0px auto;
+                                            padding: 0 auto 0px auto;
+                                        }
+
+                                        #gauge {
+                                            width: 160px;
+                                            height: 160px;
+                                            margin: 0 auto;
+                                        }
+                                    </style>
+                                </div>
+
+
+                                @*<div class="k-content wide">
+                                        <div id="datapointschart" class="small-chart"></div>
+                                    </div>
+
+                                    <script>
+                                        function createChart3() {
+                                            $("#datapointschart")
+                                                .kendoChart({
+                                                    title: {
+                                                        position: "bottom",
+                                                        text: "Data Points Shared"
+                                                    },
+                                                    legend: {
+                                                        visible: false
+                                                    },
+                                                    chartArea: {
+                                                        background: ""
+                                                    },
+                                                    seriesDefaults: {
+
+                                                    },
+                                                    series: [
+                                                        {
+                                                            type: "pie",
+                                                            startAngle: 150,
+                                                            data: [
+                                                                {
+                                                                    category: "Apps & Devices",
+                                                                    value: 5,
+                                                                    color: "#00B5A3"
+                                                                }, {
+                                                                    category: "Medical",
+                                                                    value: 2,
+                                                                    color: "#0071BB"
+                                                                }, {
+                                                                    category: "Social",
+                                                                    value: 1,
+                                                                    color: "#4D4D4D"
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    tooltip: {
+                                                        visible: true,
+                                                        template: "#= category # : #= kendo.format('{0}', value) #"
+                                                    }
+                                                });
+                                        }*@
+                                <script>
+                                    function BindCharts() {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '/User/GetSurveyChart',
+                                            contentType: "application/json; charset=utf-8",
+                                            data: null,
+                                            dataType: "json",
+                                            async: true,
+                                            success: function (response) {
+                                                if (response != null && response.length > 0) {
+                                                    var arr = [];
+                                                    $.each(response, function (i, obj) {
+                                                        arr.push({ "category": obj.Category, "value": obj.SurveysCount });
+                                                    });
+
+                                                    createChart2(arr);
+                                                }
+                                            }
+                                        });
+                                    }
+
+                                    function BindSourceCharts() {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: '/User/GetSourceConnectedChart',
+                                            contentType: "application/json; charset=utf-8",
+                                            data: null,
+                                            dataType: "json",
+                                            async: true,
+                                            success: function (response) {
+                                                var arr = [];
+                                                if (response != null && response.length > 0) {
+                                                    $.each(response, function (i, obj) {
+                                                        var color = "#00B5A3";
+                                                        if (i == 1) {
+                                                            color = "#0071BB";
+                                                        }
+                                                        else if (i > 1) {
+                                                            color = "#4D4D4D";
+                                                        }
+                                                        arr.push({ "category": obj.Type, "value": obj.Value, "color": color });
+                                                    });
+
+                                                    createChart(arr);
+                                                }
+                                            }
+                                        });
+                                    }
+
+                                    function createCharts() {
+                                        //createChart();
+                                        BindCharts();
+                                        BindSourceCharts();
+                                        //createChart2();
+                                        //createChart3();
+                                        createGauge();
+                                    }
+
+                                    $(document).ready(createCharts);
+                                    $(document).bind("kendo:skinChange", createCharts);
+                                </script>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Recent Activity & Relevant Information
+                    @*<div style="float: right;">
+                            <span class="glyphicon glyphicon-asterisk"></span>
+                        </div>*@
+                </div>
+                <div class="panel-body" id="divRecentActivities" style="max-height: 500px; overflow-x:auto;">
+                    <input type="hidden" id="hfCurrentPage" value="1" />
+                    <nav>
+                        <ul class="nav">
+                            @if (Model != null && Model.RecentActivities != null && Model.RecentActivities.Count() > 0)
+                            {
+                                foreach (var log in Model.RecentActivities)
+                                {
+                                    <li><a href="#"><span class="glyphicon glyphicon-star fixVerticalMenu"></span>@log.Name</a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                    <div class="tetaligncenter" id="SeeMoreDiv">
+                        <div id="loadingDiv" style="text-align: center; display: none; margin-bottom: 20px;">
+                            <img alt="Loading.." src="@Url.Content("~/images/bx_loader.gif")" />
+                        </div>
+                        <a href="javascript:void(0);" id="SeeMoreActivitiesLog">See Older Activities</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $("#btn-1").click(function () {
+        $("#darrow").toggleClass('glyphicon-chevron-right glyphicon-chevron-down');
+    });
+</script>
+<script>
+
+    $("#btnRefreshAccounts").click(function () {
+        /*Implement Async call to refresh data*/
+    });
+
+    $("#btnEditAccounts").click(function () {
+        /*Implement show/edit accounts modal*/
+    });
+
+    $(function () {
+        $("#SeeMoreActivitiesLog").click(function () {
+            var currentPage = parseInt($("#hfCurrentPage").val()) + 1;
+            $("#loadingDiv").show();
+            setTimeout(function () {
+                $.getJSON("/User/GetRecentActivities?currentPage=" + currentPage, {},
+                    function (data) {
+                        if (data != null && data.list != null && data.list.length > 0) {
+                            var list = "";
+                            $.each(data.list, function (i, log) {
+                                list += "<li><a href=\"#\"><span class=\"glyphicon glyphicon-star fixVerticalMenu\"></span>" + log.Name +
+                                "</a></li>";
+                            });
+                            $("#divRecentActivities ul").append(list);
+                            $("#hfCurrentPage").val(currentPage);
+
+                            if (!data.MoreRecords)
+                                $("#SeeMoreDiv").hide();
+
+                            $("#loadingDiv").hide();
+                        }
+                    });
+            }, 1000);
+        });
+        SaveAdsAudids();
+    })
+
+    function SaveAdsAudids() {
+        var adsId = $("#current_ID").val();
+        var jsonData = JSON.stringify({
+            SponsoredAdID: adsId
+        });
+        $.ajax({
+            type: "POST",
+            url: '/User/SaveAdsAuditLog',
+            contentType: "application/json; charset=utf-8",
+            data: jsonData,
+            dataType: "json",
+            async: false,
+            success: function (response) {
+            }
+        });
+    }
+
+</script>

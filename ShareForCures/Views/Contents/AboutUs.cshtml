@@ -1,0 +1,50 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    ViewBag.ActiveNav = "about";
+
+}
+
+  <!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                    <h2>About Us</h2>
+                </header>
+                <div>
+                    <p>
+                        <img src="/images/about-us.gif" width="30%" align="right" style="margin-left:10px;">
+                        SHARE For Cures is a <b>501(c)3 nonprofit organization</b> that is dedicated to empowering you to use your health
+                        data to advance medical research and save lives.   We were formed in 2014, in Virginia, just outside of Washington, D.C.
+                        We put patients, as well as their families and friends, first in everything we do.
+                    </p>
+                    <p>
+                        Our organization is made up of health information technology experts, researchers, privacy and security experts,
+                        patients, and loved ones.  We all share a passion for curing disease and improving health and we constantly strive
+                        for <a href="https://twitter.com/search?q=%23morecures" target="_blank">#MoreCures</a>.
+                    </p>
+                    <p>
+                        We encourage you to browse the website and learn more. Join us by contributing your case, supporting us financially, 
+                        or volunteering.  Share. Be part of a cure.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>

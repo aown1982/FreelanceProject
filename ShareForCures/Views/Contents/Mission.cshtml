@@ -1,0 +1,44 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "about";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                    <h2>Our Mission</h2>
+                </header>
+                <div>
+                    <p>
+                        <img src="/images/mission.jpg" width="241" align="left" style="margin-right:2%;">
+                        SHARE For Cures’ Mission is to empower you to use your health data to advance medical research and save lives.
+                    </p>
+                    <p>
+                        Our transformational vision is to crowdsource cures by empowering everyday people to drive research forward.
+                    </p>
+                    
+                    <p>We encourage you to help us achieve our mission. Learn more, reach out, contribute your case, and support us. Be part of a cure.</p>
+
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>
+

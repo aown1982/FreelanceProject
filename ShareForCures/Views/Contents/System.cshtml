@@ -1,0 +1,52 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "hiw";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                        <h2>The SHARE System</h2>
+                </header>
+                <div>
+                    <p>
+                        &lsquo;SHARE&rsquo; (System for Health And Research data Exchange) ) is a technology platform that enables patients
+                        to direct the collection and aggregation of their health data from multiple disparate systems.   SHARE is being
+                        built in a phased-approach, with the first phase launching  as a pilot in Fall 2016.
+                    </p>
+                    <p>
+                        In the first phase, we will launch the SHARE website portal.  From the website, users can create a SHARE account and connect 
+                        it to a number of different health and wellness sites.  They can manage their data, as well as their consent 
+                        for SHARE for Cures to use and share their health information for research purposes. Patients have the option of
+                        providing consent for all of their data or just the portions of the data that they are comfortable sharing.
+                    </p>
+                    <p style="font-style:italic;font-weight:bold">
+                        We let YOU decide what data you want to share for research and who you want to share it with.  We want you to be in complete 
+                        control and able to collectively move research forward and help make other people's lives better.
+                    </p>
+                    <p>
+                        The next phases of SHARE will add additional user-facing features for data exploration and patient education as well a mobile
+                        app to help everyone connect to SHARE For Cures.
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>

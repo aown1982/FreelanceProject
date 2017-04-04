@@ -1,0 +1,53 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "hiw";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+            <!-- Content -->
+            <article>
+                <header>
+                    <h2>How It Works</h2>
+                </header>
+                <div>
+                    <p>
+                        SHARE For Cures has built a technology platform called SHARE, the System for Health And Research date Exchange that enables
+                        anyone to collect and aggregate their health and wellness data from many different places.  This will include electronic
+                        medical records from multiple providers as well as wellness data from apps and mobile devices.  The platform can currently
+                        connect to nearly half of the hospitals in the U.S.
+                    </p>
+                    <p>
+                        The system is being built in multiple phases.  The first phase features the launch of the SHARE website & user portal.
+                        In the portal, you can easily connect multiple data sources by choosing medical providers you have seen and health apps
+                        you have used and entering your credentials.  Then you can see all of your health data in one simple place.  You can then
+                        pick which data sources to connect with and tell SHARE For Cures what data they feel comfortable sharing and what data they
+                        don’t, and with whom.
+                    </p>
+                    <p>
+                        SHARE For Cures partners with research organizations, such as academic institutions, hospitals, and other disease-focused
+                        nonprofits to provide fully-consented real-world data to researchers in order to speed cures and improve health.   With
+                        user permission, SHARE For Cures may also share data with corporations interested in improving health such as pharmaceutical
+                        companies.
+                    </p>
+                    <p><strong>
+                        All sharing is directed by the you. You are the only person who has the power to determine with whom, and how, we will
+                        share your data.
+                    </strong>
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

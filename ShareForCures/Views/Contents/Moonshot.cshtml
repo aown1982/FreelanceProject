@@ -1,0 +1,95 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "hiw";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                        <h2>The Cancer Moonshot Project</h2>
+                </header>
+                <div>
+                    <p>
+                        <strong>SHARE For Cures is thrilled to part of the White House Cancer Moonshot Initiative.</strong>
+                    </p>
+                    <p>
+                        For our Cancer Moonshot Project, SHARE For Cures is examining real-world immunotherapy usage in the cancer community, 
+                        focusing on the PD-1/PD-L1 inhibitors such as Opdivo (nivolumab,  Keytruda (pembrolizumab), and Tecentriq (atezolizumab).  
+                        This is a new class of drugs and there is very little data on how these drugs are being used in the community and what types 
+                        of issues and side effects are being seen in patients who may have health issues that would prevent them from participating in 
+                        clinical trials.
+                    </p>
+                    <p>
+                        We are collaborating with patient advocacy groups to help identify the proper patients for the study. The targeted accrual 
+                        for this pilot study is 300 – 500 patients who have taken a PD-1/PD-L1  inhibitor. Data will be analyzed to study approved vs 
+                        off-label usage patterns as well as co-morbidities and side-effects in a real world setting.
+                    </p>
+                    
+                        Patients will be asked to:
+                        <ul style="margin: 0em 3em;">
+                            <li style="list-style:circle">
+                                Join SHARE For Cures
+                            </li>
+                            <li style="list-style:circle">
+                                Connect as many clinical, wellness, and lifestyle data sources as they feel comfortable with                
+                                <ul>
+                                    <li style="list-style:circle;margin: 0em 3em;">
+                                        SFC can currently connect to >48% of hospitals in the U.S., as well as many wellness/lifestyle/fitness/diet apps
+                                    </li>
+                                </ul>
+                            </li>
+                            <li style="list-style:circle">
+                                Consent to SHARE the data that they are comfortable sharing for research purposes
+                            </li>
+                            <li style="list-style:circle">
+                                Answer survey questions about their immunotherapy usage for additional data points and have the option of answering additional surveys
+                            </li>
+                            <li style="list-style:circle">
+                                Be re-contacted for future studies (optional, patients may choose to opt-out)
+                            </li>
+                        </ul>
+                    </p>
+                    <p>
+                        SHARE For Cures will work with leading researchers to analyze the data on this new class of drugs. Results of the analyses 
+                        will also be returned to advocacy partners who helped with project recruitment in order to help them support patients in their 
+                        communities.
+                    </p>
+                    <p><strong>Patient Advocacy Collaborators for this project are:</strong></p>
+                    <div class="row centered">
+                        <section class="6u 12u(narrower)">
+                            <div class="box post">
+                                <a href="www.lungcanceralliance.org" target="_blank" class="image">
+                                    <img src="~/images/Partners/LCA_LungCancerAlliance_LCA_Stacked_Horizontal_RBG.jpg" style="width: 210px;" />
+                                </a>
+                            </div>
+                        </section>
+                        <section class="6u 12u(narrower)">
+                            <div class="box post">
+                                <a href="http://www.KidneyCancer.org" target="_blank" class="image">
+                                    <img src="~/images/Partners/kidneycancer.png" />
+                                </a>
+                            </div>
+                        </section>
+                    </div>
+        </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>

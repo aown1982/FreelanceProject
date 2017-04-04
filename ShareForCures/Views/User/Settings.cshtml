@@ -1,0 +1,602 @@
+﻿@using ShareForCures.Models.Users
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Settings";
+
+    string usersName = string.Empty;
+    string usersFirstName = string.Empty;
+    string usersLastName = string.Empty;
+    string usersEmail = string.Empty;
+    string dob = null;
+    int? genderId = null;
+
+    if (System.Web.HttpContext.Current.Session["User"] != null)
+    {
+        UserAuthLogin user = (UserAuthLogin)System.Web.HttpContext.Current.Session["User"];
+        usersEmail = user.tUser.Email.ToString().Trim();
+        usersName = user.tUser.FirstName.ToString().Trim() + " " + user.tUser.LastName.ToString().Trim();
+        usersFirstName = user.tUser.FirstName.ToString().Trim();
+        usersLastName = user.tUser.LastName.ToString().Trim();
+        if (user.tUser.DOB.HasValue) { dob = user.tUser.DOB.Value.Date.ToString("MM/dd/yyyy"); }
+        genderId = user.tUser.GenderID;
+    }
+}
+
+<style>
+     .k-header,
+.k-treemap-title,
+.k-grid-header .k-header > .k-link {
+  color: #000;
+}
+</style>
+<div style="background-color:#fff">
+    <div>
+
+        <br />
+        <div class="col-md-12 col-xs-12 cold-sm-12">
+            <div class="container settingsContainer">
+                <div class="">
+                    <h4>Settings</h4>
+                </div>
+                <div class="">
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading fontGray">
+                                <span class="glyphicon glyphicon-lock"></span>
+                                Sign-in & Security
+                                <div style="float: right;">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <nav>
+                                    <ul class="nav font9pt">
+                                        <li><a href="#animatedModal" id="lnkResetPassword">Change Password</a></li>
+                                        <li><a href="#">Connected Sites</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading fontGray">
+                                <span class="glyphicon glyphicon-user"></span>
+                                Personal Info & Privacy
+                                <div style="float: right;">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <nav>
+                                    <ul class="nav font9pt">
+                                        <li>
+                                            <div class="basicInfo">
+                                                <strong>Basic Info</strong>
+                                                <div class="clearfix"></div>
+                                                <span>@(string.IsNullOrEmpty(usersName) ? string.Empty : usersName)</span>
+                                                <div class="clearfix"></div>
+                                                <span><i>@(string.IsNullOrEmpty(usersEmail) ? string.Empty : usersEmail)</i></span>
+                                            </div>
+                                        </li>
+                                        <li><a href="#animatedModal" id="lnkUpdateBasicInfo">Change Name or Contact Email Address</a></li>
+                                        <li><a href="#animatedModal" id="lnkUpdateDemographics">Demographics</a></li>
+                                        <li><a href="@Url.Action("AuditLogReport","User")">Audit Log</a></li>
+                                        <li><a href="@Url.Action("Share","User")">SHARE Settings</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading fontGray">
+                                <span class="glyphicon glyphicon-cog"></span>
+                                Account Prefrences
+                                <div style="float: right;">
+                                    <span class="glyphicon glyphicon-chevron-right"></span>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <nav>
+                                    <ul class="nav font9pt">
+                                        <li>
+                                            <div class="basicInfo">
+                                                <strong>Location & Language Info</strong>
+                                                <div class="clearfix"></div>
+                                                <span id="location">United States</span>
+                                                <div class="clearfix"></div>
+                                                <span id="language">English (United States)</span>
+                                                <div class="clearfix"></div>
+                                                <span id="timezone"><span class="fontGray">Timezone:</span> Pacific Time</span>
+                                            </div>
+                                        </li>
+                                        <li><a href="#animatedModal" id="lnkChangeLocationLanguage">Change Location or Language</a></li>
+                                        <li>
+                                            <span class="basicInfo"><strong>Account</strong></span>
+                                        </li>
+                                        <li><a href="#animatedModal" id="lnkDeleteAccount">Delete Your Account</a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="animatedModal">
+        <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID class="close-animatedModal" -->
+        <div id="closebt-container" class="close-animatedModal">
+            <img class="closebt" src="/images/closebt.svg">
+        </div>
+        <div class="container hidden" id="resetPassword">
+            <form class="well form-horizontal" action=" " method="post" id="resetPasswordForm">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend class="formHeading"><span>Reset your password</span></legend>
+
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div id="alertPassword" class="input-group right-inner-addon centered alert alert-danger" style="text-align: left; display: none;">
+                                <span class="glyphicon glyphicon-info-sign" style="color: #B40404"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    @*<div class="form-group">
+                            <div class="col-md-12 ">
+                                <div class="input-group right-inner-addon centered">
+                                    <span>Please enter your current password</span>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input type="password" class="form-control" id="txtCurrentPassword" name="txtCurrentPassword" placeholder="current password" required />
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <div class="col-md-12 ">
+                                <div class="input-group right-inner-addon centered">
+                                    <span>Please enter your new password</span>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input type="password" class="form-control" id="txtResetPassword" name="txtResetPassword" placeholder="New password" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input type="password" class="form-control" id="txtResetPasswordAgain" name="txtResetPasswordAgain" data-match="#txtResetPassword" data-match-error="Password must match" placeholder="Retype new password" required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered center">
+                                <button type="submit" id="btnResetPassword" class="button btn-white">Reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="container hidden" id="updateBasicInfo">
+            <form class="well form-horizontal" action=" " method="post" id="basicInfoForm">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend class="formHeading"><span>Change your name or email address</span></legend>
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div id="alertAccountInfo" class="input-group right-inner-addon centered alert alert-danger" style="text-align: left; display: none;">
+                                <span class="glyphicon glyphicon-info-sign" style="color: #B40404"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span>Please enter your new name</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input type="text" class="form-control" id="txtFirstName" name="txtFirstName" placeholder="First Name" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input type="text" class="form-control" id="txtLastName" name="txtLastName" placeholder="Last Name" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span>Please enter your new contact email address</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input type="text" class="form-control" id="txtNewEmail" name="txtNewEmail" placeholder="New contact email address" value="johne@nowhere.com" required />
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered center">
+                                <button type="submit" id="btnUpdateBasicInfo" class="button btn-white">Update Basic Info</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="container hidden" id="updateLocationLanguageInfo">
+            <form class="well form-horizontal" action=" " method="post" id="locationLanguageForm">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend class="formHeading"><span>Change your location or language</span></legend>
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span id="msgChangeLocationLanguage" class="alert-info"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span>Please select your location</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group right-inner-addon centered">
+                            @*<select class="form-control" id="selLocation">
+                                    <option>United States</option>
+                                    <option>United Kingdom</option>
+                                    <option>Canada</option>
+                                    <option>Australia</option>
+                                </select>*@
+                            <input id="ddl_State" name="ddl_State" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span>Please select your language</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                @*<select class="form-control" id="selLanguage">
+                                        <option>English (United States)</option>
+                                        <option>English (England)</option>
+                                        <option>French</option>
+                                        <option>Spanish</option>
+                                    </select>*@
+                                <input id="ddl_Language" name="ddl_Language" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered center">
+                                <button type="submit" id="btnChangeLocationLanguage" class="button btn-white">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="container hidden" id="updateDemographics">
+            <form class="well form-horizontal" action=" " method="post" id="demographicsForm">
+                <fieldset>
+
+                    <!-- Form Name -->
+                    <legend class="formHeading"><span>Demographics</span></legend>
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span id="msgChangeLocationLanguage" class="alert-info"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span>Please select your Dob</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input id="dp_dob" style="color:black" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span>Please select your Gender</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered">
+                                <input id="ddl_Gender" name="ddl_Gender" />
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered center">
+                                <button type="submit" id="btnChangeDemographics" class="button btn-white">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="container hidden" id="deleteAccount">
+            <form class="well form-horizontal" action=" " method="post" id="deleteAccountForm">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="col-md-12 ">
+                            <div class="input-group right-inner-addon centered">
+                                <span id="msgDeleteAccount" class="alert-info"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Form Name -->
+                    <legend class="formHeading"><span>Are you sure you want to delete your account?</span></legend>
+
+
+                    <!-- Text input-->
+                    <div class="form-group">
+                        <div class="col-md-12 inputGroupContainer">
+                            <div class="input-group right-inner-addon centered center">
+                                <button type="submit" id="btnYesDeleteAccount" class="button btn-white">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+        <div class="container hidden" id="serverMsgContainer">
+            <div class="row">
+                <form class="well form-horizontal container frmResetForm" action=" " method="post">
+                    <fieldset>
+                        <legend><span id="msgInfo"></span></legend>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <input type="hidden" id="locationId" />
+    <input type="hidden" id="languageId" />
+
+</div>
+<script>
+    $("#lnkResetPassword").animatedModal();
+    $("#lnkUpdateBasicInfo").animatedModal();
+    $("#lnkDeleteAccount").animatedModal();
+    $("#lnkUpdateDemographics").animatedModal();
+    $("#lnkChangeLocationLanguage").animatedModal();
+
+    $(document).ready(function () {
+        //$("#dp_dob").datepicker({
+        //    showOn: "button",
+        //    buttonImage: "images/calendar.gif",
+        //    buttonImageOnly: true,
+        //    buttonText: "Select date"
+        //});
+        $("#dp_dob").kendoDatePicker();
+        $("#lnkResetPassword").click(function () {
+            $('#resetPasswordForm').bootstrapValidator('resetForm', true);
+            $('#updateBasicInfo').hide();
+            $('#serverMsgContainer').hide();
+            $('#updateLocationLanguageInfo').hide();
+            $('#updateDemographics').hide();
+            $('#deleteAccount').hide();
+            $('#btnResetPassword').removeClass('disabled');
+            $('#resetPassword').removeClass('hidden');
+            $('#resetPassword').show();
+
+        });
+        $("#lnkUpdateBasicInfo").click(function () {
+            $('#basicInfoForm').bootstrapValidator(true);
+            $('#serverMsgContainer').hide();
+            $('#resetPassword').hide();
+            $('#updateLocationLanguageInfo').hide();
+            $('#updateDemographics').hide();
+            $('#deleteAccount').hide();
+            $('#btnUpdateBasicInfo').removeAttr('disabled');
+
+            $('#txtFirstName').val('@(string.IsNullOrEmpty(usersFirstName)?string.Empty:usersFirstName)');
+            $('#txtLastName').val('@(string.IsNullOrEmpty(usersLastName) ? string.Empty : usersLastName)');
+            $('#txtNewEmail').val('@(string.IsNullOrEmpty(usersEmail) ? string.Empty : usersEmail)');
+            $('#updateBasicInfo').removeClass('hidden');
+            $('#updateBasicInfo').show();
+        });
+        $("#lnkDeleteAccount").click(function () {
+            $('#deleteAccountForm').bootstrapValidator(true);
+            $('#serverMsgContainer').hide();
+            $('#resetPassword').hide();
+            $('#updateLocationLanguageInfo').hide();
+            $('#updateBasicInfo').hide();
+            $('#updateDemographics').hide();
+            $('#btnYesDeleteAccount').removeAttr('disabled');
+            $('#deleteAccount').removeClass('hidden');
+            $('#deleteAccount').show();
+        });
+        $("#lnkUpdateDemographics").click(function () {
+            $('#demographicsForm').bootstrapValidator(true);
+            $('#serverMsgContainer').hide();
+            $('#resetPassword').hide();
+            $('#updateLocationLanguageInfo').hide();
+            $('#updateDemographics').hide();
+            $('#updateBasicInfo').hide();
+            $('#deleteAccount').hide();
+            $('#btnChangeDemographics').removeAttr('disabled');
+            $('#updateDemographics').removeClass('hidden');
+            $('#updateDemographics').show();
+
+
+
+
+            $("#ddl_Gender").kendoDropDownList({
+                dataTextField: "Gender",
+                dataValueField: "Id",
+                autoBind: false,
+                filter: "contains",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/GetAllGenders"
+                            , dataType: "json"
+                        }
+                    }
+                },
+                serverFiltering: true,
+                index: 0
+            });
+
+
+            var ddl_Gender = $("#ddl_Gender").data("kendoDropDownList");
+            var dp_dob = $("#dp_dob").data("kendoDatePicker");
+            ddl_Gender.dataSource.read();
+            if (@genderId != null)
+            {ddl_Gender.value(@genderId);}
+            if ('@dob' != null)
+            {   dp_dob.value('@dob');
+
+            }
+
+
+        });
+        $("#lnkChangeLocationLanguage").click(function () {
+            $('#locationLanguageForm').bootstrapValidator(true);
+            $('#serverMsgContainer').hide();
+            $('#resetPassword').hide();
+            $('#deleteAccount').hide();
+            $('#updateBasicInfo').hide();
+            $('#btnChangeLocationLanguage').removeAttr('disabled');
+            $('#updateLocationLanguageInfo').removeClass('hidden');
+            $('#updateLocationLanguageInfo').show();
+
+            var ddl_Language = $("#ddl_Language").data("kendoDropDownList");
+            var ddl_State = $("#ddl_State").data("kendoDropDownList");
+
+            var languageid = 0;
+            var locationid = 0;
+
+            if ($("#language").val() != null) languageid = $("#languageId").val();
+            if ($("#location").val() != null) locationid = $("#locationId").val();
+
+            ddl_Language.dataSource.read();
+            ddl_Language.value(languageid);
+
+            ddl_State.dataSource.read();
+            ddl_State.value(locationid);
+
+
+        });
+
+        $("#ddl_Language").kendoDropDownList({
+            dataTextField: "Language",
+            dataValueField: "Id",
+            autoBind: false,
+            filter: "contains",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/User/GetAllLanguages"
+                        , dataType: "json"
+                    }
+                }
+            },
+            serverFiltering: true,
+            index: 0
+        });
+
+        $("#ddl_State").kendoDropDownList({
+            dataTextField: "StateName",
+            dataValueField: "Id",
+            autoBind: false,
+            filter: "contains",
+            dataSource: {
+                transport: {
+                    read: {
+                        url: "/User/GetAllStates"
+                        , dataType: "json"
+                    }
+                }
+            },
+            serverFiltering: true,
+            index: 0
+        });
+
+        $.ajax({
+            type: "GET",
+            url: "/User/GetUserSettingDetails",
+            contentType: "application/json"
+        }).done(function (settings) {
+            if (settings == null) return;
+
+            $("#location").text(settings.Location);
+            $("#language").text(settings.Language);
+            $("#timezone").text(settings.TimeZone);
+            $("#locationId").val(settings.LocationId);
+            $("#languageId").val(settings.LanguageId);
+
+
+        });
+
+
+    });
+</script>

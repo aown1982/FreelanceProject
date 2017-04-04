@@ -1,0 +1,61 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "wts";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1">
+    <div class="container">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                    <center>
+                        <h2>Support Us</h2>
+                    </center>
+                    <p>All content, all the time.</p>
+                </header>
+                <div style="width: 30%; position: relative; display: inline-block; margin-right: 3%; text-align: center;">
+                    <img src="/images/paypal.jpg" width="226" height="49" longdesc="https://www.paypal.com/webapps/mpp/search-cause?charityId=113616&s=3">
+                    <p>
+                    <div id="amznCharityBannerInner">
+                        <a href="https://smile.amazon.com/ch/47-1396784" target="_blank">
+                            <div class="text" height="">
+                                <div class="support-wrapper">
+                                    <div class="support" style="font-size: 25px; line-height: 28px; margin-top: 15px; margin-bottom: 15px;">Support <span id="charity-name" style="display: inline-block;">SHARE For Cures.</span></div>
+                                </div>
+                                <p class="when-shop">When you shop at <b>smile.amazon.com,</b>
+                                </p>
+                                <p class="donates">Amazon donates.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div style="width: 65%; position: relative; display: inline-block;">
+                    <h3><strong>How can I donate?</strong></h3>
+                    <p>SHARE For Cures uses PayPal for online donations. PayPal can be used for quick one-time donations or recurring monthly donations. In addition, it provides you with the ability to donate in honor or in memory of someone.</p>
+                    <h3><strong>What will my donation be used for?</strong></h3>
+                    <p>Your donation will support the technology, educational content, research projects, and the overhead associated with making it possible for everyone to SHARE For Cures. As a non-profit organization, SHARE For Cures is dedicated to empowering the patient community to use their individual health data to advance medical research and save lives. </p>
+                    <h3><strong>Is my donation tax deductible?</strong></h3>
+                    <p>SHARE For Cures is a 501(c) (3) non-profit public charity organization. As such, all or part of any contributions you make to SHARE For Cures may be tax deductible as a charitable contribution (Please check with your tax advisor).</p>
+                    <p>If you have questions or wish to speak with a development officer about a personal, foundation, or corporate donation, please email <a href="mailto:Development@SHAREForCures.org" target="_self">Development@SHAREForCures.org</a></p>
+                    <p>
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>
+

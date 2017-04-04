@@ -1,0 +1,9 @@
+﻿<html>
+<body style="color:grey; font-size:15px;">
+    <div border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" bgcolor="#ffffff" style="margin:0">
+        <p>Name: {0}</p>
+        <p>Email: {1}</p>
+        <p>Message: {2}</p>
+    </div>
+</body>
+</html>

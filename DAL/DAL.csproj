@@ -1,0 +1,608 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7CE9DD76-4C33-41E0-81A9-93DA2BFB4997}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="spGetUserSHARESettings_Result.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAccountStatu.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tActivity.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAdsLog.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAdsSponsored.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAdType.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAllergen.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAllergySeverity.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tAllergyStatus.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tConsent.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCountry.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tCredential.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tDietCategory.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tEmploymentIndustry.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tEthnicity.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tGender.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tGeneticTrait.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tHealthGoalType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tIcon.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tInstructionType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tInvitationCode.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tLanguage.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tMaritalStatus.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tMedicationForm.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tMedicationRoute.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tNutrient.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tNutrientType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tOrderType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tOrganization.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tPharmacy.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tProvider.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tProviderPhoneNumber.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tRace.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tReaction.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tReactionType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tRelationshipPersonType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tReligion.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSalt.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSex.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSHAREPurpose.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSHAREPurposeCategory.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSHARESetting.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSNPAvailability.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSource.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSourceOrganization.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSourceService.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSourceServiceDevice.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSourceServiceType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSponsor.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tState.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSurvey.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSurveyQuestion.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSurveyQuestionMCAnswer.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSurveyQuestionType.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tSystemStatus.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tTestResultStatus.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tTimeZone.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUnitsOfMeasure.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUOMRelationship.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUser.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserActivity.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserAllergy.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserCarePlan.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserCarePlanSpecialty.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserCarePlanType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserDataAudit.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserDataAuditType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserDataErrLog.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserDerivedNote.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserDiet.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserEducation.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserEmployment.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserEncounter.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserEncounterReason.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserEvent.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserFilter.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserFunctionalStatus.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserGeneticTrait.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserHealthGoal.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserID.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserImmunization.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserImmunizationsDate.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserInstruction.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserLocation.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserLoginAuth.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserNarrative.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserNarrativeEntry.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserOrder.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserPasswordReset.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserPolitic.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserPrescription.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserProblem.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserProcedure.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserProcedureDevice.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserProcedureDeviceCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserRelationship.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserReligion.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUsersAddressHistory.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUsersAudit.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUsersAuditType.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUsersErrLog.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSHARESetting.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSleep.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSleepDetail.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSNPProbe.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSocialPost.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSourceService.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSourceServiceStatus.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSpecimen.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSpecimenCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserSurveyResult.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserTestResult.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserTestResultComponent.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tUserVital.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tVisitType.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tWAAudit.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tWAAuditObject.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tWAErrLog.cs">
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefAllergensCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefMedicationFormsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefMedicationRoutesCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefReactionsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefReactionTypesCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefReligionsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserAllergiesCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserCarePlansCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserDietNutrient.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserEncountersCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserEncountersPrescription.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserEncountersProblem.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserEncountersVital.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserFunctionalStatusesCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserImmunizationsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserInstructionsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserPrescriptionsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserProblemsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserProceduresCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserSHARESettingsPurpos.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUsersMaritalStatu.cs">
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="tXrefUserSNPProbesSNPAvailability.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserSourceServiceDevice.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserTestResultComponentsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserTestResultRecipientsProvider.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserTestResultsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tXrefUserVitalsCode.cs">
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="UsersModal.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersModal.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersModal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsersModal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsersModal.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="WebApplicationModal.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebApplicationModal.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebApplicationModal.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebApplicationModal.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WebApplicationModal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WebApplicationModal.edmx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <EntityDeploy Include="UsersModal.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UsersModal.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="UserDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UserDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+    <None Include="UserDataModel.edmx.diagram">
+      <DependentUpon>UserDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="UsersModal.edmx.diagram">
+      <DependentUpon>UsersModal.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="WebApplicationModal.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>WebApplicationModal.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="WebApplicationModal.edmx.diagram">
+      <DependentUpon>WebApplicationModal.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UserDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserDataModel.edmx</DependentUpon>
+      <LastGenOutput>UserDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UserDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserDataModel.edmx</DependentUpon>
+      <LastGenOutput>UserDataModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="UsersModal.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsersModal.edmx</DependentUpon>
+      <LastGenOutput>UsersModal.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="UsersModal.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UsersModal.edmx</DependentUpon>
+      <LastGenOutput>UsersModal.cs</LastGenOutput>
+    </Content>
+    <Content Include="WebApplicationModal.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebApplicationModal.edmx</DependentUpon>
+      <LastGenOutput>WebApplicationModal.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="WebApplicationModal.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>WebApplicationModal.edmx</DependentUpon>
+      <LastGenOutput>WebApplicationModal.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

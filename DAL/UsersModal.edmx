@@ -1,0 +1,1311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Models.Users.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tAccountStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountStatus" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCountry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CountryName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryAbbrev" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tEthnicity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ethnicity" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tGender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Language" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tMaritalStatuses">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MaritalStatus" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tRace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Race" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSalts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Salt" Type="nchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sex" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tStates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StateName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="CountryID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSystemStatuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tTimeZone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TimeZone" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Offset" Type="float" />
+        </EntityType>
+        <EntityType Name="tUserLoginAuths">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="ExpirationDate" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tUserPasswordResets">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ExternalUserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResetCodeID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UsedDateTime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="tUsers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ExternalID" Type="uniqueidentifier" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="FirstName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="MiddleName" Type="nchar" MaxLength="50" />
+          <Property Name="LastName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="LanguageID" Type="int" />
+          <Property Name="Email" Type="nchar" MaxLength="320" Nullable="false" />
+          <Property Name="Username" Type="nchar" MaxLength="50" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="PHSaltID" Type="int" />
+          <Property Name="SexID" Type="int" />
+          <Property Name="GenderID" Type="int" />
+          <Property Name="RaceID" Type="int" />
+          <Property Name="EthnicityID" Type="int" />
+          <Property Name="AccountStatusID" Type="int" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="LastUpdatedDateTime" Type="datetime2" Precision="7" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tUsersAddressHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TimeZoneID" Type="int" />
+          <Property Name="Address1" Type="nchar" MaxLength="255" />
+          <Property Name="Address2" Type="nchar" MaxLength="255" />
+          <Property Name="City" Type="nchar" MaxLength="255" />
+          <Property Name="StateID" Type="int" />
+          <Property Name="Zip" Type="nchar" MaxLength="12" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tUsersAudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewObjectID" Type="uniqueidentifier" />
+          <Property Name="OldObjectID" Type="uniqueidentifier" />
+          <Property Name="TypeID" Type="int" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+          <Property Name="OriginalValue" Type="nvarchar(max)" />
+          <Property Name="NewValue" Type="nvarchar(max)" />
+          <Property Name="DateTimeStamp" Type="datetime2" Precision="7" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tUsersAuditTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InternalName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayDescription" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDisplayed" Type="bit" Nullable="false" />
+          <Property Name="SystemStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tUsersErrLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrTypeID" Type="int" Nullable="false" />
+          <Property Name="ErrSourceID" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Trace" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tXrefUsersMaritalStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="MaritalStatusID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_tStates_tCountry">
+          <End Role="tCountry" Type="Self.tCountry" Multiplicity="1" />
+          <End Role="tStates" Type="Self.tStates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCountry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tStates">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUserLoginAuths_tUsers">
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="1" />
+          <End Role="tUserLoginAuths" Type="Self.tUserLoginAuths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUserLoginAuths">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUserPasswordResets_tUsers">
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="1" />
+          <End Role="tUserPasswordResets" Type="Self.tUserPasswordResets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUserPasswordResets">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tAccountStatus">
+          <End Role="tAccountStatus" Type="Self.tAccountStatus" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAccountStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="AccountStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tEthnicity">
+          <End Role="tEthnicity" Type="Self.tEthnicity" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEthnicity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="EthnicityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tGender">
+          <End Role="tGender" Type="Self.tGender" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tLanguage">
+          <End Role="tLanguage" Type="Self.tLanguage" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tRace">
+          <End Role="tRace" Type="Self.tRace" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tRace">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tSalts">
+          <End Role="tSalts" Type="Self.tSalts" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSalts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="PHSaltID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tSex">
+          <End Role="tSex" Type="Self.tSex" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="SexID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAddressHistory_tStates">
+          <End Role="tStates" Type="Self.tStates" Multiplicity="0..1" />
+          <End Role="tUsersAddressHistory" Type="Self.tUsersAddressHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsersAddressHistory">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAddressHistory_tTimeZone">
+          <End Role="tTimeZone" Type="Self.tTimeZone" Multiplicity="0..1" />
+          <End Role="tUsersAddressHistory" Type="Self.tUsersAddressHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tTimeZone">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsersAddressHistory">
+              <PropertyRef Name="TimeZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAddressHistory_tUsers">
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="1" />
+          <End Role="tUsersAddressHistory" Type="Self.tUsersAddressHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAddressHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAudit_tUsers">
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="0..1" />
+          <End Role="tUsersAudit" Type="Self.tUsersAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAudit">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAudit_tUsersAuditTypes">
+          <End Role="tUsersAuditTypes" Type="Self.tUsersAuditTypes" Multiplicity="1" />
+          <End Role="tUsersAudit" Type="Self.tUsersAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsersAuditTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAudit">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAuditTypes_tSystemStatuses">
+          <End Role="tSystemStatuses" Type="Self.tSystemStatuses" Multiplicity="1" />
+          <End Role="tUsersAuditTypes" Type="Self.tUsersAuditTypes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSystemStatuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAuditTypes">
+              <PropertyRef Name="SystemStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersErrLog_tUsers">
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="0..1" />
+          <End Role="tUsersErrLog" Type="Self.tUsersErrLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersErrLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tXrefUsersMaritalStatus_tMaritalStatuses">
+          <End Role="tMaritalStatuses" Type="Self.tMaritalStatuses" Multiplicity="1" />
+          <End Role="tXrefUsersMaritalStatus" Type="Self.tXrefUsersMaritalStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaritalStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tXrefUsersMaritalStatus">
+              <PropertyRef Name="MaritalStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tXrefUsersMaritalStatus_tUsers">
+          <End Role="tUsers" Type="Self.tUsers" Multiplicity="1" />
+          <End Role="tXrefUsersMaritalStatus" Type="Self.tXrefUsersMaritalStatus" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tXrefUsersMaritalStatus">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelsUsersStoreContainer">
+          <EntitySet Name="tAccountStatus" EntityType="Self.tAccountStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tCountry" EntityType="Self.tCountry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tEthnicity" EntityType="Self.tEthnicity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tGender" EntityType="Self.tGender" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tLanguage" EntityType="Self.tLanguage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tMaritalStatuses" EntityType="Self.tMaritalStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tRace" EntityType="Self.tRace" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSalts" EntityType="Self.tSalts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSex" EntityType="Self.tSex" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tStates" EntityType="Self.tStates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSystemStatuses" EntityType="Self.tSystemStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tTimeZone" EntityType="Self.tTimeZone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUserLoginAuths" EntityType="Self.tUserLoginAuths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUserPasswordResets" EntityType="Self.tUserPasswordResets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUsers" EntityType="Self.tUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUsersAddressHistory" EntityType="Self.tUsersAddressHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUsersAudit" EntityType="Self.tUsersAudit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUsersAuditTypes" EntityType="Self.tUsersAuditTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUsersErrLog" EntityType="Self.tUsersErrLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tXrefUsersMaritalStatus" EntityType="Self.tXrefUsersMaritalStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tStates_tCountry" Association="Self.FK_tStates_tCountry">
+            <End Role="tCountry" EntitySet="tCountry" />
+            <End Role="tStates" EntitySet="tStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUserLoginAuths_tUsers" Association="Self.FK_tUserLoginAuths_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUserLoginAuths" EntitySet="tUserLoginAuths" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUserPasswordResets_tUsers" Association="Self.FK_tUserPasswordResets_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUserPasswordResets" EntitySet="tUserPasswordResets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tAccountStatus" Association="Self.FK_tUsers_tAccountStatus">
+            <End Role="tAccountStatus" EntitySet="tAccountStatus" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tEthnicity" Association="Self.FK_tUsers_tEthnicity">
+            <End Role="tEthnicity" EntitySet="tEthnicity" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tGender" Association="Self.FK_tUsers_tGender">
+            <End Role="tGender" EntitySet="tGender" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tLanguage" Association="Self.FK_tUsers_tLanguage">
+            <End Role="tLanguage" EntitySet="tLanguage" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tRace" Association="Self.FK_tUsers_tRace">
+            <End Role="tRace" EntitySet="tRace" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tSalts" Association="Self.FK_tUsers_tSalts">
+            <End Role="tSalts" EntitySet="tSalts" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tSex" Association="Self.FK_tUsers_tSex">
+            <End Role="tSex" EntitySet="tSex" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAddressHistory_tStates" Association="Self.FK_tUsersAddressHistory_tStates">
+            <End Role="tStates" EntitySet="tStates" />
+            <End Role="tUsersAddressHistory" EntitySet="tUsersAddressHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAddressHistory_tTimeZone" Association="Self.FK_tUsersAddressHistory_tTimeZone">
+            <End Role="tTimeZone" EntitySet="tTimeZone" />
+            <End Role="tUsersAddressHistory" EntitySet="tUsersAddressHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAddressHistory_tUsers" Association="Self.FK_tUsersAddressHistory_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUsersAddressHistory" EntitySet="tUsersAddressHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAudit_tUsers" Association="Self.FK_tUsersAudit_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUsersAudit" EntitySet="tUsersAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAudit_tUsersAuditTypes" Association="Self.FK_tUsersAudit_tUsersAuditTypes">
+            <End Role="tUsersAuditTypes" EntitySet="tUsersAuditTypes" />
+            <End Role="tUsersAudit" EntitySet="tUsersAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAuditTypes_tSystemStatuses" Association="Self.FK_tUsersAuditTypes_tSystemStatuses">
+            <End Role="tSystemStatuses" EntitySet="tSystemStatuses" />
+            <End Role="tUsersAuditTypes" EntitySet="tUsersAuditTypes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersErrLog_tUsers" Association="Self.FK_tUsersErrLog_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUsersErrLog" EntitySet="tUsersErrLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tXrefUsersMaritalStatus_tMaritalStatuses" Association="Self.FK_tXrefUsersMaritalStatus_tMaritalStatuses">
+            <End Role="tMaritalStatuses" EntitySet="tMaritalStatuses" />
+            <End Role="tXrefUsersMaritalStatus" EntitySet="tXrefUsersMaritalStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tXrefUsersMaritalStatus_tUsers" Association="Self.FK_tXrefUsersMaritalStatus_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tXrefUsersMaritalStatus" EntitySet="tXrefUsersMaritalStatus" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Models.Users" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tAccountStatu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountStatus" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tCountry">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CountryName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CountryAbbrev" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="tStates" Relationship="Self.FK_tStates_tCountry" FromRole="tCountry" ToRole="tStates" />
+        </EntityType>
+        <EntityType Name="tEthnicity">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ethnicity" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tGender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tLanguage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Language" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tMaritalStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tRace">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Race" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSalt">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
+          <Property Name="Salt" Nullable="false" MaxLength="256" FixedLength="true" Unicode="true" Type="String" />
+        </EntityType>
+        <EntityType Name="tSex">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sex" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tState">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="CountryID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tTimeZone">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TimeZone" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Offset" Type="Double" />
+        </EntityType>
+        <EntityType Name="tUser">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExternalID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="LanguageID" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="320" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="PHSaltID" Type="Int32" Nullable="true" />
+          <Property Name="SexID" Type="Int32" />
+          <Property Name="GenderID" Type="Int32" />
+          <Property Name="RaceID" Type="Int32" />
+          <Property Name="EthnicityID" Type="Int32" />
+          <Property Name="AccountStatusID" Type="Int32" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LastUpdatedDateTime" Type="DateTime" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tAccountStatu" Relationship="Self.FK_tUsers_tAccountStatus" FromRole="tUsers" ToRole="tAccountStatus" />
+          <NavigationProperty Name="tEthnicity" Relationship="Self.FK_tUsers_tEthnicity" FromRole="tUsers" ToRole="tEthnicity" />
+          <NavigationProperty Name="tGender" Relationship="Self.FK_tUsers_tGender" FromRole="tUsers" ToRole="tGender" />
+          <NavigationProperty Name="tLanguage" Relationship="Self.FK_tUsers_tLanguage" FromRole="tUsers" ToRole="tLanguage" />
+          <NavigationProperty Name="tRace" Relationship="Self.FK_tUsers_tRace" FromRole="tUsers" ToRole="tRace" />
+          <NavigationProperty Name="tSalt" Relationship="Self.FK_tUsers_tSalts" FromRole="tUsers" ToRole="tSalts" />
+          <NavigationProperty Name="tSex" Relationship="Self.FK_tUsers_tSex" FromRole="tUsers" ToRole="tSex" />
+          <NavigationProperty Name="tUsersAddressHistories" Relationship="Self.FK_tUsersAddressHistory_tUsers" FromRole="tUsers" ToRole="tUsersAddressHistory" />
+          <NavigationProperty Name="tUsersAudits" Relationship="Self.FK_tUsersAudit_tUsers" FromRole="tUsers" ToRole="tUsersAudit" />
+          <NavigationProperty Name="tUsersErrLogs" Relationship="Self.FK_tUsersErrLog_tUsers" FromRole="tUsers" ToRole="tUsersErrLog" />
+          <NavigationProperty Name="tXrefUsersMaritalStatus" Relationship="Self.FK_tXrefUsersMaritalStatus_tUsers" FromRole="tUsers" ToRole="tXrefUsersMaritalStatus" />
+          <NavigationProperty Name="tUserLoginAuths" Relationship="Models.Users.FK_tUserLoginAuths_tUsers" FromRole="tUser" ToRole="tUserLoginAuth" />
+          <NavigationProperty Name="tUserPasswordResets" Relationship="Models.Users.FK_tUserPasswordResets_tUsers" FromRole="tUser" ToRole="tUserPasswordReset" />
+        </EntityType>
+        <EntityType Name="tUsersAddressHistory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TimeZoneID" Type="Int32" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="StateID" Type="Int32" />
+          <Property Name="Zip" Type="String" MaxLength="12" FixedLength="true" Unicode="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tState" Relationship="Self.FK_tUsersAddressHistory_tStates" FromRole="tUsersAddressHistory" ToRole="tStates" />
+          <NavigationProperty Name="tTimeZone" Relationship="Self.FK_tUsersAddressHistory_tTimeZone" FromRole="tUsersAddressHistory" ToRole="tTimeZone" />
+          <NavigationProperty Name="tUser" Relationship="Self.FK_tUsersAddressHistory_tUsers" FromRole="tUsersAddressHistory" ToRole="tUsers" />
+        </EntityType>
+        <EntityType Name="tUsersAudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="OriginalValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTimeStamp" Type="DateTime" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="NewObjectID" Type="Guid" />
+          <Property Name="OldObjectID" Type="Guid" />
+          <Property Name="TypeID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tUsersAuditType1" Relationship="Models.Users.FK_tUsersAudit_tUsersAuditTypes1" FromRole="tUsersAudit" ToRole="tUsersAuditType" />
+        </EntityType>
+        <EntityType Name="tUsersErrLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ErrSourceID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Trace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tXrefUsersMaritalStatu">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="MaritalStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tMaritalStatus" Relationship="Self.FK_tXrefUsersMaritalStatus_tMaritalStatuses" FromRole="tXrefUsersMaritalStatus" ToRole="tMaritalStatuses" />
+          <NavigationProperty Name="tUser" Relationship="Self.FK_tXrefUsersMaritalStatus_tUsers" FromRole="tXrefUsersMaritalStatus" ToRole="tUsers" />
+        </EntityType>
+        <Association Name="FK_tUsers_tAccountStatus">
+          <End Role="tAccountStatus" Type="Self.tAccountStatu" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAccountStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="AccountStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tStates_tCountry">
+          <End Role="tCountry" Type="Self.tCountry" Multiplicity="1" />
+          <End Role="tStates" Type="Self.tState" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tCountry">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tStates">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tEthnicity">
+          <End Role="tEthnicity" Type="Self.tEthnicity" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tEthnicity">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="EthnicityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tGender">
+          <End Role="tGender" Type="Self.tGender" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tGender">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tLanguage">
+          <End Role="tLanguage" Type="Self.tLanguage" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tLanguage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tXrefUsersMaritalStatus_tMaritalStatuses">
+          <End Role="tMaritalStatuses" Type="Self.tMaritalStatus" Multiplicity="1" />
+          <End Role="tXrefUsersMaritalStatus" Type="Self.tXrefUsersMaritalStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tMaritalStatuses">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tXrefUsersMaritalStatus">
+              <PropertyRef Name="MaritalStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tRace">
+          <End Role="tRace" Type="Self.tRace" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tRace">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="RaceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tSalts">
+          <End Type="Self.tSalt" Multiplicity="0..1" Role="tSalts" />
+          <End Type="Self.tUser" Multiplicity="*" Role="tUsers" />
+          <ReferentialConstraint>
+            <Principal Role="tSalts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="PHSaltID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsers_tSex">
+          <End Role="tSex" Type="Self.tSex" Multiplicity="0..1" />
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSex">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsers">
+              <PropertyRef Name="SexID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAddressHistory_tStates">
+          <End Role="tStates" Type="Self.tState" Multiplicity="0..1" />
+          <End Role="tUsersAddressHistory" Type="Self.tUsersAddressHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tStates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsersAddressHistory">
+              <PropertyRef Name="StateID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAddressHistory_tTimeZone">
+          <End Role="tTimeZone" Type="Self.tTimeZone" Multiplicity="0..1" />
+          <End Role="tUsersAddressHistory" Type="Self.tUsersAddressHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tTimeZone">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="tUsersAddressHistory">
+              <PropertyRef Name="TimeZoneID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAddressHistory_tUsers">
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="1" />
+          <End Role="tUsersAddressHistory" Type="Self.tUsersAddressHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAddressHistory">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAudit_tUsers">
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="0..1" />
+          <End Role="tUsersAudit" Type="Self.tUsersAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAudit">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersErrLog_tUsers">
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="0..1" />
+          <End Role="tUsersErrLog" Type="Self.tUsersErrLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersErrLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tXrefUsersMaritalStatus_tUsers">
+          <End Role="tUsers" Type="Self.tUser" Multiplicity="1" />
+          <End Role="tXrefUsersMaritalStatus" Type="Self.tXrefUsersMaritalStatu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsers">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tXrefUsersMaritalStatus">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UsersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tAccountStatus" EntityType="Self.tAccountStatu" />
+          <EntitySet Name="tCountries" EntityType="Self.tCountry" />
+          <EntitySet Name="tEthnicities" EntityType="Self.tEthnicity" />
+          <EntitySet Name="tGenders" EntityType="Self.tGender" />
+          <EntitySet Name="tLanguages" EntityType="Self.tLanguage" />
+          <EntitySet Name="tMaritalStatuses" EntityType="Self.tMaritalStatus" />
+          <EntitySet Name="traces" EntityType="Self.tRace" />
+          <EntitySet Name="tSalts" EntityType="Self.tSalt" />
+          <EntitySet Name="tSexes" EntityType="Self.tSex" />
+          <EntitySet Name="tStates" EntityType="Self.tState" />
+          <EntitySet Name="tTimeZones" EntityType="Self.tTimeZone" />
+          <EntitySet Name="tUsers" EntityType="Self.tUser" />
+          <EntitySet Name="tUsersAddressHistories" EntityType="Self.tUsersAddressHistory" />
+          <EntitySet Name="tUsersAudits" EntityType="Self.tUsersAudit" />
+          <EntitySet Name="tUsersErrLogs" EntityType="Self.tUsersErrLog" />
+          <EntitySet Name="tXrefUsersMaritalStatus" EntityType="Self.tXrefUsersMaritalStatu" />
+          <AssociationSet Name="FK_tUsers_tAccountStatus" Association="Self.FK_tUsers_tAccountStatus">
+            <End Role="tAccountStatus" EntitySet="tAccountStatus" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tStates_tCountry" Association="Self.FK_tStates_tCountry">
+            <End Role="tCountry" EntitySet="tCountries" />
+            <End Role="tStates" EntitySet="tStates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tEthnicity" Association="Self.FK_tUsers_tEthnicity">
+            <End Role="tEthnicity" EntitySet="tEthnicities" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tGender" Association="Self.FK_tUsers_tGender">
+            <End Role="tGender" EntitySet="tGenders" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tLanguage" Association="Self.FK_tUsers_tLanguage">
+            <End Role="tLanguage" EntitySet="tLanguages" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tXrefUsersMaritalStatus_tMaritalStatuses" Association="Self.FK_tXrefUsersMaritalStatus_tMaritalStatuses">
+            <End Role="tMaritalStatuses" EntitySet="tMaritalStatuses" />
+            <End Role="tXrefUsersMaritalStatus" EntitySet="tXrefUsersMaritalStatus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tRace" Association="Self.FK_tUsers_tRace">
+            <End Role="tRace" EntitySet="traces" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tSalts" Association="Self.FK_tUsers_tSalts">
+            <End EntitySet="tSalts" Role="tSalts" />
+            <End EntitySet="tUsers" Role="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsers_tSex" Association="Self.FK_tUsers_tSex">
+            <End Role="tSex" EntitySet="tSexes" />
+            <End Role="tUsers" EntitySet="tUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAddressHistory_tStates" Association="Self.FK_tUsersAddressHistory_tStates">
+            <End Role="tStates" EntitySet="tStates" />
+            <End Role="tUsersAddressHistory" EntitySet="tUsersAddressHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAddressHistory_tTimeZone" Association="Self.FK_tUsersAddressHistory_tTimeZone">
+            <End Role="tTimeZone" EntitySet="tTimeZones" />
+            <End Role="tUsersAddressHistory" EntitySet="tUsersAddressHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAddressHistory_tUsers" Association="Self.FK_tUsersAddressHistory_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUsersAddressHistory" EntitySet="tUsersAddressHistories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAudit_tUsers" Association="Self.FK_tUsersAudit_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUsersAudit" EntitySet="tUsersAudits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersErrLog_tUsers" Association="Self.FK_tUsersErrLog_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tUsersErrLog" EntitySet="tUsersErrLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tXrefUsersMaritalStatus_tUsers" Association="Self.FK_tXrefUsersMaritalStatus_tUsers">
+            <End Role="tUsers" EntitySet="tUsers" />
+            <End Role="tXrefUsersMaritalStatus" EntitySet="tXrefUsersMaritalStatus" />
+          </AssociationSet>
+          <EntitySet Name="tUserLoginAuths" EntityType="Models.Users.tUserLoginAuth" />
+          <AssociationSet Name="FK_tUserLoginAuths_tUsers" Association="Models.Users.FK_tUserLoginAuths_tUsers">
+            <End Role="tUser" EntitySet="tUsers" />
+            <End Role="tUserLoginAuth" EntitySet="tUserLoginAuths" />
+          </AssociationSet>
+          <EntitySet Name="tUsersAuditTypes" EntityType="Models.Users.tUsersAuditType" />
+          <EntitySet Name="tUserPasswordResets" EntityType="Models.Users.tUserPasswordReset" />
+          <AssociationSet Name="FK_tUserPasswordResets_tUsers" Association="Models.Users.FK_tUserPasswordResets_tUsers">
+            <End Role="tUser" EntitySet="tUsers" />
+            <End Role="tUserPasswordReset" EntitySet="tUserPasswordResets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tUsersAudit_tUsersAuditTypes1" Association="Models.Users.FK_tUsersAudit_tUsersAuditTypes1">
+            <End Role="tUsersAuditType" EntitySet="tUsersAuditTypes" />
+            <End Role="tUsersAudit" EntitySet="tUsersAudits" />
+          </AssociationSet>
+          <EntitySet Name="tSystemStatuses" EntityType="Models.Users.tSystemStatus" />
+          <AssociationSet Name="FK_tUsersAuditTypes_tSystemStatuses" Association="Models.Users.FK_tUsersAuditTypes_tSystemStatuses">
+            <End Role="tSystemStatus" EntitySet="tSystemStatuses" />
+            <End Role="tUsersAuditType" EntitySet="tUsersAuditTypes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tUserLoginAuth">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tUser" Relationship="Models.Users.FK_tUserLoginAuths_tUsers" FromRole="tUserLoginAuth" ToRole="tUser" />
+        </EntityType>
+        <Association Name="FK_tUserLoginAuths_tUsers">
+          <End Type="Models.Users.tUser" Role="tUser" Multiplicity="1" />
+          <End Type="Models.Users.tUserLoginAuth" Role="tUserLoginAuth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUserLoginAuth">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tUsersAuditType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InternalName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDisplayed" Type="Boolean" Nullable="false" />
+          <Property Name="SystemStatusID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tUsersAudits1" Relationship="Models.Users.FK_tUsersAudit_tUsersAuditTypes1" FromRole="tUsersAuditType" ToRole="tUsersAudit" />
+          <NavigationProperty Name="tSystemStatus" Relationship="Models.Users.FK_tUsersAuditTypes_tSystemStatuses" FromRole="tUsersAuditType" ToRole="tSystemStatus" />
+        </EntityType>
+        <EntityType Name="tUserPasswordReset">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ExternalUserID" Type="Guid" Nullable="false" />
+          <Property Name="ResetCodeID" Type="Guid" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UsedDateTime" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="tUser" Relationship="Models.Users.FK_tUserPasswordResets_tUsers" FromRole="tUserPasswordReset" ToRole="tUser" />
+        </EntityType>
+        <Association Name="FK_tUserPasswordResets_tUsers">
+          <End Type="Models.Users.tUser" Role="tUser" Multiplicity="1" />
+          <End Type="Models.Users.tUserPasswordReset" Role="tUserPasswordReset" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUser">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUserPasswordReset">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tUsersAudit_tUsersAuditTypes1">
+          <End Type="Models.Users.tUsersAuditType" Role="tUsersAuditType" Multiplicity="1" />
+          <End Type="Models.Users.tUsersAudit" Role="tUsersAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUsersAuditType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAudit">
+              <PropertyRef Name="TypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="tSystemStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tUsersAuditTypes" Relationship="Models.Users.FK_tUsersAuditTypes_tSystemStatuses" FromRole="tSystemStatus" ToRole="tUsersAuditType" />
+        </EntityType>
+        <Association Name="FK_tUsersAuditTypes_tSystemStatuses">
+          <End Type="Models.Users.tSystemStatus" Role="tSystemStatus" Multiplicity="1" />
+          <End Type="Models.Users.tUsersAuditType" Role="tUsersAuditType" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSystemStatus">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tUsersAuditType">
+              <PropertyRef Name="SystemStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelsUsersStoreContainer" CdmEntityContainer="UsersEntities">
+          <EntitySetMapping Name="tAccountStatus">
+            <EntityTypeMapping TypeName="Models.Users.tAccountStatu">
+              <MappingFragment StoreEntitySet="tAccountStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tCountries">
+            <EntityTypeMapping TypeName="Models.Users.tCountry">
+              <MappingFragment StoreEntitySet="tCountry">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryAbbrev" ColumnName="CountryAbbrev" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tEthnicities">
+            <EntityTypeMapping TypeName="Models.Users.tEthnicity">
+              <MappingFragment StoreEntitySet="tEthnicity">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Ethnicity" ColumnName="Ethnicity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tGenders">
+            <EntityTypeMapping TypeName="Models.Users.tGender">
+              <MappingFragment StoreEntitySet="tGender">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tLanguages">
+            <EntityTypeMapping TypeName="Models.Users.tLanguage">
+              <MappingFragment StoreEntitySet="tLanguage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tMaritalStatuses">
+            <EntityTypeMapping TypeName="Models.Users.tMaritalStatus">
+              <MappingFragment StoreEntitySet="tMaritalStatuses">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="traces">
+            <EntityTypeMapping TypeName="Models.Users.tRace">
+              <MappingFragment StoreEntitySet="tRace">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Race" ColumnName="Race" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSalts">
+            <EntityTypeMapping TypeName="Models.Users.tSalt">
+              <MappingFragment StoreEntitySet="tSalts">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSexes">
+            <EntityTypeMapping TypeName="Models.Users.tSex">
+              <MappingFragment StoreEntitySet="tSex">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tStates">
+            <EntityTypeMapping TypeName="Models.Users.tState">
+              <MappingFragment StoreEntitySet="tStates">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tTimeZones">
+            <EntityTypeMapping TypeName="Models.Users.tTimeZone">
+              <MappingFragment StoreEntitySet="tTimeZone">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="Offset" ColumnName="Offset" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUsers">
+            <EntityTypeMapping TypeName="Models.Users.tUser">
+              <MappingFragment StoreEntitySet="tUsers">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ExternalID" ColumnName="ExternalID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="PHSaltID" ColumnName="PHSaltID" />
+                <ScalarProperty Name="SexID" ColumnName="SexID" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="RaceID" ColumnName="RaceID" />
+                <ScalarProperty Name="EthnicityID" ColumnName="EthnicityID" />
+                <ScalarProperty Name="AccountStatusID" ColumnName="AccountStatusID" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="LastUpdatedDateTime" ColumnName="LastUpdatedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUsersAddressHistories">
+            <EntityTypeMapping TypeName="Models.Users.tUsersAddressHistory">
+              <MappingFragment StoreEntitySet="tUsersAddressHistory">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TimeZoneID" ColumnName="TimeZoneID" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateID" ColumnName="StateID" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUsersAudits">
+            <EntityTypeMapping TypeName="Models.Users.tUsersAudit">
+              <MappingFragment StoreEntitySet="tUsersAudit">
+                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+                <ScalarProperty Name="OldObjectID" ColumnName="OldObjectID" />
+                <ScalarProperty Name="NewObjectID" ColumnName="NewObjectID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUsersErrLogs">
+            <EntityTypeMapping TypeName="Models.Users.tUsersErrLog">
+              <MappingFragment StoreEntitySet="tUsersErrLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ErrTypeID" ColumnName="ErrTypeID" />
+                <ScalarProperty Name="ErrSourceID" ColumnName="ErrSourceID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Trace" ColumnName="Trace" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tXrefUsersMaritalStatus">
+            <EntityTypeMapping TypeName="Models.Users.tXrefUsersMaritalStatu">
+              <MappingFragment StoreEntitySet="tXrefUsersMaritalStatus">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MaritalStatusID" ColumnName="MaritalStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUserLoginAuths">
+            <EntityTypeMapping TypeName="Models.Users.tUserLoginAuth">
+              <MappingFragment StoreEntitySet="tUserLoginAuths">
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUsersAuditTypes">
+            <EntityTypeMapping TypeName="Models.Users.tUsersAuditType">
+              <MappingFragment StoreEntitySet="tUsersAuditTypes">
+                <ScalarProperty Name="SystemStatusID" ColumnName="SystemStatusID" />
+                <ScalarProperty Name="IsDisplayed" ColumnName="IsDisplayed" />
+                <ScalarProperty Name="DisplayDescription" ColumnName="DisplayDescription" />
+                <ScalarProperty Name="InternalName" ColumnName="InternalName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUserPasswordResets">
+            <EntityTypeMapping TypeName="Models.Users.tUserPasswordReset">
+              <MappingFragment StoreEntitySet="tUserPasswordResets">
+                <ScalarProperty Name="UsedDateTime" ColumnName="UsedDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="ResetCodeID" ColumnName="ResetCodeID" />
+                <ScalarProperty Name="ExternalUserID" ColumnName="ExternalUserID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSystemStatuses">
+            <EntityTypeMapping TypeName="Models.Users.tSystemStatus">
+              <MappingFragment StoreEntitySet="tSystemStatuses">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

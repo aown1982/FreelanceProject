@@ -1,0 +1,138 @@
+﻿@{
+    ViewBag.Title = "Audit Log";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div class="row">
+    <div class="col-md-12 ">
+        <div id="grid"></div>
+        <style>
+            .k-window-content {
+                font-size: 13px;
+            }
+
+            .k-window-title {
+                font-size: 13px;
+                font-weight: bold;
+            }
+
+            .k-grid {
+                font-size: 12px;
+            }
+
+                .k-grid td {
+                    line-height: 2em;
+                }
+            /* Apply minimum width to the Grid when scrolling is disabled. */
+            #grid {
+                min-width: 550px;
+            }
+
+                /* Apply a minimum width to the tables when scrolling is enabled and nested tables (hierarchy) ARE NOT USED. */
+                #grid .k-grid-header-wrap > table, /* header table */
+                #grid .k-grid-content table, /* data table, no virtual scrolling */
+                #grid .k-virtual-scrollable-wrap table /* data table, with virtual scrolling */ {
+                    min-width: 550px;
+                }
+        </style>
+
+
+
+        <script>
+        var wnd;
+        var deleteWnd;
+        var selectedCategory;
+        $(document).ready(function () {
+            //debugger;
+            //deleteWnd = $("#DeleteModalWindow").kendoWindow({
+            //    title: "Delete confirmation",
+            //    modal: true,
+            //    visible: false,
+            //    resizable: false,
+            //    width: 300
+            //}).data("kendoWindow");
+
+
+
+
+            $("#grid").kendoGrid({
+                toolbar: ["pdf", "excel"],
+                pdf: {
+                    allPages: true,
+                    avoidLinks: true,
+                    paperSize: "A4",
+                    margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+                    landscape: true,
+                    repeatHeaders: true,
+                    template: $("#page-template").html(),
+                    scale: 0.8
+                },
+                excel: {
+                    fileName: "SHAREForCures_Grid_Export.xlsx",
+                    proxyURL: "",
+                    filterable: true
+                },
+                dataBound: null,
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/AuditLogReportData"
+                            , dataType: "json"
+                            , data: {
+                                categoryName: selectedCategory
+                            }
+                        }
+                    },
+                    pageSize: 10
+                },
+                height: 550,
+                scrollable: true,
+                autoBind: true,
+                groupable: true,
+                sortable: true,
+                resizable: true,
+                filterable: true,
+                pageable: {
+                    refresh: true,
+                    pageSizes: true,
+                    buttonCount: 5
+                },
+
+                columns: [
+
+                    {
+                        field: "DateTimeStamp",
+                        title: "Date Time Stamp",
+                        template: "#= kendo.toString(kendo.parseDate(DateTimeStamp, 'yyyy-MM-dd'), 'MM/dd/yyyy') #",
+                        width: "100px",
+                        type: "date"
+                    },
+                    //{
+                    //    field: "ApplicationID",
+                    //    title: "ApplicationID",
+                    //    width: "100px",
+                    //},
+                    {
+                        field: "Description", title: "Description",
+                        width: "100px"
+                    },
+                    //{
+                    //    field: "UserID", title: "UserID",
+                    //    width: "100px"
+                    //},
+                    {
+                        field: "OriginalValue", title: "OriginalValue",
+                        width: "100px"
+                    },
+                    {
+                        field: "NewValue", title: "NewValue",
+                        width: "100px"
+                    },
+
+                ]
+            });
+        });
+        </script>
+    </div>
+</div>
+<script src="/assets/kendo/pako_deflate.min.js"></script>
+<script src="~/assets/kendo/jszip.min.js"></script>

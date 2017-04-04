@@ -1,0 +1,404 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{68A0C850-6219-4421-95CB-68BC33A91C4E}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RESTfulBAL</RootNamespace>
+    <AssemblyName>RESTfulBAL</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AWSSDK.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.Core.3.3.0.1\lib\net45\AWSSDK.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AWSSDK.DynamoDBv2, Version=3.3.0.0, Culture=neutral, PublicKeyToken=885c28607f98e604, processorArchitecture=MSIL">
+      <HintPath>..\packages\AWSSDK.DynamoDBv2.3.3.0\lib\net45\AWSSDK.DynamoDBv2.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\CommonMethods.cs" />
+    <Compile Include="Common\Extensions.cs" />
+    <Compile Include="Common\MultiResultSetReader.cs" />
+    <Compile Include="Controllers\CustomUserData\C_UserData.cs" />
+    <Compile Include="Controllers\DynamoDB\mAllergies.cs" />
+    <Compile Include="Controllers\DynamoDB\mImmunizations.cs" />
+    <Compile Include="Controllers\DynamoDB\mInstructions.cs" />
+    <Compile Include="Controllers\DynamoDB\mNarratives.cs" />
+    <Compile Include="Controllers\DynamoDB\mVitals.cs" />
+    <Compile Include="Controllers\DynamoDB\mTestResults.cs" />
+    <Compile Include="Controllers\DynamoDB\HAPISources.cs" />
+    <Compile Include="Controllers\DynamoDB\wGeneticTraits.cs" />
+    <Compile Include="Controllers\DynamoDB\wSleepSummaries.cs" />
+    <Compile Include="Controllers\DynamoDB\wSleep.cs" />
+    <Compile Include="Controllers\DynamoDB\wLocations.cs" />
+    <Compile Include="Controllers\DynamoDB\wHeartRate.cs" />
+    <Compile Include="Controllers\DynamoDB\wBodyFat.cs" />
+    <Compile Include="Controllers\DynamoDB\wBMI.cs" />
+    <Compile Include="Controllers\DynamoDB\wBloodPressure.cs" />
+    <Compile Include="Controllers\DynamoDB\wHeight.cs" />
+    <Compile Include="Controllers\DynamoDB\wWeight.cs" />
+    <Compile Include="Controllers\DynamoDB\wMeals.cs" />
+    <Compile Include="Controllers\DynamoDB\wBloodGlucose.cs" />
+    <Compile Include="Controllers\DynamoDB\wActivitySummaries.cs" />
+    <Compile Include="Controllers\DynamoDB\wActivities.cs" />
+    <Compile Include="Controllers\UserData\ActivitiesController.cs" />
+    <Compile Include="Controllers\UserData\AllergensController.cs" />
+    <Compile Include="Controllers\UserData\AllergySeveritiesController.cs" />
+    <Compile Include="Controllers\UserData\AllergyStatusController.cs" />
+    <Compile Include="Controllers\UserData\CodesController.cs" />
+    <Compile Include="Controllers\UserData\ConsentController.cs" />
+    <Compile Include="Controllers\UserData\CredentialsController.cs" />
+    <Compile Include="Controllers\UserData\DietCategoriesController.cs" />
+    <Compile Include="Controllers\UserData\GeneticTraitsController.cs" />
+    <Compile Include="Controllers\UserData\InstructionTypesController.cs" />
+    <Compile Include="Controllers\UserData\MedicationFormsController.cs" />
+    <Compile Include="Controllers\UserData\MedicationRoutesController.cs" />
+    <Compile Include="Controllers\UserData\NutrientsController.cs" />
+    <Compile Include="Controllers\UserData\NutrientTypesController.cs" />
+    <Compile Include="Controllers\UserData\OrderTypesController.cs" />
+    <Compile Include="Controllers\UserData\OrganizationsController.cs" />
+    <Compile Include="Controllers\UserData\PharmaciesController.cs" />
+    <Compile Include="Controllers\UserData\ProviderPhoneNumbersController.cs" />
+    <Compile Include="Controllers\UserData\ProvidersController.cs" />
+    <Compile Include="Controllers\UserData\ReactionsController.cs" />
+    <Compile Include="Controllers\UserData\ReactionTypesController.cs" />
+    <Compile Include="Controllers\UserData\SHAREPurposeCategoriesController.cs" />
+    <Compile Include="Controllers\UserData\SHAREPurposesController.cs" />
+    <Compile Include="Controllers\UserData\SHARESettingsController.cs" />
+    <Compile Include="Controllers\UserData\SNPAvailabilitiesController.cs" />
+    <Compile Include="Controllers\UserData\SourceOrganizationsController.cs" />
+    <Compile Include="Controllers\UserData\SourcesController.cs" />
+    <Compile Include="Controllers\UserData\SourceServiceDevicesController.cs" />
+    <Compile Include="Controllers\UserData\SourceServicesController.cs" />
+    <Compile Include="Controllers\UserData\SourceServiceTypeController.cs" />
+    <Compile Include="Controllers\UserData\SystemStatusController.cs" />
+    <Compile Include="Controllers\UserData\UnitsOfMeasuresController.cs" />
+    <Compile Include="Controllers\UserData\UserActivitiesController.cs" />
+    <Compile Include="Controllers\UserData\UserAllergiesController.cs" />
+    <Compile Include="Controllers\UserData\UserCarePlansController.cs" />
+    <Compile Include="Controllers\UserData\UserCarePlanSpecialtiesController.cs" />
+    <Compile Include="Controllers\UserData\UserCarePlanTypesController.cs" />
+    <Compile Include="Controllers\UserData\UserDataAuditsController.cs" />
+    <Compile Include="Controllers\UserData\UserDataErrLogsController.cs" />
+    <Compile Include="Controllers\UserData\UserDerivedNotesController.cs" />
+    <Compile Include="Controllers\UserData\UserDietsController.cs" />
+    <Compile Include="Controllers\UserData\UserEncounterReasonsController.cs" />
+    <Compile Include="Controllers\UserData\UserEncountersController.cs" />
+    <Compile Include="Controllers\UserData\UserEventsController.cs" />
+    <Compile Include="Controllers\UserData\UserFunctionalStatusController.cs" />
+    <Compile Include="Controllers\UserData\UserGeneticTraitsController.cs" />
+    <Compile Include="Controllers\UserData\UserIDsController.cs" />
+    <Compile Include="Controllers\UserData\UserImmunizationsController.cs" />
+    <Compile Include="Controllers\UserData\UserImmunizationsDatesController.cs" />
+    <Compile Include="Controllers\UserData\UserInstructionsController.cs" />
+    <Compile Include="Controllers\UserData\UserLocationsController.cs" />
+    <Compile Include="Controllers\UserData\UserNarrativeEntriesController.cs" />
+    <Compile Include="Controllers\UserData\UserNarrativesController.cs" />
+    <Compile Include="Controllers\UserData\UserOrdersController.cs" />
+    <Compile Include="Controllers\UserData\UserPrescriptionsController.cs" />
+    <Compile Include="Controllers\UserData\UserProblemsController.cs" />
+    <Compile Include="Controllers\UserData\UserProcedureDeviceCodesController.cs" />
+    <Compile Include="Controllers\UserData\UserProcedureDevicesController.cs" />
+    <Compile Include="Controllers\UserData\UserProceduresController.cs" />
+    <Compile Include="Controllers\UserData\UserSHARESettingsController.cs" />
+    <Compile Include="Controllers\UserData\UserSleepDetailsController.cs" />
+    <Compile Include="Controllers\UserData\UserSleepsController.cs" />
+    <Compile Include="Controllers\UserData\UserSNPProbesController.cs" />
+    <Compile Include="Controllers\UserData\UserSourceServicesController.cs" />
+    <Compile Include="Controllers\UserData\UserSourceServiceStatusController.cs" />
+    <Compile Include="Controllers\UserData\UserSpecimenCodesController.cs" />
+    <Compile Include="Controllers\UserData\UserSpecimenController.cs" />
+    <Compile Include="Controllers\UserData\UserSurveyResultsController.cs" />
+    <Compile Include="Controllers\UserData\UserTestResultComponentsController.cs" />
+    <Compile Include="Controllers\UserData\UserTestResultsController.cs" />
+    <Compile Include="Controllers\UserData\UserVitalsController.cs" />
+    <Compile Include="Controllers\UserData\VisitTypesController.cs" />
+    <Compile Include="Controllers\UserData\XrefAllergensCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefMedicationFormsCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefMedicationRoutesCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefReactionsCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefReactionTypesCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserAllergiesCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserCarePlansCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserDietNutrientsController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserEncountersCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserEncountersPrescriptionsController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserEncountersProblemsController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserEncountersVitalsController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserFunctionalStatusesCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserImmunizationsCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserPrescriptionsCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserProblemsCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserProceduresCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserSHARESettingsPurposController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserSNPProbesSNPAvailabilitiesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserSourceServiceDevicesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserTestResultComponentsCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserTestResultRecipientsProvidersController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserTestResultsCodesController.cs" />
+    <Compile Include="Controllers\UserData\XrefUserVitalsCodesController.cs" />
+    <Compile Include="Controllers\Users\AccountStatusController.cs" />
+    <Compile Include="Controllers\Users\CountriesController.cs" />
+    <Compile Include="Controllers\Users\EthnicitiesController.cs" />
+    <Compile Include="Controllers\Users\GendersController.cs" />
+    <Compile Include="Controllers\Users\LanguagesController.cs" />
+    <Compile Include="Controllers\Users\MaritalStatusController.cs" />
+    <Compile Include="Controllers\Users\RacesController.cs" />
+    <Compile Include="Controllers\Users\SaltsController.cs" />
+    <Compile Include="Controllers\Users\SexesController.cs" />
+    <Compile Include="Controllers\Users\StatesController.cs" />
+    <Compile Include="Controllers\Users\TimeZonesController.cs" />
+    <Compile Include="Controllers\Users\UsersAddressHistoriesController.cs" />
+    <Compile Include="Controllers\Users\UsersAuditsController.cs" />
+    <Compile Include="Controllers\Users\UsersController.cs" />
+    <Compile Include="Controllers\Users\UsersErrLogsController.cs" />
+    <Compile Include="Controllers\Users\XrefUsersMaritalStatusController.cs" />
+    <Compile Include="Controllers\DynamoDB\wBloodOxygen.cs" />
+    <Compile Include="Controllers\WebApp\AdsLogsController.cs" />
+    <Compile Include="Controllers\WebApp\AdsSponsoredsController.cs" />
+    <Compile Include="Controllers\WebApp\AdTypesController.cs" />
+    <Compile Include="Controllers\WebApp\IconsController.cs" />
+    <Compile Include="Controllers\WebApp\InvitationCodesController.cs" />
+    <Compile Include="Controllers\WebApp\SponsorsController.cs" />
+    <Compile Include="Controllers\WebApp\SurveyQuestionsController.cs" />
+    <Compile Include="Controllers\WebApp\SurveyQuestionTypesController.cs" />
+    <Compile Include="Controllers\WebApp\SurveysController.cs" />
+    <Compile Include="Controllers\WebApp\UserFiltersController.cs" />
+    <Compile Include="Controllers\WebApp\UserIDsController.cs" />
+    <Compile Include="Controllers\WebApp\WAAuditObjectsController.cs" />
+    <Compile Include="Controllers\WebApp\WAAuditsController.cs" />
+    <Compile Include="Controllers\WebApp\WAErrLogsController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SurveyQuestionMCAnswersViewModel.cs" />
+    <Compile Include="Models\DynamoDB\BaseHAPIMedical.cs" />
+    <Compile Include="Models\DynamoDB\BaseHAPIWellness.cs" />
+    <Compile Include="Models\DynamoDB\IHAPI.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Allergen.cs" />
+    <Compile Include="Models\DynamoDB\Medical\FunctionalStatuses.cs" />
+    <Compile Include="Models\DynamoDB\Medical\CCD.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Components.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Narratives.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Instructions.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Immunizations.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Results.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Recipients.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Vitals.cs" />
+    <Compile Include="Models\DynamoDB\Medical\TestResults.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Allergies.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Codes.cs" />
+    <Compile Include="Models\DynamoDB\Medical\DateRange.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Organization.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Patient.cs" />
+    <Compile Include="Models\DynamoDB\Medical\Reactions.cs" />
+    <Compile Include="Models\DynamoDB\Medical\ReactionType.cs" />
+    <Compile Include="Models\DynamoDB\Utilities.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Activities.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\ActivitySummaries.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\BloodGlucose.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\BloodOxygen.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\BloodPressure.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\BloodPressureValue.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Bmi.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\BodyFat.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\GeneticTrait.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\HeartRate.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Height.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\IHuman.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Locations.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Meals.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Profile.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Series.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Sleep.cs" />
+    <Compile Include="Models\DynamoDB\Utility\Sources.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\SleepSummaries.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\SourceData.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Summary.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\TimeSeries.cs" />
+    <Compile Include="Models\DynamoDB\Wellness\Weight.cs" />
+    <Compile Include="Models\HealthGoalModel.cs" />
+    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\SettingViewModel.cs" />
+    <Compile Include="Models\SurveyQuestionViewModel.cs" />
+    <Compile Include="Models\SurveyViewModel.cs" />
+    <Compile Include="Models\UserBodyComposition.cs" />
+    <Compile Include="Models\UserData\ConnectedSourceViewModel.cs" />
+    <Compile Include="Models\UserData\DerivedNotes.cs" />
+    <Compile Include="Models\UserData\ShareCategoryViewModel.cs" />
+    <Compile Include="Models\UserData\SharePurposeCategoriesViewModel.cs" />
+    <Compile Include="Models\UserData\SharePurposeViewModel.cs" />
+    <Compile Include="Models\UserData\SourceServiceTypesViewModel.cs" />
+    <Compile Include="Models\UserData\SourceServiceViewModel.cs" />
+    <Compile Include="Models\UserData\UserAcitivityModel.cs" />
+    <Compile Include="Models\UserData\UserAuditLogsViewModel.cs" />
+    <Compile Include="Models\UserData\UserBloodGlucose.cs" />
+    <Compile Include="Models\UserData\UserDiet.cs" />
+    <Compile Include="Models\UserData\UserVital.cs" />
+    <Compile Include="Models\UserData\UserSurveyResultsViewModel.cs" />
+    <Compile Include="Models\UserDietModel.cs" />
+    <Compile Include="Models\UserSleepModel.cs" />
+    <Compile Include="Models\UserTestModel.cs" />
+    <Compile Include="Models\UserVitalModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\AuditHandling.cs" />
+    <Compile Include="Utilities\ErrorHandling.cs" />
+    <Compile Include="Utilities\Exceptions.cs" />
+    <Compile Include="Utilities\PasswordSecurity.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\AWSSDK.DynamoDBv2.3.3.0\analyzers\dotnet\cs\AWSSDK.DynamoDBv2.CodeAnalysis.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{7ce9dd76-4c33-41e0-81a9-93da2bfb4997}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>59818</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:59818/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.2\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

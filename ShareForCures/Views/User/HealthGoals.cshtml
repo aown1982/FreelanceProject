@@ -1,0 +1,248 @@
+﻿@using Newtonsoft.Json
+@using ShareForCures.Models.Users
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Health Goals";
+    ViewBag.ActiveNav = "healthgoals";
+}
+
+
+
+<div style="background-color: #fff;">
+    <br />
+    <div class="row floatRight width70" style="display: inline-block; position:relative;">
+        <div style="font-size:small; font-weight:bold;">
+            <input type="radio" name="entries" id="last5Radio" value="last5Radio" checked="checked" onchange="GetGoalLast5();" />&nbsp;Show last 5 entries&nbsp;&nbsp;
+            <input type="radio" name="entries" id="customRadio" value="customRadio" />&nbsp;Custom date range:
+        </div>
+        <div class="width40">
+            <input type="text" name="daterange" id="txtDateRangeFilter" class="input-sm customDataRange" />
+            <script type="text/javascript">
+                $(function () {
+                    $('input[name="daterange"]').daterangepicker(
+                        {
+                            locale: {
+                                format: 'MM-DD-YYYY'
+                            },
+                            startDate: moment().startOf('month'),
+                            endDate: moment().endOf('month'),
+                            alwaysShowCalendars: true,
+                            linkedCalendars: false,
+                            opens: 'left',
+                            ranges: {
+                                'Today': [moment(), moment()],
+                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                            }
+                        },
+                        function (start, end, label) {
+                            //  alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                            var radiobtn = document.getElementById("customRadio");
+                            radiobtn.checked = true;
+                            excerciseChartDataUpdated = true;
+
+                            GetWeightGoal(start, end);
+                            GetDietGoal(start, end);
+                            GetExerciseGoal(start, end);
+                            GetSleepGoal(start, end);
+                        }
+                    );
+
+                });
+
+            </script>
+        </div>
+    </div>
+
+    <div class="row">
+        @*<div class="padding-12">*@
+        <div>
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-sx-8 ">
+                            <div>
+                                <h1>WEIGHT</h1>
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartWeight"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createWeightChart);
+                                    $(document).bind("kendo:skinChange", createWeightChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-sx-4">
+                            <div class="well padding-14 GraphKey">
+                                <h4 class="textAlignCenter"> Latest </h4>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="glyphicon glyphicon-map-marker customSpot" aria-hidden="true"></span><span id="currentWeight"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="fa fa-flag-checkered customFinishFlag"></span> <span id="goalWeight"></span>
+                                </div>
+                                <div class="clearfix" id="setGoal"></div>
+                                <span id="lnkSetWeightGoal" class="font9pt textAlignCenter hide-on-narrow btn-link">+ Set New Goal</span>
+                                <div id="window">
+                                    <input type="text" id="txtWeightGoal" style="width: 100px; margin-bottom: 5px" />
+                                    <button id="btnSetWeightGoal" class="btn btn-success">Set</button>
+
+                                </div>
+                                <script>
+                                    $(document).ready(SetWeightGoal);
+                                </script>
+
+                                <div class="responsive-message"></div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-sx-8 ">
+                            <div>
+                                <h1>FOOD & DRINK</h1>
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartDiet"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createDietChart);
+                                    $(document).bind("kendo:skinChange", createDietChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-sx-4">
+                            <div class="well padding-14 GraphKey">
+                                <h4 class="textAlignCenter"> Latest </h4>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="glyphicon glyphicon-map-marker customSpot" aria-hidden="true"></span> <span id="currentDiet"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="fa fa-flag-checkered customFinishFlag"></span> <span id="goalDiet"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <span id="lnkSetDietGoal" class="font9pt textAlignCenter hide-on-narrow btn-link">+ Set New Goal</span>
+                                <div id="windowDiet">
+                                    <input type="text" id="txtDietGoal" style="width: 100px; margin-bottom: 5px" />
+                                    <button id="btnSetDietGoal" class="btn btn-success">Set</button>
+
+                                </div>
+                                <script>
+                                    $(document).ready(SetDietGoal);
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-sx-8 ">
+                            <div>
+                                <h1>EXCERCISE</h1>
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartExercise"></div>
+                                </div>
+                                <script>
+
+                                    $(document).ready(createExerciseChart);
+                                    $(document).bind("kendo:skinChange", createExerciseChart);
+
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-sx-4">
+                            <div class="well padding-14 GraphKey">
+                                <h4 class="textAlignCenter"> Latest </h4>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="glyphicon glyphicon-map-marker customSpot" aria-hidden="true"></span> <span id="currentDuration"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="fa fa-flag-checkered customFinishFlag"></span> <span id="goalDuration"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <span id="lnkSetExerciseGoal" class="font9pt textAlignCenter hide-on-narrow btn-link">+ Set New Goal</span>
+                                <div id="windowExercise">
+                                    <input type="text" id="txtExerciseGoal" style="width: 100px; margin-bottom: 5px" />
+                                    <button id="btnSetExerciseGoal" class="btn btn-success">Set</button>
+
+                                </div>
+                                <script>
+                                    $(document).ready(SetExerciseGoal);
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-6 col-xs-12 col-sm-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="col-lg-8 col-md-8 col-sm-8 col-sx-8 ">
+                            <div>
+                                <h1>SLEEP</h1>
+                            </div>
+                            <div>
+                                <div class="demo-section k-content wide">
+                                    <div id="chartSleep"></div>
+                                </div>
+                                <script>
+                                    $(document).ready(createSleepChart);
+                                    $(document).bind("kendo:skinChange", createSleepChart);
+                                </script>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-sx-4">
+                            <div class="well padding-14 GraphKey">
+                                <h4 class="textAlignCenter"> Latest </h4>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="glyphicon glyphicon-map-marker customSpot" aria-hidden="true"></span> <span id="currentSleep"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="padding-12" style="font-size: small;">
+                                    <span class="fa fa-flag-checkered customFinishFlag"></span> <span id="goalSleep"></span>
+                                </div>
+                                <div class="clearfix"></div>
+                                <span id="lnkSetSleepGoal" class="font9pt textAlignCenter hide-on-narrow btn-link">+ Set New Goal</span>
+                                <div id="windowSleep">
+                                    <input type="text" id="txtSleepGoal" style="width: 100px; margin-bottom: 5px" />
+                                    <button id="btnSetSleepGoal" class="btn btn-success">Set</button>
+
+                                </div>
+                                <script>
+                                    $(document).ready(SetSleepGoal);
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+

@@ -1,0 +1,41 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "hiw";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+            <!-- Content -->
+            <article>
+                <header>
+                    <h2>Privacy and Security</h2>
+                </header>
+                <div>
+                    <p>
+                        We understand that many people have concerns about providing private data to others, and for that reason SHARE For
+                        Cures is committed to the highest level of privacy and security controls available in the industry. It’s also why we
+                        let you decide what data you want to share and who you want to share it with.
+                    </p>
+                    <p>
+                        Some details about privacy and security: The data is stored in a secure, HIPAA-compliant cloud.  The system was built
+                        adhering to the HITRUST Common Security Framework-- a top-of-the-line information security framework that combines all
+                        healthcare-relevant regulations and standards. Users will have complete control over who can use their data, and
+                        visibility into who has seen it and why.  All deidentification will take place using one of the two HIPAA standard
+                        methods: safe harbor deidentification or statistical, expert-determination deidentification.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

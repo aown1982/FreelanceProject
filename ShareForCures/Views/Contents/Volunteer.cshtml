@@ -1,0 +1,95 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "wts";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1">
+    <div class="container">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                    <center>
+                        <h2>Help Us Help Others...</h2>
+                    </center>
+                    <p>All content, all the time.</p>
+                </header>
+                <div>
+                    <p>Interested in contributing your skills and knowledge to a worthy cause? Want to gain some hands-on experience?<strong>We need your help!</strong></p>
+                    <p>SHARE For Cures is always on the lookout for talented, creative people interested in helping to improve the lives of others. We have a rotating array of skills-based volunteer opportunities. By contributing your time and skills, you can greatly enhance our ability to carry out our mission!</p>
+                    <center>
+                        <p><strong>To get started, just click on the link below to browse our current volunteer listings.</strong></p>
+                        <p><img src="/images/volunteer.jpg" width="195" height="83" longdesc="http://www.volunteermatch.org/search/org775998.jsp"></p>
+                    </center>
+                    <h2><strong>Didn't see an opportunity that fits you?</strong></h2>
+                    <p>Just fill out this quick form, and we will be in touch if and when you match to a future opportunity. Within your message please indicate your experience and areas of expertise.</p>
+                    <section class="6u 12u(narrower)">
+                        <div id="alertAccountInfos">
+                            <div id="alertAccountInfo" class="input-group right-inner-addon centered alert alert-danger width100Percent form-horizontal" style="text-align:left;display: none;">
+                                <span class="glyphicon glyphicon-info-sign" style="color: #B40404"></span>
+                                <span id="error"></span>
+                            </div>
+                        </div>
+                        <div id="divMsg" style="display: none;">
+                            <form class="well form-horizontal width100Percent" action=" " method="get">
+                                <fieldset>
+                                    <!-- Form Name -->
+                                    <legend class="formHeading"><span id="msgResetInfo"></span></legend>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </section>
+                    <section class="6u 12u(narrower)">
+
+                        <form action=" " method="post" id="emailForm">
+                            <fieldset>
+                                <div class="row 50% form-group">
+                                    <div class="6u 12u(mobilep)">
+                                        <input type="text" name="txt_names" id="txt_names" placeholder="Name" />
+                                    </div>
+                                    <div class="6u 12u(mobilep)">
+                                        <input type="email" name="txt_email" id="txt_email" placeholder="Email" />
+                                    </div>
+                                </div>
+                                <div class="row 50% form-group">
+                                    <div class="12u">
+                                        <textarea name="txt_message" id="txt_message" placeholder="Message" rows="5"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row 50% form-group">
+                                    <div class="12u">
+                                        <button type="submit" id="btnSendEmail" class="button btn-white">Send Message</button>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </section>
+                </div>
+
+            </article>
+
+        </div>
+        <input type="hidden" id="EmailTo" value="EmailVolunteer" />
+    </div>
+</section>
+
+<script>
+
+    $(document).ready(function () {
+        $('#emailForm').bootstrapValidator(true);
+    });
+
+
+</script>

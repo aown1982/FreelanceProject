@@ -1,0 +1,1022 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WebApplicationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tAdsLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SponsoredAdID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ViewClick" Type="tinyint" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tAdsSponsored">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdTypeID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserFilterID" Type="int" />
+          <Property Name="IconID" Type="int" />
+          <Property Name="ImagePath" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="ClickPath" Type="nvarchar" MaxLength="2000" />
+          <Property Name="SponsorID" Type="int" Nullable="false" />
+          <Property Name="StartDateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="EndDateTime" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tAdType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tIcons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="AltName" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tInvitationCodes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvitationCode" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AssignedFirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="AssignedLastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="AssignedCompany" Type="nvarchar" MaxLength="100" />
+          <Property Name="AssignedEmailAddress" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="UsedDateTime" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="tSponsors">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSurveyQuestionMCAnswers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="QuestionID" Type="int" Nullable="false" />
+          <Property Name="AnswerText" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SequenceOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSurveyQuestions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SurveyID" Type="int" Nullable="false" />
+          <Property Name="Question" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="QuestionTypeID" Type="int" Nullable="false" />
+          <Property Name="IsValid" Type="tinyint" Nullable="false" />
+          <Property Name="CanSkip" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSurveyQuestionTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSurveys">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SponsorID" Type="int" />
+          <Property Name="UserFilterID" Type="int" Nullable="false" />
+          <Property Name="InternalName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PublicName" Type="nvarchar" MaxLength="150" />
+          <Property Name="PublicDescription" Type="nvarchar(max)" />
+          <Property Name="AvgLengthofTime" Type="nvarchar" MaxLength="30" />
+          <Property Name="MoreInfoLink" Type="nvarchar" MaxLength="2000" />
+          <Property Name="StartDateTime" Type="datetime2" Precision="7" />
+          <Property Name="EndDateTime" Type="datetime2" Precision="7" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tUserFilters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="FilterQuery" Type="nvarchar(max)" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tUserIDs">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tWAAudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="EventID" Type="int" Nullable="false" />
+          <Property Name="ObjectID" Type="int" />
+          <Property Name="Description" Type="nchar" MaxLength="100" />
+          <Property Name="OriginalValue" Type="nvarchar(max)" />
+          <Property Name="NewValue" Type="nvarchar(max)" />
+          <Property Name="DateTimeStamp" Type="datetime2" Precision="7" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="tWAAuditObjects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TableName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ColumnName" Type="nchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tWAErrLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ErrTypeID" Type="int" Nullable="false" />
+          <Property Name="ErrSourceID" Type="int" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Trace" Type="nvarchar(max)" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CreateDateTime" Type="datetime2" Precision="7" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_tAdsLog_tAdsSponsored">
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="1" />
+          <End Role="tAdsLog" Type="Self.tAdsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAdsSponsored">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsLog">
+              <PropertyRef Name="SponsoredAdID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsLog_tUserIDs">
+          <End Role="tUserIDs" Type="Self.tUserIDs" Multiplicity="1" />
+          <End Role="tAdsLog" Type="Self.tAdsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserIDs">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tAdsLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tAdType">
+          <End Role="tAdType" Type="Self.tAdType" Multiplicity="1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAdType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="AdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tIcons">
+          <End Role="tIcons" Type="Self.tIcons" Multiplicity="0..1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tIcons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tSponsors">
+          <End Role="tSponsors" Type="Self.tSponsors" Multiplicity="1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSponsors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="SponsorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tUserFilters">
+          <End Role="tUserFilters" Type="Self.tUserFilters" Multiplicity="0..1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserFilters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="UserFilterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveyQuestionMCAnswers_tSurveyQuestions">
+          <End Role="tSurveyQuestions" Type="Self.tSurveyQuestions" Multiplicity="1" />
+          <End Role="tSurveyQuestionMCAnswers" Type="Self.tSurveyQuestionMCAnswers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSurveyQuestions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveyQuestionMCAnswers">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveyQuestions_tSurveyQuestionTypes">
+          <End Role="tSurveyQuestionTypes" Type="Self.tSurveyQuestionTypes" Multiplicity="1" />
+          <End Role="tSurveyQuestions" Type="Self.tSurveyQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSurveyQuestionTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveyQuestions">
+              <PropertyRef Name="QuestionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveyQuestions_tSurveys">
+          <End Role="tSurveys" Type="Self.tSurveys" Multiplicity="1" />
+          <End Role="tSurveyQuestions" Type="Self.tSurveyQuestions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSurveys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveyQuestions">
+              <PropertyRef Name="SurveyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveys_tSponsors">
+          <End Role="tSponsors" Type="Self.tSponsors" Multiplicity="0..1" />
+          <End Role="tSurveys" Type="Self.tSurveys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSponsors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveys">
+              <PropertyRef Name="SponsorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveys_tUserFilters">
+          <End Role="tUserFilters" Type="Self.tUserFilters" Multiplicity="1" />
+          <End Role="tSurveys" Type="Self.tSurveys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserFilters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveys">
+              <PropertyRef Name="UserFilterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWAAudit_tUserIDs">
+          <End Role="tUserIDs" Type="Self.tUserIDs" Multiplicity="0..1" />
+          <End Role="tWAAudit" Type="Self.tWAAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserIDs">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tWAAudit">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWAAudit_tWAAuditObjects">
+          <End Role="tWAAuditObjects" Type="Self.tWAAuditObjects" Multiplicity="0..1" />
+          <End Role="tWAAudit" Type="Self.tWAAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWAAuditObjects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tWAAudit">
+              <PropertyRef Name="ObjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWAErrLog_tUserIDs">
+          <End Role="tUserIDs" Type="Self.tUserIDs" Multiplicity="0..1" />
+          <End Role="tWAErrLog" Type="Self.tWAErrLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserIDs">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tWAErrLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebApplicationModelStoreContainer">
+          <EntitySet Name="tAdsLog" EntityType="Self.tAdsLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tAdsSponsored" EntityType="Self.tAdsSponsored" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tAdType" EntityType="Self.tAdType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tIcons" EntityType="Self.tIcons" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tInvitationCodes" EntityType="Self.tInvitationCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSponsors" EntityType="Self.tSponsors" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSurveyQuestionMCAnswers" EntityType="Self.tSurveyQuestionMCAnswers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSurveyQuestions" EntityType="Self.tSurveyQuestions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSurveyQuestionTypes" EntityType="Self.tSurveyQuestionTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tSurveys" EntityType="Self.tSurveys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUserFilters" EntityType="Self.tUserFilters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tUserIDs" EntityType="Self.tUserIDs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tWAAudit" EntityType="Self.tWAAudit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tWAAuditObjects" EntityType="Self.tWAAuditObjects" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tWAErrLog" EntityType="Self.tWAErrLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tAdsLog_tAdsSponsored" Association="Self.FK_tAdsLog_tAdsSponsored">
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsored" />
+            <End Role="tAdsLog" EntitySet="tAdsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsLog_tUserIDs" Association="Self.FK_tAdsLog_tUserIDs">
+            <End Role="tUserIDs" EntitySet="tUserIDs" />
+            <End Role="tAdsLog" EntitySet="tAdsLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tAdType" Association="Self.FK_tAdsSponsored_tAdType">
+            <End Role="tAdType" EntitySet="tAdType" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsored" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tIcons" Association="Self.FK_tAdsSponsored_tIcons">
+            <End Role="tIcons" EntitySet="tIcons" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsored" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tSponsors" Association="Self.FK_tAdsSponsored_tSponsors">
+            <End Role="tSponsors" EntitySet="tSponsors" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsored" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tUserFilters" Association="Self.FK_tAdsSponsored_tUserFilters">
+            <End Role="tUserFilters" EntitySet="tUserFilters" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsored" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveyQuestionMCAnswers_tSurveyQuestions" Association="Self.FK_tSurveyQuestionMCAnswers_tSurveyQuestions">
+            <End Role="tSurveyQuestions" EntitySet="tSurveyQuestions" />
+            <End Role="tSurveyQuestionMCAnswers" EntitySet="tSurveyQuestionMCAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveyQuestions_tSurveyQuestionTypes" Association="Self.FK_tSurveyQuestions_tSurveyQuestionTypes">
+            <End Role="tSurveyQuestionTypes" EntitySet="tSurveyQuestionTypes" />
+            <End Role="tSurveyQuestions" EntitySet="tSurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveyQuestions_tSurveys" Association="Self.FK_tSurveyQuestions_tSurveys">
+            <End Role="tSurveys" EntitySet="tSurveys" />
+            <End Role="tSurveyQuestions" EntitySet="tSurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveys_tSponsors" Association="Self.FK_tSurveys_tSponsors">
+            <End Role="tSponsors" EntitySet="tSponsors" />
+            <End Role="tSurveys" EntitySet="tSurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveys_tUserFilters" Association="Self.FK_tSurveys_tUserFilters">
+            <End Role="tUserFilters" EntitySet="tUserFilters" />
+            <End Role="tSurveys" EntitySet="tSurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWAAudit_tUserIDs" Association="Self.FK_tWAAudit_tUserIDs">
+            <End Role="tUserIDs" EntitySet="tUserIDs" />
+            <End Role="tWAAudit" EntitySet="tWAAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWAAudit_tWAAuditObjects" Association="Self.FK_tWAAudit_tWAAuditObjects">
+            <End Role="tWAAuditObjects" EntitySet="tWAAuditObjects" />
+            <End Role="tWAAudit" EntitySet="tWAAudit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWAErrLog_tUserIDs" Association="Self.FK_tWAErrLog_tUserIDs">
+            <End Role="tUserIDs" EntitySet="tUserIDs" />
+            <End Role="tWAErrLog" EntitySet="tWAErrLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WebApplicationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tAdsLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SponsoredAdID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ViewClick" Type="Byte" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tAdsSponsored" Relationship="Self.FK_tAdsLog_tAdsSponsored" FromRole="tAdsLog" ToRole="tAdsSponsored" />
+          <NavigationProperty Name="tUserID" Relationship="Self.FK_tAdsLog_tUserIDs" FromRole="tAdsLog" ToRole="tUserIDs" />
+        </EntityType>
+        <EntityType Name="tAdsSponsored">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserFilterID" Type="Int32" />
+          <Property Name="IconID" Type="Int32" />
+          <Property Name="ImagePath" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ClickPath" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="SponsorID" Type="Int32" Nullable="false" />
+          <Property Name="StartDateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="EndDateTime" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tAdsLogs" Relationship="Self.FK_tAdsLog_tAdsSponsored" FromRole="tAdsSponsored" ToRole="tAdsLog" />
+          <NavigationProperty Name="tAdType" Relationship="Self.FK_tAdsSponsored_tAdType" FromRole="tAdsSponsored" ToRole="tAdType" />
+          <NavigationProperty Name="tIcon" Relationship="Self.FK_tAdsSponsored_tIcons" FromRole="tAdsSponsored" ToRole="tIcons" />
+          <NavigationProperty Name="tSponsor" Relationship="Self.FK_tAdsSponsored_tSponsors" FromRole="tAdsSponsored" ToRole="tSponsors" />
+          <NavigationProperty Name="tUserFilter" Relationship="Self.FK_tAdsSponsored_tUserFilters" FromRole="tAdsSponsored" ToRole="tUserFilters" />
+        </EntityType>
+        <EntityType Name="tAdType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tAdsSponsoreds" Relationship="Self.FK_tAdsSponsored_tAdType" FromRole="tAdType" ToRole="tAdsSponsored" />
+        </EntityType>
+        <EntityType Name="tIcon">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AltName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="tInvitationCode">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvitationCode" Type="Guid" Nullable="false" />
+          <Property Name="AssignedFirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AssignedLastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AssignedCompany" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AssignedEmailAddress" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="UsedDateTime" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="tSponsor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tAdsSponsoreds" Relationship="Self.FK_tAdsSponsored_tSponsors" FromRole="tSponsors" ToRole="tAdsSponsored" />
+          <NavigationProperty Name="tSurveys" Relationship="Self.FK_tSurveys_tSponsors" FromRole="tSponsors" ToRole="tSurveys" />
+        </EntityType>
+        <EntityType Name="tSurveyQuestion">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SurveyID" Type="Int32" Nullable="false" />
+          <Property Name="Question" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="QuestionTypeID" Type="Int32" Nullable="false" />
+          <Property Name="IsValid" Type="Byte" Nullable="false" />
+          <Property Name="CanSkip" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="tSurveyQuestionType" Relationship="Self.FK_tSurveyQuestions_tSurveyQuestionTypes" FromRole="tSurveyQuestions" ToRole="tSurveyQuestionTypes" />
+          <NavigationProperty Name="tSurveyQuestionMCAnswers" Relationship="WebApplicationModel.FK_tSurveyQuestionMCAnswers_tSurveyQuestions" FromRole="tSurveyQuestion" ToRole="tSurveyQuestionMCAnswer" />
+        </EntityType>
+        <EntityType Name="tSurveyQuestionType">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tSurvey">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SponsorID" Type="Int32" />
+          <Property Name="UserFilterID" Type="Int32" Nullable="false" />
+          <Property Name="InternalName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PublicName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="PublicDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AvgLengthofTime" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="MoreInfoLink" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="StartDateTime" Type="DateTime" Precision="7" />
+          <Property Name="EndDateTime" Type="DateTime" Precision="7" />
+          <Property Name="CreateDateTime" Type="DateTime" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tSponsor" Relationship="Self.FK_tSurveys_tSponsors" FromRole="tSurveys" ToRole="tSponsors" />
+          <NavigationProperty Name="tSurveyQuestions" Relationship="Self.FK_tSurveyQuestions_tSurveys" FromRole="tSurveys" ToRole="tSurveyQuestions" />
+          <NavigationProperty Name="tUserFilter" Relationship="Self.FK_tSurveys_tUserFilters" FromRole="tSurveys" ToRole="tUserFilters" />
+        </EntityType>
+        <EntityType Name="tUserFilter">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FilterQuery" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tAdsSponsoreds" Relationship="Self.FK_tAdsSponsored_tUserFilters" FromRole="tUserFilters" ToRole="tAdsSponsored" />
+          <NavigationProperty Name="tSurveys" Relationship="Self.FK_tSurveys_tUserFilters" FromRole="tUserFilters" ToRole="tSurveys" />
+        </EntityType>
+        <EntityType Name="tUserID">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tWAAudit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="EventID" Type="Int32" Nullable="false" />
+          <Property Name="ObjectID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+          <Property Name="OriginalValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NewValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateTimeStamp" Type="DateTime" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="tWAAuditObject" Relationship="Self.FK_tWAAudit_tWAAuditObjects" FromRole="tWAAudit" ToRole="tWAAuditObjects" />
+        </EntityType>
+        <EntityType Name="tWAAuditObject">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TableName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ColumnName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tWAErrLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ErrTypeID" Type="Int32" Nullable="false" />
+          <Property Name="ErrSourceID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Trace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CreateDateTime" Type="DateTime" Nullable="false" Precision="7" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Association Name="FK_tAdsLog_tAdsSponsored">
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="1" />
+          <End Role="tAdsLog" Type="Self.tAdsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAdsSponsored">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsLog">
+              <PropertyRef Name="SponsoredAdID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsLog_tUserIDs">
+          <End Role="tUserIDs" Type="Self.tUserID" Multiplicity="1" />
+          <End Role="tAdsLog" Type="Self.tAdsLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserIDs">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tAdsLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tAdType">
+          <End Role="tAdType" Type="Self.tAdType" Multiplicity="1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tAdType">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="AdTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tIcons">
+          <End Role="tIcons" Type="Self.tIcon" Multiplicity="0..1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tIcons">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="IconID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tSponsors">
+          <End Role="tSponsors" Type="Self.tSponsor" Multiplicity="1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSponsors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="SponsorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tAdsSponsored_tUserFilters">
+          <End Role="tUserFilters" Type="Self.tUserFilter" Multiplicity="0..1" />
+          <End Role="tAdsSponsored" Type="Self.tAdsSponsored" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserFilters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tAdsSponsored">
+              <PropertyRef Name="UserFilterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveys_tSponsors">
+          <End Role="tSponsors" Type="Self.tSponsor" Multiplicity="0..1" />
+          <End Role="tSurveys" Type="Self.tSurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSponsors">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveys">
+              <PropertyRef Name="SponsorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveyQuestions_tSurveyQuestionTypes">
+          <End Role="tSurveyQuestionTypes" Type="Self.tSurveyQuestionType" Multiplicity="1" />
+          <End Role="tSurveyQuestions" Type="Self.tSurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSurveyQuestionTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveyQuestions">
+              <PropertyRef Name="QuestionTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveyQuestions_tSurveys">
+          <End Role="tSurveys" Type="Self.tSurvey" Multiplicity="1" />
+          <End Role="tSurveyQuestions" Type="Self.tSurveyQuestion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSurveys">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveyQuestions">
+              <PropertyRef Name="SurveyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tSurveys_tUserFilters">
+          <End Role="tUserFilters" Type="Self.tUserFilter" Multiplicity="1" />
+          <End Role="tSurveys" Type="Self.tSurvey" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserFilters">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveys">
+              <PropertyRef Name="UserFilterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWAAudit_tUserIDs">
+          <End Role="tUserIDs" Type="Self.tUserID" Multiplicity="0..1" />
+          <End Role="tWAAudit" Type="Self.tWAAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserIDs">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tWAAudit">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWAErrLog_tUserIDs">
+          <End Role="tUserIDs" Type="Self.tUserID" Multiplicity="0..1" />
+          <End Role="tWAErrLog" Type="Self.tWAErrLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tUserIDs">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="tWAErrLog">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tWAAudit_tWAAuditObjects">
+          <End Role="tWAAuditObjects" Type="Self.tWAAuditObject" Multiplicity="0..1" />
+          <End Role="tWAAudit" Type="Self.tWAAudit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tWAAuditObjects">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tWAAudit">
+              <PropertyRef Name="ObjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WebApplicationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tAdsLogs" EntityType="Self.tAdsLog" />
+          <EntitySet Name="tAdsSponsoreds" EntityType="Self.tAdsSponsored" />
+          <EntitySet Name="tAdTypes" EntityType="Self.tAdType" />
+          <EntitySet Name="tIcons" EntityType="Self.tIcon" />
+          <EntitySet Name="tInvitationCodes" EntityType="Self.tInvitationCode" />
+          <EntitySet Name="tSponsors" EntityType="Self.tSponsor" />
+          <EntitySet Name="tSurveyQuestions" EntityType="Self.tSurveyQuestion" />
+          <EntitySet Name="tSurveyQuestionTypes" EntityType="Self.tSurveyQuestionType" />
+          <EntitySet Name="tSurveys" EntityType="Self.tSurvey" />
+          <EntitySet Name="tUserFilters" EntityType="Self.tUserFilter" />
+          <EntitySet Name="tUserIDs" EntityType="Self.tUserID" />
+          <EntitySet Name="tWAAudits" EntityType="Self.tWAAudit" />
+          <EntitySet Name="tWAAuditObjects" EntityType="Self.tWAAuditObject" />
+          <EntitySet Name="tWAErrLogs" EntityType="Self.tWAErrLog" />
+          <AssociationSet Name="FK_tAdsLog_tAdsSponsored" Association="Self.FK_tAdsLog_tAdsSponsored">
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsoreds" />
+            <End Role="tAdsLog" EntitySet="tAdsLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsLog_tUserIDs" Association="Self.FK_tAdsLog_tUserIDs">
+            <End Role="tUserIDs" EntitySet="tUserIDs" />
+            <End Role="tAdsLog" EntitySet="tAdsLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tAdType" Association="Self.FK_tAdsSponsored_tAdType">
+            <End Role="tAdType" EntitySet="tAdTypes" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsoreds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tIcons" Association="Self.FK_tAdsSponsored_tIcons">
+            <End Role="tIcons" EntitySet="tIcons" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsoreds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tSponsors" Association="Self.FK_tAdsSponsored_tSponsors">
+            <End Role="tSponsors" EntitySet="tSponsors" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsoreds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tAdsSponsored_tUserFilters" Association="Self.FK_tAdsSponsored_tUserFilters">
+            <End Role="tUserFilters" EntitySet="tUserFilters" />
+            <End Role="tAdsSponsored" EntitySet="tAdsSponsoreds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveys_tSponsors" Association="Self.FK_tSurveys_tSponsors">
+            <End Role="tSponsors" EntitySet="tSponsors" />
+            <End Role="tSurveys" EntitySet="tSurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveyQuestions_tSurveyQuestionTypes" Association="Self.FK_tSurveyQuestions_tSurveyQuestionTypes">
+            <End Role="tSurveyQuestionTypes" EntitySet="tSurveyQuestionTypes" />
+            <End Role="tSurveyQuestions" EntitySet="tSurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveyQuestions_tSurveys" Association="Self.FK_tSurveyQuestions_tSurveys">
+            <End Role="tSurveys" EntitySet="tSurveys" />
+            <End Role="tSurveyQuestions" EntitySet="tSurveyQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tSurveys_tUserFilters" Association="Self.FK_tSurveys_tUserFilters">
+            <End Role="tUserFilters" EntitySet="tUserFilters" />
+            <End Role="tSurveys" EntitySet="tSurveys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWAAudit_tUserIDs" Association="Self.FK_tWAAudit_tUserIDs">
+            <End Role="tUserIDs" EntitySet="tUserIDs" />
+            <End Role="tWAAudit" EntitySet="tWAAudits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWAErrLog_tUserIDs" Association="Self.FK_tWAErrLog_tUserIDs">
+            <End Role="tUserIDs" EntitySet="tUserIDs" />
+            <End Role="tWAErrLog" EntitySet="tWAErrLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tWAAudit_tWAAuditObjects" Association="Self.FK_tWAAudit_tWAAuditObjects">
+            <End Role="tWAAuditObjects" EntitySet="tWAAuditObjects" />
+            <End Role="tWAAudit" EntitySet="tWAAudits" />
+          </AssociationSet>
+          <EntitySet Name="tSurveyQuestionMCAnswers" EntityType="WebApplicationModel.tSurveyQuestionMCAnswer" />
+          <AssociationSet Name="FK_tSurveyQuestionMCAnswers_tSurveyQuestions" Association="WebApplicationModel.FK_tSurveyQuestionMCAnswers_tSurveyQuestions">
+            <End Role="tSurveyQuestion" EntitySet="tSurveyQuestions" />
+            <End Role="tSurveyQuestionMCAnswer" EntitySet="tSurveyQuestionMCAnswers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tSurveyQuestionMCAnswer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionID" Type="Int32" Nullable="false" />
+          <Property Name="AnswerText" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SequenceOrder" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tSurveyQuestion" Relationship="WebApplicationModel.FK_tSurveyQuestionMCAnswers_tSurveyQuestions" FromRole="tSurveyQuestionMCAnswer" ToRole="tSurveyQuestion" />
+        </EntityType>
+        <Association Name="FK_tSurveyQuestionMCAnswers_tSurveyQuestions">
+          <End Type="WebApplicationModel.tSurveyQuestion" Role="tSurveyQuestion" Multiplicity="1" />
+          <End Type="WebApplicationModel.tSurveyQuestionMCAnswer" Role="tSurveyQuestionMCAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tSurveyQuestion">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="tSurveyQuestionMCAnswer">
+              <PropertyRef Name="QuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WebApplicationModelStoreContainer" CdmEntityContainer="WebApplicationEntities">
+          <EntitySetMapping Name="tAdsLogs">
+            <EntityTypeMapping TypeName="WebApplicationModel.tAdsLog">
+              <MappingFragment StoreEntitySet="tAdsLog">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SponsoredAdID" ColumnName="SponsoredAdID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ViewClick" ColumnName="ViewClick" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tAdsSponsoreds">
+            <EntityTypeMapping TypeName="WebApplicationModel.tAdsSponsored">
+              <MappingFragment StoreEntitySet="tAdsSponsored">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AdTypeID" ColumnName="AdTypeID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="UserFilterID" ColumnName="UserFilterID" />
+                <ScalarProperty Name="IconID" ColumnName="IconID" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="ClickPath" ColumnName="ClickPath" />
+                <ScalarProperty Name="SponsorID" ColumnName="SponsorID" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tAdTypes">
+            <EntityTypeMapping TypeName="WebApplicationModel.tAdType">
+              <MappingFragment StoreEntitySet="tAdType">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tIcons">
+            <EntityTypeMapping TypeName="WebApplicationModel.tIcon">
+              <MappingFragment StoreEntitySet="tIcons">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="AltName" ColumnName="AltName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tInvitationCodes">
+            <EntityTypeMapping TypeName="WebApplicationModel.tInvitationCode">
+              <MappingFragment StoreEntitySet="tInvitationCodes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="InvitationCode" ColumnName="InvitationCode" />
+                <ScalarProperty Name="AssignedFirstName" ColumnName="AssignedFirstName" />
+                <ScalarProperty Name="AssignedLastName" ColumnName="AssignedLastName" />
+                <ScalarProperty Name="AssignedCompany" ColumnName="AssignedCompany" />
+                <ScalarProperty Name="AssignedEmailAddress" ColumnName="AssignedEmailAddress" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+                <ScalarProperty Name="UsedDateTime" ColumnName="UsedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSponsors">
+            <EntityTypeMapping TypeName="WebApplicationModel.tSponsor">
+              <MappingFragment StoreEntitySet="tSponsors">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSurveyQuestions">
+            <EntityTypeMapping TypeName="WebApplicationModel.tSurveyQuestion">
+              <MappingFragment StoreEntitySet="tSurveyQuestions">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SurveyID" ColumnName="SurveyID" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="QuestionTypeID" ColumnName="QuestionTypeID" />
+                <ScalarProperty Name="IsValid" ColumnName="IsValid" />
+                <ScalarProperty Name="CanSkip" ColumnName="CanSkip" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSurveyQuestionTypes">
+            <EntityTypeMapping TypeName="WebApplicationModel.tSurveyQuestionType">
+              <MappingFragment StoreEntitySet="tSurveyQuestionTypes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSurveys">
+            <EntityTypeMapping TypeName="WebApplicationModel.tSurvey">
+              <MappingFragment StoreEntitySet="tSurveys">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SponsorID" ColumnName="SponsorID" />
+                <ScalarProperty Name="UserFilterID" ColumnName="UserFilterID" />
+                <ScalarProperty Name="InternalName" ColumnName="InternalName" />
+                <ScalarProperty Name="PublicName" ColumnName="PublicName" />
+                <ScalarProperty Name="PublicDescription" ColumnName="PublicDescription" />
+                <ScalarProperty Name="AvgLengthofTime" ColumnName="AvgLengthofTime" />
+                <ScalarProperty Name="MoreInfoLink" ColumnName="MoreInfoLink" />
+                <ScalarProperty Name="StartDateTime" ColumnName="StartDateTime" />
+                <ScalarProperty Name="EndDateTime" ColumnName="EndDateTime" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUserFilters">
+            <EntityTypeMapping TypeName="WebApplicationModel.tUserFilter">
+              <MappingFragment StoreEntitySet="tUserFilters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FilterQuery" ColumnName="FilterQuery" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tUserIDs">
+            <EntityTypeMapping TypeName="WebApplicationModel.tUserID">
+              <MappingFragment StoreEntitySet="tUserIDs">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tWAAudits">
+            <EntityTypeMapping TypeName="WebApplicationModel.tWAAudit">
+              <MappingFragment StoreEntitySet="tWAAudit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="ObjectID" ColumnName="ObjectID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="OriginalValue" ColumnName="OriginalValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="DateTimeStamp" ColumnName="DateTimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tWAAuditObjects">
+            <EntityTypeMapping TypeName="WebApplicationModel.tWAAuditObject">
+              <MappingFragment StoreEntitySet="tWAAuditObjects">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="ColumnName" ColumnName="ColumnName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tWAErrLogs">
+            <EntityTypeMapping TypeName="WebApplicationModel.tWAErrLog">
+              <MappingFragment StoreEntitySet="tWAErrLog">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ErrTypeID" ColumnName="ErrTypeID" />
+                <ScalarProperty Name="ErrSourceID" ColumnName="ErrSourceID" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Trace" ColumnName="Trace" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CreateDateTime" ColumnName="CreateDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tSurveyQuestionMCAnswers">
+            <EntityTypeMapping TypeName="WebApplicationModel.tSurveyQuestionMCAnswer">
+              <MappingFragment StoreEntitySet="tSurveyQuestionMCAnswers">
+                <ScalarProperty Name="SequenceOrder" ColumnName="SequenceOrder" />
+                <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+                <ScalarProperty Name="QuestionID" ColumnName="QuestionID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,48 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "hiw";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                    <h2>The Problem</h2>
+                </header>
+                <div>
+                    <p>Medical research is not happening fast enough.</p>
+                    <p>
+                        People are suffering and dying every minute from treatable conditions due to the slow pace of traditional research.
+                        Every day, we all generate a tremendous amount of health and wellness data (e.g., medical records, medical devices, F
+                        itBit, Apple Watch, etc,) that if collected, and put to use, could help cure our wives, husbands, mothers, fathers,
+                        daughters, sons, friends or neighbors.
+                    </p>
+                    <p>
+                        Researchers need this "real-world" data but they rarely have access to it. That data is in the hands of you and your
+                        loved ones or locked away with your medical providers.  Because of this, researchers are rarely able to gain new knowledge
+                        from the everyday care of the majority of the population.
+                    </p>
+                    <p>
+                        SHARE For Cures wants to change this.  Help us find More Cures today.
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+    </div>
+</section>

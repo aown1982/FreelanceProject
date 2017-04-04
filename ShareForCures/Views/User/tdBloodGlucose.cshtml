@@ -1,0 +1,780 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "Trend Details";
+    ViewBag.ActiveNav = "trends";
+}
+
+<div style="background-color: #fff;">
+    <br />
+    <div class="row">
+
+        <div class="floatLeft width40">
+            <h3>Blood Glucose</h3>
+        </div>
+        <div class="floatRight width40">
+            <input type="text" name="daterange" id="txtDateRangeFilter" class="input-sm customDataRange" />
+            <script type="text/javascript">
+                $(function () {
+                    $('input[name="daterange"]').daterangepicker(
+                        {
+                            locale: {
+                                format: 'MM-DD-YYYY'
+                            },
+                            startDate: moment().startOf('year'),
+                            endDate: moment().endOf('year'),
+                            alwaysShowCalendars: true,
+                            linkedCalendars: false,
+                            opens: 'left',
+                            ranges: {
+                                'Today': [moment(), moment()],
+                                'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                                'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                                'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                            }
+                        },
+                        function (start, end, label) {
+                            var grid = $("#grid").data("kendoGrid");
+                            kendo.ui.progress(grid.element, false);
+                            grid.dataSource.read();
+                            GetGlucoseChart(start, end);
+                            //  alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                        }
+                    );
+
+                });
+
+            </script>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="TrendDetailsTabs" class="width100Percent">
+            <div class="k-content">
+                <div id="tabstrip">
+                    <ul>
+                        <li class="k-state-active" id="list">
+                            List
+                        </li>
+                        <li id="chart">
+                            Chart
+                        </li>
+                        <li id="accounts">
+                            Accounts
+                        </li>
+                    </ul>
+                    <div>
+                        <div class="views">
+                            <div id="grid"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="views">
+                            <div class="k-content wide">
+                                <div id="chartTrendBloodGlucose"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="views">
+                            <p>The following connected accounts have provided data for Blood Glucose:</p>
+                        </div>
+                        <div>
+                            <ul id="ulAccounts" style="padding:5px">
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <style>
+                #ulAccounts > li{
+                    padding-bottom:5px;
+                }
+                .views {
+                    margin: 0 auto 0px;
+                }
+
+                .k-tabstrip .k-content {
+                    width: 100%;
+                    min-width: 500px;
+                    position: relative;
+                    margin: 0px;
+                    padding: 0px;
+                }
+
+                #tabstrip-parent,
+                #tabstrip {
+                    width: 100%;
+                    margin: 0;
+                    padding: 0;
+                    border-width: 0;
+                }
+
+                    #tabstrip h2 {
+                        font-weight: lighter;
+                        font-size: 5em;
+                        line-height: 1;
+                        margin: 0;
+                    }
+
+                        #tabstrip h2 span {
+                            background: none;
+                            font-size: .3em;
+                            vertical-align: top;
+                        }
+
+                    #tabstrip p {
+                        margin: 0;
+                        padding: 0;
+                    }
+            </style>
+
+            <script>
+                $(document).ready(function () {
+                    $("#tabstrip").kendoTabStrip({
+                        animation: {
+                            open: {
+                                effects: "fadeIn"
+                            }
+                        }
+                    });
+                });
+
+                // event handler for activate
+                var onActivate = function (e) {
+                    // access the activated item via e.item (Element)
+                    switch(e.item.id) {
+                        case 'list':
+
+                            break;
+
+                        case 'chart':
+                            $(document).ready(createGlucoseChart);
+                            $(document).bind("kendo:skinChange", createGlucoseChart);
+
+                            /* $("#lineChartHorizantal").css("width", "100%")
+                               .data("kendoChart").resize();*/
+                            break;
+
+                        case 'accounts':
+                            getAccounts();
+                            break;
+                    }
+
+                    // detach activate event handler via unbind()
+                    //tabStrip.unbind("activate", onActivate);
+                };
+
+                // attach activate event handler during initialization
+                var tabStrip = $("#tabstrip").kendoTabStrip({
+                    activate: onActivate
+                }).data("kendoTabStrip");
+            </script>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    function getAccounts()
+    {
+        $.ajax({
+            type: "GET",
+            url: "/User/GetUserTrendBloodGlucoseAccounts",
+            contentType: "application/json",
+            dataType: 'json'
+        }).done(function (data) {
+            console.log(data);
+            if(data != null){
+                var organizations = data;
+                var cList = $('#ulAccounts');
+                cList.empty();
+                $.each(organizations, function (i) {
+                    var li = $('<li>' + organizations[i].Name + '<li/>')
+                        .appendTo(cList);
+                });
+            }
+        });
+    }
+
+    function createGlucoseChart() {
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify({
+                startDate: $('#txtDateRangeFilter').data('daterangepicker').startDate,
+                endDate: $('#txtDateRangeFilter').data('daterangepicker').endDate
+            }),
+            url: "/User/BloodGlucoseChart",
+            contentType: "application/json",
+            dataType: 'json'
+        })
+            .done(function (data) {
+                $('#chartTrendBloodGlucose').kendoChart({
+                    dataSource: {
+                        data: data.userBloodGlucose,
+                        sort: {
+                            field: "ResultDateTime",
+                            dir: "asc"
+                        }
+                    },
+                    legend: {
+                        position: "bottom"
+                    },
+                    chartArea: {
+                        background: "",
+                        height: 400
+                    },
+                    seriesDefaults: {
+                        type: "line",
+                        style: "smooth"
+                    },
+                    series: [{
+                        field: "Value",
+                        name: "Blood Glucose",
+                        color: "#00B5A3"
+                    }],
+                    valueAxis: {
+                        min: 60,
+                        max: 200,
+                        color: "#1a8cff",
+                        line: {
+                            visible: true
+                        },
+                        minorGridLines: {
+                            visible: true
+                        },
+                        labels: {
+                            format: "{0} mg/dl"
+                        }
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "{0}%",
+                        template: "#= series.name #: #= value # <br> Date: #= kendo.toString(category, 'M/d/yy') #"
+                    },
+                    categoryAxis: {
+                        field: "Day",
+                        axisCrossingValue: [0, 32],
+                        majorGridLines: {
+                            visible: false
+                        },
+                        labels: {
+                            rotation: "auto"
+                        },
+                        visible: true
+                    }
+                });
+            });
+    }
+
+    function GetGlucoseChart(start, end) {
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify({
+                startDate: start,
+                endDate: end
+            }),
+            url: "/User/BloodGlucoseChart",
+            contentType: "application/json",
+            dataType: 'json'
+        })
+          .done(function (data) {
+              $("#chartTrendBloodGlucose").data("kendoChart").dataSource.data(data.userBloodGlucose);
+          });
+    };
+
+
+</script>
+
+<style>
+    .k-group {
+        color: #000;
+        font-size: small;
+    }
+
+        .k-group .k-link {
+            color: #000;
+            font-size: small;
+        }
+
+    .k-window-content {
+        font-size: 13px;
+    }
+
+    .k-window-title {
+        font-size: 13px;
+        font-weight: bold;
+    }
+
+    .k-grid {
+        font-size: 12px;
+    }
+
+        .k-grid td {
+            line-height: 2em;
+        }
+    /* Apply minimum width to the Grid when scrolling is disabled. */
+    #grid {
+        min-width: 500px;
+    }
+
+        /* Apply a minimum width to the tables when scrolling is enabled and nested tables (hierarchy) ARE NOT USED. */
+        #grid .k-grid-header-wrap > table, /* header table */
+        #grid .k-grid-content table, /* data table, no virtual scrolling */
+        #grid .k-virtual-scrollable-wrap table /* data table, with virtual scrolling */ {
+            min-width: 550px;
+        }
+</style>
+
+<script src="/assets/kendo/pako_deflate.min.js"></script>
+<script src="~/assets/kendo/jszip.min.js"></script>
+<script>
+    var wnd;
+    $(document).ready(
+        function () {
+
+            var windowTemplate = kendo.template($("#windowTemplate").html());
+
+            var window = $("#window").kendoWindow({
+                title: "Are you sure you want to delete this record?",
+                visible: false, //the window will not appear before its .open method is called
+                width: "300",
+            }).data("kendoWindow");
+
+
+            $("#grid").kendoGrid({
+                toolbar: ["create", "pdf", "excel"],
+                pdf: {
+                    allPages: true,
+                    avoidLinks: true,
+                    paperSize: "A4",
+                    margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "1cm" },
+                    landscape: true,
+                    repeatHeaders: true,
+                    template: $("#page-template").html(),
+                    scale: 0.8
+                },
+                excel: {
+                    fileName: "SHAREForCures_Grid_Export.xlsx",
+                    proxyURL: "",
+                    filterable: true
+                },
+                dataBound: OnGridDataBound,
+                dataSource: {
+                    transport: {
+                        read: function (options) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/User/GetUserBloodGlucose",
+                                dataType: "json",
+                                data: JSON.stringify({
+                                    startDate: $('#txtDateRangeFilter').data('daterangepicker').startDate,
+                                    endDate: $('#txtDateRangeFilter').data('daterangepicker').endDate
+                                }),
+                                contentType: "application/json",
+                                success: function (result) {
+                                    options.success(result);
+                                }
+                            });
+                        }
+                    }
+                },
+                    height: 550,
+                    scrollable: true,
+                    groupable: true,
+                    sortable: true,
+                    resizable: true,
+                    filterable: true,
+                    pageable: {
+                        pageSize: 10,
+                        refresh: true,
+                        pageSizes: true,
+                        buttonCount: 5
+                    },
+                    columns: [
+                        { command: { text: "Edit", click: ShowEditWindow }, title: " ", width: "90px" },
+                        { command: { text: "Delete", click: 
+                             function(e){  //add a click event listener on the delete button
+                                 e.preventDefault();
+
+                                 var tr = $(e.target).closest("tr"); //get the row for deletion
+                                 var data = this.dataItem(tr); //get the row data so it can be referred later
+                                 window.content(windowTemplate(data)); //send the row data object to the template and render it
+                                 window.center().open();
+
+                                 $("#yesButton").click(function () {
+
+                                     var grid = $("#grid").data("kendoGrid");
+                                     kendo.ui.progress(grid.element, true);
+
+                                     var item = grid.dataItem($(e.target).closest("tr"));
+                                     jQuery.ajax({
+                                         type: "GET",
+                                         async: true,
+                                         url: "DeleteBloodGlucose",
+                                         contentType: "application/json; charset=utf-8", // we are sending in JSON format so we need to specify this
+                                         dataType: "json", // the data type we want back, so text.  The data will come wrapped in xml
+                                         data: { testResultComponentID: item.TestResultComponentID, testResultID: item.TestResultID, count: item.Count, noteID: item.NoteID }, // the data in JSON format.  Note it is *not* a JSON object, is is a literal string in JSON format
+                                         success: function (retval) {
+                                             window.close();
+                                             var grid = $("#grid").data("kendoGrid");
+                                             kendo.ui.progress(grid.element, false);
+                                             grid.dataSource.read();
+                                         }
+                                            , error: function (xmlHttpRequest, status, err) { alert(err); kendo.ui.progress(grid.element, false); }
+                                     });
+
+                                 })
+                                 $("#noButton").click(function () {
+                                     window.close();
+                                 })
+                            }             
+                        }, title: " ", width: "90px" },
+                        {
+                            field: "Value", title: "Value",
+                            width: "100px"
+                        },
+                         {
+                             field: "UnitOfMeasure", title: "Unit Of Measure",
+                             width: "100px"
+                         },
+                          {
+                              field: "Comments", title: "Comments",
+                              width: "100px"
+                          },
+                        {
+                            field: "ResultDateTime",
+                            title: "Result Date",
+                            template: "#= kendo.toString(kendo.parseDate(ResultDateTime, 'yyyy-MM-dd'), 'MM/dd/yyyy') #",
+                            width: "100px"
+                        },
+                        {
+                            field: "Source", title: "Source",
+                            width: "100px"
+                        },
+                        {
+                            field: "Note", title: "Note",
+                            width: "100px"
+                        }
+                    ]
+                });
+            $('.k-grid-add').on('click', function () {
+                OpenAddWindow(0);
+            });
+
+            // create DropDownList from input HTML element
+            $("#ddl_UOM").kendoDropDownList({
+                dataTextField: "UnitOfMeasure",
+                dataValueField: "ID",
+                autoBind: false,
+                filter: "contains",
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/User/GetAllUOM"
+                            , dataType: "json"
+                        }
+                    }
+                },
+                serverFiltering: true,
+                index: 0
+            });
+            $("#dp_resultdate").kendoDatePicker();
+        }
+        );
+    // id == 0 ? "Add new Item":"Edit Item"
+    function OpenAddWindow(item) {
+
+        var _title = "";
+        if (item == 0) {
+            _title = "Add New Item";
+        } else {
+            _title = "Edit Item";
+        }
+
+        wnd = $("#AddEditUserBloodGlucose");
+        wnd.kendoWindow({
+            modal: false,
+            visible: false,
+            width: 450,
+            resizable: false
+        }).data("kendoWindow").center();
+        wnd = wnd.data("kendoWindow");
+        wnd.title(_title);
+        wnd.open();
+        kendo.ui.progress(wnd.element, true);
+        var ddl_UOM = $("#ddl_UOM").data("kendoDropDownList");
+        var resultdatepicker = $("#dp_resultdate").data("kendoDatePicker");
+        if (item.TestResultComponentID > 0) // Edit Mode
+        {
+            kendo.ui.progress(wnd.element, false);
+            //Start - Load Data sources
+            ddl_UOM.dataSource.read();
+            ddl_UOM.value(item.UOMID);
+
+            $("#StatusID").val(item.StatusID);
+            $("#txt_value").val(item.Value);
+            resultdatepicker.value(item.ResultDateTime);
+            $("#txt_note").val(item.Note);
+            $("#txt_comment").val(item.Comments);
+            // End - Load Data sources
+            // Set Hidden Fields
+            $("#TestResultComponentID").val(item.TestResultComponentID);
+            $("#TestResultID").val(item.TestResultID);
+            $("#NoteID").val(item.NoteID);
+            $("#Source").val(item.Source);
+            $("#SourceObjectID").val(item.SourceObjectID);
+            $("#SourceOrganizationID").val(item.SourceOrganizationID);
+            $("#UserSourceServiceID").val(item.UserSourceServiceID);
+            $("#fkObjectID").val(item.fkObjectID);
+            $("#Count").val(item.Count);
+
+
+
+            var validator = $("#AddEditUserBloodGlucose").kendoValidator().data("kendoValidator");
+            validator.validate();
+
+        } else {
+            kendo.ui.progress(wnd.element, false);
+            //Start - Load Data sources
+            ddl_UOM.dataSource.read();
+            ddl_UOM.select(0);
+
+            $("#StatusID").val(0);
+            $("#txt_value").val(0);
+            resultdatepicker.value("");
+            $("#txt_note").val('');
+            $("#txt_comment").val('');
+            // End - Load Data sources
+            // Set Hidden Fields
+            $("#TestResultComponentID").val(0);
+            $("#TestResultID").val(0);
+            $("#NoteID").val(0);
+            $("#Source").val('');
+            $("#SourceObjectID").val(0);
+            $("#SourceOrganizationID").val(0);
+            $("#UserSourceServiceID").val(0);
+            $("#fkObjectID").val(0);
+
+
+
+            var validator = $("#AddEditUserBloodGlucose").kendoValidator().data("kendoValidator");
+            validator.hideMessages();
+        }
+
+
+    }
+    function ShowEditWindow(e) {
+        e.preventDefault();
+        //var NoteID = e.sender.dataItem(e.container).ID;
+        var grid = $("#grid").data("kendoGrid");
+        var item = grid.dataItem($(e.target).closest("tr"));
+        OpenAddWindow(item);
+    }
+    function DeleteItem(e) {
+        e.preventDefault();
+
+        var tr = $(e.target).closest("tr"); //get the row for deletion
+        var data = this.dataItem(tr); //get the row data so it can be referred later
+        window.content(windowTemplate(data)); //send the row data object to the template and render it
+        window.center().open();
+
+        $("#yesButton").click(function () {
+
+            var grid = $("#grid").data("kendoGrid");
+            kendo.ui.progress(grid.element, true);
+
+            var item = grid.dataItem($(e.target).closest("tr"));
+            jQuery.ajax({
+                type: "GET",
+                async: true,
+                url: "DeleteBloodGlucose",
+                contentType: "application/json; charset=utf-8", // we are sending in JSON format so we need to specify this
+                dataType: "json", // the data type we want back, so text.  The data will come wrapped in xml
+                data: { testResultComponentID: item.TestResultComponentID, testResultID: item.TestResultID, count: item.Count, noteID: item.NoteID }, // the data in JSON format.  Note it is *not* a JSON object, is is a literal string in JSON format
+                success: function (retval) {
+                    var grid = $("#grid").data("kendoGrid");
+                    kendo.ui.progress(grid.element, false);
+                    grid.dataSource.read();
+                    window.close();
+                }
+                   , error: function (xmlHttpRequest, status, err) { alert(err); kendo.ui.progress(grid.element, false); }
+            });
+
+        })
+        $("#noButton").click(function () {
+            window.close();
+        })
+
+    }
+    function OnGridDataBound() {
+        $(".k-grid-Edit span").addClass("k-icon k-edit");
+        $(".k-grid-Delete span").addClass("k-icon k-delete");
+    }
+    function ClosePopup() {
+        wnd.close();
+    }
+    function SaveItem() {
+        var validator = $("#AddEditUserBloodGlucose").kendoValidator().data("kendoValidator");
+        if (validator.validate()) {
+            kendo.ui.progress(wnd.element, true);
+            var ddl_UOM = $("#ddl_UOM").data("kendoDropDownList");
+            var resultdatepicker = $("#dp_resultdate").data("kendoDatePicker");
+
+            var NewItem = new Object();
+            NewItem.TestResultComponentID = $("#TestResultComponentID").val();
+            NewItem.TestResultID = $("#TestResultID").val();
+            NewItem.NoteID = $("#NoteID").val();
+            NewItem.Value = $("#txt_value").val();
+            NewItem.Source = $("#Source").val();
+            NewItem.SourceObjectID = $("#SourceObjectID").val();
+            NewItem.SourceOrganizationID = $("#SourceOrganizationID").val();
+            NewItem.UserSourceServiceID = $("#UserSourceServiceID").val();
+            NewItem.fkObjectID = $("#fkObjectID").val();
+            NewItem.UOMID = ddl_UOM.value();
+            NewItem.StatusID = $("#StatusID").val();
+            NewItem.Note = $("#txt_note").val();
+            NewItem.ResultDateTime = resultdatepicker.value();
+            NewItem.Comments = $("#txt_comment").val();
+            NewItem.Count = $("#Count").val();
+
+
+            jQuery.ajax({
+                type: "POST",
+                async: true,
+                url: "SaveBloodGlucose",
+                contentType: "application/json; charset=utf-8", // we are sending in JSON format so we need to specify this
+                dataType: "json", // the data type we want back, so text.  The data will come wrapped in xml
+                data: JSON.stringify({ 'model': NewItem }), // the data in JSON format.  Note it is *not* a JSON object, is is a literal string in JSON format
+                success: function (retval) {
+                    kendo.ui.progress(wnd.element, false);
+                    if (retval == "SUCCESS") {
+                        wnd.close();
+                        var grid = $("#grid").data("kendoGrid");
+                        grid.dataSource.read();
+                    }
+                }
+           , error: function (xmlHttpRequest, status, err) { alert(err); kendo.ui.progress(wnd.element, false); }
+            });
+        }
+    }
+
+</script>
+
+<style>
+    /* Page Template for the exported PDF */
+    .page-template {
+        font-family: "Arial", sans-serif;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+        .page-template .header {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            border-bottom: 1px solid #888;
+            color: #888;
+        }
+
+        .page-template .footer {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            border-top: 1px solid #888;
+            text-align: center;
+            color: #888;
+        }
+
+        .page-template .watermark {
+            font-weight: bold;
+            font-size: 400%;
+            text-align: center;
+            margin-top: 30%;
+            color: #aaaaaa;
+            opacity: 0.1;
+            transform: rotate(-35deg) scale(1.7, 1.5);
+        }
+</style>
+<div id="AddEditUserBloodGlucose" class="k-popup-edit-form k-window-content k-content" style="display:none">
+    <div class="k-edit-form-container">
+        <div>
+            <div class="k-edit-label">
+                <label>Value: </label>
+            </div>
+            <div class="k-edit-field">
+                <input id="txt_value" name="txt_value" class="k-textbox" required validationMessage="Required" />
+            </div>
+        </div>
+        <div>
+            <div class="k-edit-label">
+                <label>Unit Of Measure: </label>
+            </div>
+            <div class="k-edit-field">
+                <input id="ddl_UOM" name="ddl_UOM" />
+            </div>
+        </div>
+
+        <div>
+            <div class="k-edit-label">
+                <label>Comments: </label>
+            </div>
+            <div class="k-edit-field">
+                <input id="txt_comment" name="txt_comment" class="k-textbox"  validationMessage="Required" />
+            </div>
+        </div>
+        <div>
+            <div class="k-edit-label">
+                <label>Result Date: </label>
+            </div>
+            <div class="k-edit-field">
+                <input id="dp_resultdate" style="color:black" name="dp_resultdate" required validationMessage="Required" />
+            </div>
+        </div>
+        <div>
+            <div class="k-edit-label">
+                <label>Note: </label>
+            </div>
+            <div class="k-edit-field">
+                <input id="txt_note" name="txt_note" class="k-textbox"  validationMessage="Required" />
+            </div>
+        </div>
+        <div class="k-edit-buttons k-state-default">
+            <a class="k-button k-button-icontext k-primary k-grid-update" onclick="SaveItem()">
+                <span class="k-icon k-update"></span>
+                Save
+            </a>
+            <a class="k-button k-button-icontext k-grid-cancel" onclick="ClosePopup()">
+                <span class="k-icon k-cancel"></span>
+                Cancel
+            </a>
+
+        </div>
+    </div>
+    <input type="hidden" id="TestResultID" />
+    <input type="hidden" id="TestResultComponentID" />
+    <input type="hidden" id="NoteID" />
+    <input type="hidden" id="Source" />
+    <input type="hidden" id="SourceObjectID" />
+    <input type="hidden" id="SourceOrganizationID" />
+    <input type="hidden" id="UserSourceServiceID" />
+    <input type="hidden" id="fkObjectID" />
+    <input type="hidden" id="Count" />
+    <input type="hidden" id="StatusID" />
+</div>
+<div id="window"></div>
+
+<script type="text/x-kendo-template" id="windowTemplate">
+<h4>Are you sure that you want to delete this record ?</h4>
+<button class="k-button" id="yesButton">Yes</button>
+<button class="k-button" id="noButton"> No</button>
+</script>

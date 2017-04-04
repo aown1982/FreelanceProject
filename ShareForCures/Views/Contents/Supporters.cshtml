@@ -1,0 +1,147 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "about";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                    <h2>Our Supporters</h2>
+                </header>
+                <div>
+                    <p>
+                        Thank you to all of our generous supporters who have made sharing possible!<br />
+                        We are a 501(c)3 nonprofit organization and we rely on people like you to support the mission and help find More Cures.
+                    </p>
+                </div>
+
+                <div class="container">
+                    <p>
+                        <strong>Individuals</strong>
+                        <br/>
+                        <div class="centered">Check back in early 2017 for our Annual Report with listings of all our individual donors</div>
+                    </p>
+                </div>
+                <div class="container">
+                    <p><strong>Corporate Supporters</strong></p>
+                    <div class="row">
+                        <section class="6u 12u(narrower)">
+                            <div class="box post">
+                                <a href="#" class="image left"><img src="" alt=""></a>
+                                <div class="inner">
+                                    <h3>company</h3>
+                                    <p>
+                                        description
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="6u 12u(narrower)">
+                            <div class="box post">
+                                <a href="#" class="image left"><img src="" alt=""></a>
+                                <div class="inner">
+                                    <h3>company</h3>
+                                    <p>
+                                        description
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="container">
+                        <p><strong>Patient Advocacy Collaborators for Cancer Moonshot Project</strong></p>
+                        <div class="row centered">
+                            <section class="6u 12u(narrower)">
+                                <div class="box post">
+                                    <a href="www.lungcanceralliance.org" target="_blank" class="image">
+                                    <img src="~/images/Partners/LCA_LungCancerAlliance_LCA_Stacked_Horizontal_RBG.jpg" style="width: 210px;" /></a>
+                                    @*<div class="inner">
+        <h3>Lung Cancer Alliance</h3>
+        <p>
+            description
+        </p>
+    </div>*@
+                                </div>
+                            </section>
+                            <section class="6u 12u(narrower)">
+                                <div class="box post">
+                                    <a href="http://www.KidneyCancer.org" target="_blank" class="image">
+                                        <img src="~/images/Partners/kidneycancer.png" /></a>
+                                    @*<div class="inner">
+            <h3>Kidney Cancer Association</h3>
+            <p>
+                description
+            </p>
+        </div>*@
+                                </div>
+                            </section>
+                        </div>
+                        @*<div class="row">
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="" alt=""></a>
+                    <div class="inner">
+                        <h3>company</h3>
+                        <p>
+                            description
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="" alt=""></a>
+                    <div class="inner">
+                        <h3>company</h3>
+                        <p>
+                            description
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="" alt=""></a>
+                    <div class="inner">
+                        <h3>company</h3>
+                        <p>
+                            description
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <section class="6u 12u(narrower)">
+                <div class="box post">
+                    <a href="#" class="image left"><img src="" alt=""></a>
+                    <div class="inner">
+                        <h3>company</h3>
+                        <p>
+                            description
+                        </p>
+                    </div>
+                </div>
+            </section>
+                            </div>*@
+                    </div>
+    </article>
+
+    </div>
+    </div>
+</section>
+
+

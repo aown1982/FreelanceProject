@@ -1,0 +1,79 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "wts";
+}
+
+
+
+<!-- Highlights -->
+<section class="wrapper style1">
+    <div class="container">
+        <div class="row">
+            <section class="4u 12u(narrower)">
+                <a href="/Contents/Data">
+                    <div class="box highlight">
+                        <i class="icon major fa-clone"></i>
+                        <h3>SHARE Your Data</h3>
+                </a>
+                <p>Contribute your case - share the health data that you feel comfortable sharing and be part of a cure.</p>
+        </div>
+</section>
+<section class="4u 12u(narrower)">
+    <a href="/Contents/Volunteer">
+        <div class="box highlight">
+            <i class="icon major  fa-hand-paper-o"></i>
+            <h3>Volunteer</h3>
+    </a>
+    <p>Interested in contributing your skills and knowledge to a worthy cause? We need your help!</p>
+    </div>
+</section>
+<section class="4u 12u(narrower)">
+    <a href="https://www.aplos.com/aws/give/SHAREForCures/donation" target="_blank">
+        <div class="box highlight">
+            <i class="icon major  fa-heart-o"></i>
+            <h3>Show Your Support</h3>
+    </a>
+    <p>We can’t achieve our goal of More Cures without financial support. Be part of a cure. Help us today.</p>
+    </div>
+</section>
+<section class="4u 12u(narrower)">
+    <a href="/Contents/Partner">
+        <div class="box highlight">
+            <i class="icon major fa-users"></i>
+            <h3>Partner</h3>
+    </a>
+    <p>
+        We're always interested in partnering with other like-minded, mission-driven organizations. Learn how together, we can contribute to a cure.
+    </p>
+    </div>
+</section>
+<section class="4u 12u(narrower)">
+    <a href="/Contents/Research">
+        <div class="box highlight">
+            <i class="icon major fa-flask"></i>
+            <h3>Research</h3>
+    </a>
+    <p>
+        We are interested in all health-related research and we are committed to helping find cures for all types of diseases. Connect with us to learn more.
+    </p>
+    </div>
+</section>
+
+<section class="4u 12u(narrower)">
+    <div class="box highlight">
+        <i class="icon major fa-check-circle"></i>
+        <h3>GET INVOLVED TODAY</h3>
+
+    </div>
+</section>
+      </div>
+    </div>
+  </section>

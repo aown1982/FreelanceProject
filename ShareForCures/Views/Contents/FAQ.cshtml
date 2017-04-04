@@ -1,0 +1,298 @@
+﻿
+@{
+    if (!string.IsNullOrEmpty(ViewBag.Login) && ViewBag.Login == "yes")
+    {
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    ViewBag.ActiveNav = "hiw";
+
+}
+
+<!-- Main -->
+<section class="wrapper style1" style="padding: 2em 0 3em 0;">
+    <div class="container" style="background-color:#fff;">
+        <div id="content">
+
+            <!-- Content -->
+
+            <article>
+                <header>
+                        <h2>Frequently Asked Questions</h2>
+                </header>
+                <div>
+                    <div style="font-size:small;display:inline-flex;align-content:center;">
+                        <div class="width70" style="margin-right:3%">
+                            <ol style="list-style:upper-roman;margin-left:3%;">
+                                <li>
+                                    <strong>Using the System</strong>
+                                    <ol style="list-style:lower-latin;margin-left:3%;">
+                                        <li>
+                                            <a href="#q1">How do I get started?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q2">Why can’t I get in right now? What’s an activation code?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q3">I had a problem or got an error, what do I do?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q4">Can I create an account for my child or another person I care for?</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <strong>Adding, removing, and viewing data</strong>
+                                    <ol style="list-style:lower-latin;margin-left:3%;">
+                                        <li>
+                                            <a href="#q5">How do I combine my health and wellness data in the SHARE system?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q6">How do I stop sharing data from a source?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q7">Who’s Human API? Why am I authorizing them?</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <strong>Data Sharing</strong>
+                                    <ol style="list-style:lower-latin;margin-left:3%;">
+                                        <li>
+                                            <a href="#q8">Why should I share my data?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q9">Who will see my data?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q10">What data do you receive from my social media accounts?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q11">Can I donate my data if I am a healthy individual?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q18">How does sharing data about my doctor's appointment or sharing the data from my Fitbit® help find cures?</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                        <div class="width70" style="margin-left:3%;">
+                            <ol style="list-style:upper-roman;margin-left:3%;">
+                                <li>
+                                    <strong>Privacy and Security</strong>
+                                    <ol style="list-style:lower-latin;margin-left:3%;">
+                                        <li>
+                                            <a href="#q12">Is sharing my data safe?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q13">I don’t want to share my data with organizations that are for-profit, is that ok?  OR I don’t want to share my social media data, is that ok?</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                                <li>
+                                    <strong>Miscellaneous</strong>
+                                    <ol style="list-style:lower-latin;margin-left:3%;">
+                                        <li>
+                                            <a href="#q14">How does SHARE For Cures make money?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q15">What’s the Cancer Moonshot?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q16">I want to delete my account, what do I do? What happens to my data?</a>
+                                        </li>
+                                        <li>
+                                            <a href="#q17">How do I suggest a new feature that I would like to see in SHARE?</a>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <hr style="border-top: 2px solid #8c8b8b;" class="width70" />
+                    <p>&nbsp;</p>
+                    <h3 style="text-decoration:underline;">
+                    Using the System
+                    </h3>
+
+                    <section id="q1"></section><h4>How do I get started?</h4>
+                    <p>If you have an activation code (provided by SHARE For Cures or a patient advocacy group), go to “Sign In” and create an account. 
+                    You will have the choice of doing this from an existing social media account (Facebook, Twitter, Google Plus) or using an email 
+                    address and creating a password. In either case, you will need to agree to the <a href="/Consent/ConditionsOfUse">Conditions of Use</a>
+                    and <a href="/Consent/PrivacyPolicy">Privacy Policies</a> before your account is created. We encourage you to read these documents ahead of time.
+                    </p>
+                    <p>When you first create an account, your preferences are set to share all of your data for any purpose.  If you are not comfortable 
+                    with this, we encourage you to set your sharing preferences on the “SHARE” page during your first login.</p>
+                    
+                    <section id="q2"></section><h4>Why can’t I get in right now? What’s an activation code?</h4>
+                    <p>Right now, the system is only open to a select group of patients who are part of our <a href="/Contents/Moonshot">pilot project</a>. If you are a cancer 
+                    patient who has taken an immunotherapy drug, please contact the appropriate patient advocacy group to find out how to get an 
+                    activation code.  All other potential users will be invited to join the system in Q1 2017 and you can put yourself on our email 
+                    list <a href="/Contents/Data">here</a>.</p>
+
+                    <section id="q3"></section><h4>I had a problem or got an error, what do I do?</h4>
+                    <p>Patients taking part in the cancer immunotherapy pilot are the first large batch of users in the system after testing. We 
+                    appreciate your patience as we still work out problems and bugs that may occur in the system.  If you have a problem, please 
+                    use the grey “Feedback” box in the bottom right-hand corner to report it.  You can even add a screen-shot of the problem you 
+                    are having.  We will work to quickly resolve these problems.</p>
+                    </p>
+                    <section id="q4"></section><h4>Can I create an account for my child or another person I care for?</h4>
+                    <p>
+                        Not yet.  This is a feature that we hope to add in 2017.  (To help make it happen faster, donate 
+                        <a href="https://www.aplos.com/aws/give/SHAREForCures/donation" target="_blank">HERE</a>).  Right now, individuals 
+                        can only create accounts for themselves.  We understand that SHARE may have lots of useful pediatric applications and we 
+                        hope to add functionality to enable account creation for a dependent soon.
+                    </p>
+
+                    <h3 style="text-decoration:underline;">
+                        Adding, removing, and viewing data</h3>
+
+                    <section id="q5"></section><h4>How do I combine my health and wellness data in the SHARE system?</h4>
+                        <p>
+                            Once you have a SHARE user account, you will click “Add Accounts” in the top menu.  This allows you to either search for your medical providers (hospitals, doctors, labs) or common mobile health apps that you may use.  When you choose a source, you will need to provide your username and password.  This is the username and password either to the appropriate app or to the hospital/doctor/lab’s patient portal. If you don’t know or don’t have your username and password, please visit the patient portal (there’s usually a hyperlink) to request it.
+                        </p>
+                    <section id="q6"></section><h4>How do I stop sharing data from a source?</h4>
+                        <p>
+                            This depends on whether you want to still have the source in your account and not share the data with researchers or 
+                            whether you want the source data completely disconnected from your account so that no new data is recieved from that source:
+                            <p style="margin-left:3%;">
+                                <strong>
+                                    To keep the data in your account, but not share it for research:</strong>
+                                    <br />
+                                    Visit the “SHARE” page and in bottom section “I want to keep the following data private”, choose”
+                                    Add to SHARE Settings” by “Source” and choose that source.
+                                <br/>&nbsp;<br/>
+                                <strong>To disconnect the source from your account entirely:</strong><br />
+                                Go to “Add Accounts” in the top and search for the source. Your connected source will show up highlighted in green.  Choose the pencil in the top right corner, then the red “X”. Answer “Yes” when it asks “Disconnect from the Source?”
+                            </p>
+
+                    <section id="q7"></section><h4>Who’s Human API? Why am I authorizing them?</h4>
+                        <p>
+                            Some of our connections are provided through a third party vendor called Human API. The Human API connections provide the “pipes” to transfer your data from your health sources (like your hospital patient portal) to us.  They are a pass-through and do not retain your data.
+                            Why has my data changed?
+                            From time to time we run processes on the databases to clean up and re-organize the data. This is to ensure that all data in the system is properly organized and categorized.  You may see slight changes in your data based on this re-organization.
+                        </p>
+                    <h3 style="text-decoration:underline;">
+                        Data Sharing</h3>
+                        </p>
+                    <section id="q8"></section><h4>Why should I share my data?</h4>
+                        <p>
+                            We believe that ‘More Cases’ will lead to ‘More Cures’. This means that the more data that is analyzed by researchers, the better chance we have of finding new methods of prevention, detection, and treatment for a variety of diseases. We hope that everyone will help make a difference and share the data that they feel comfortable sharing to help find cures.
+                            Why do you want me to connect a lot of sources?
+                            You are the only person who has a complete view of your own health. Researchers often get a slice of information (just data from one hospital or one clinical trial or about one condition that you have) and don’t have the complete picture.  We want to give them access to complete health data so they can find more cures more quickly.
+                        </p>
+                    <section id="q9"></section><h4>Who will see my data?</h4>
+                        <p>
+                            SHARE For Cures is committed to honoring your sharing preferences.  While we hope that most people will share all or the majority of their data for research, we only want you to share the data that you feel comfortable sharing. We understand privacy concerns and that some people may not want certain data shared about their health or may not want their data shared with certain types of organizations.
+                        </p><p>    We will share only the data that you choose to share only with the types of organizations that you choose under “purpose”.   This may be all research in one disease area, it may be only nonprofit organizations, or it may be anyone.  We will respect YOUR preferences.
+                        </p>
+                    <section id="q10"></section><h4>What data do you receive from my social media accounts?</h4>
+                        <p>
+                            Currently, we receive your user information and basic demographics.  In the future, we may also ask for your posts and additional information in your profile.  This information can be used (when combined with information from many other users) to provide trends in disease detection and health.  For example, it is common that disease outbreaks can be detected through Twitter using tweets from affected users.
+                        </p>
+                    <section id="q11"></section><h4>Can I donate my data if I am a healthy individual?</h4>
+                    <p>
+                        Once SHARE is open to everyone in 2017, then yes! All data helps further the cause. Healthy contributors can be used as
+                        "control" cases for comparison purposes.  It is also likely that at some point in your life you will have some type of
+                        illness, and the data you allow us to collect now and through that point may be especially useful. As such, we encourage
+                        everyone to join and help contribute to a cure.  Please sign up to be notified <a href="/Contents/Data">here</a>.
+                    </p>
+                    <section id="q18"></section><h4>
+                        How does sharing data about my doctor's appointment or sharing the data from my Fitbit® help find cures?
+                    </h4>
+                    <p>
+                        The type of research called Epidemiology is the study of disease in populations. Different factors can play a role in determining who in the population develops diseases or responds to certain treatments. These factors could be related to genetics, your family history, or even how much exercise you are getting. The more data that is collected for research, the better the chance that scientists can identify different factors that could help others, or even you. All types of data can help!
+                        I just changed my sharing preferences to be more restrictive, what does that do?
+                        From this point on, we will no longer share any of the data that you asked to remain private. Because we share de-identified information, it is impossible for us to go back to previous datasets and remove your data that has been previously shared.
+                <h3 style="text-decoration:underline;">
+                    Privacy and Security
+                </h3>
+                        <section id="q12"></section><h4>Is sharing my data safe?</h4>
+                        <p>
+                        SHARE for Cures is committed to putting the patient first in everything we do and we take patient privacy and data security 
+                            very seriously. SHARE adheres to the highest security standards. We will provide users with clear information about what 
+                            data is being used, by whom, and for what purposes.  You, the owners of the data, will have the ultimate visibility and 
+                            control over what data you share and with whom.
+                        </p>
+                        <p>Please read the <a href="/Contents/PrivacySecurity">Privacy and Security</a> page for more information and contact us if you 
+                    have questions or concerns.</p>
+                        <section id="q13"></section><h4>
+                            I don’t want to share my data with organizations that are for-profit, is that ok?  OR I don’t want to share my social media 
+                    data, is that ok?
+                        </h4>
+                        <p>
+                            We want to promote data sharing and speed up research while giving YOU the power to make these choices.  You may share as 
+                            little or as much data as you feel comfortable with.  Any personal choices are ok.
+                        </p>
+                        <h3 style="text-decoration:underline;">
+                            Miscellaneous
+                        </h3>
+                        </p>
+                        <section id="q14"></section><h4>How does SHARE For Cures make money?</h4>
+                        <p>
+                            SHARE For Cures is a 501(c)3 nonprofit organization so its primary source of revenue is from charitable donations.  
+                            (You can donate to support us <a href="https://www.aplos.com/aws/give/SHAREForCures/donation" target="_blank">HERE</a>).  
+                            The initial funding to build the system was entirely through charitable 
+                            contributions (see <a href="/Contents/Supporters">Our Supporters</a>).  As we move forward, some funding will result from partnerships with hospitals 
+                            or companies (such as pharmaceutical companies) who want to use the data that has been collected. Be assured that we 
+                            will only share data that you have agreed to share and you may change your sharing preferences at any time.
+                        </p>
+                        <section id="q15"></section><h4>
+                            What’s the Cancer Moonshot?
+                        </h4>
+                        <p>
+                            SHARE For Cures was pleased to be featured as one of the innovative projects that is part of the White House Cancer Moonshot 
+                            initiative to accelerate cancer research. During his State of the Union address on January 12, 2016, President 
+                            Barack Obama announced the establishment of a 
+                            <a href="https://www.cancer.gov/research/key-initiatives/moonshot-cancer-initiative" target="_blank">Cancer Moonshot</a> to 
+                            accelerate cancer research. The initiative—led 
+                            by Vice President Joe Biden—aims to make more therapies available to more patients, while also improving our ability to 
+                            prevent cancer and detect it at an early stage.
+                        </p>
+                        <section id="q16"></section><h4>I want to delete my account, what do I do? What happens to my data?</h4>
+                        <p>
+                            You may delete your account at any time by going to “Settings” and choosing “Delete My Account” under the “Account Preferences”
+                            heading.   At that point, we will no longer gather any new data on you.  The data that was previously in your account will
+                            continue to be shared based on your sharing preferences. If you no longer want the data that we had to be shared, please
+                            change your sharing settings to not share anything with anybody BEFORE you delete your account.  This will prevent any data
+                            about you from being shared again. Please note: We cannot "unshare" data that was previosuly shared by you. To put it another way,
+                            if you previously authorized us to share your data with a 3rd party and the data was sent to the 3rd party before you changed your
+                            SHARE settings and deleted your account, we cannot then take that data away from the 3rd party.
+                        </p>
+                        <section id="q17"></section><h4>How do I suggest a new feature that I would like to see in SHARE?</h4>
+                        <p>
+                            We have a long list of upgrades and new features that we want to add to SHARE.  It’s important to us that our priorities reflect that of our users.  Feel free to use the grey “Feedback” box to provide us suggestions for future features.
+
+</div>
+
+
+        </div>
+
+        </article>
+
+    </div>
+    </div>
+</section>
+
+<script>
+$(document).ready(function(){
+  // Add smooth scrolling
+  $("a").on('click', function(event) {
+
+    if (this.hash !== "") {
+      event.preventDefault();
+
+      var hash = this.hash;
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 500, function(){
+        window.location.hash = hash;
+      });
+    }
+  });
+});
+</script>

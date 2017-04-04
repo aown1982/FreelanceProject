@@ -1,0 +1,964 @@
+﻿@using ShareForCures.Models.UserData
+@model allUserSHARESettings
+
+@{
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    ViewBag.Title = "SHARE";
+    ViewBag.ActiveNav = "share";
+}
+<style>
+    #Sharetreeview .k-sprite {
+        background-image: url("/images/DataIcons/coloricons-sprite.png");
+    }
+
+    #Denytreeview .k-sprite {
+        background-image: url("/images/DataIcons/coloricons-sprite.png");
+    }
+
+    #purposetreeview .k-sprite {
+        background-image: url("/images/DataIcons/coloricons-sprite.png");
+    }
+
+    .rootfolder {
+        background-position: 0 0;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    .doc {
+        background-position: 0 -48px;
+    }
+
+    .k-checkbox-label {
+        display: inline !important;
+    }
+
+    .k-checkbox-wrapper {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+</style>
+
+<div style="background-color: #fff;">
+    <input type="hidden" id="hfSelectedSource" />
+    <input type="hidden" id="hfSelectedPurposeId" />
+
+
+    <div class="alert alert-success eyeOpen" role="alert">
+        <span style="font-size: medium; font-weight: bold;">Your SHARE Settings</span><br />
+        <span style="font-size: small;">On this page you can control who has access to your data, and for which purposes. Learn more here... <a href="javascript:void(0);">Read our FAQs</a></span>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:lightblue">
+                    <span>What data is visible to others?</span>
+                    @*<span class="floatRight showDataRight text-right">Let me see all data visible to others...</span>
+                        <span class="glyphicon glyphicon-eye-open floatRight eyeOpen"></span>*@
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 customBorder panel panel-body">
+                        <!-- Table Selectable -->
+                        <div class="example-wrap">
+                            <div class="example">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <span class="SHARETableHeading">I SHARE...</span>
+                                            </th>
+                                            <th>
+                                                <span class="SHARETableHeading">the following data...</span>
+                                            </th>
+                                            <th>
+                                                <span class="SHARETableHeading">for the following purposes</span>
+                                            </th>
+                                            <th>
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null && Model.allows != null && Model.allows.Count > 0)
+                                        {
+                                            int iRow = 0;
+                                            foreach (SHARESettings item in Model.allows)
+                                            {
+
+                                                <tr class="ShareRow">
+                                                    <td class="centered"><span class="glyphicon glyphicon-heart"></span></td>
+                                                    <td>
+                                                        @if (item.AllData == true)
+                                                        {
+                                                            <div>All data, from all sources </div>
+                                                        }
+                                                        else if (item.OrgName != null)
+                                                        {
+                                                            <div>All data from @item.OrgName</div>
+                                                        }
+                                                        else if (item.ServiceName != null)
+                                                        {
+                                                            <div>All data from @item.ServiceName</div>
+                                                        }
+                                                        else if ((item.StartDateTime != null) || (item.EndDateTime != null))
+                                                        {
+                                                            if (item.StartDateTime != null && item.EndDateTime != null)
+                                                            {
+                                                                <div>All data between @item.StartDateTime.Value.ToString("d") and @item.EndDateTime.Value.ToString("d")</div>
+                                                            }
+                                                            else if (item.StartDateTime == null && item.EndDateTime != null)
+                                                            {
+                                                                <div>All data befored @item.EndDateTime.Value.ToString("d")</div>
+                                                            }
+                                                            else if (item.StartDateTime != null && item.EndDateTime == null)
+                                                            {
+                                                                <div>All data after @item.StartDateTime.Value.ToString("d")</div>
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.SHAREPurpose != null)
+                                                        {
+                                                            <span>@item.SHAREPurpose</span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item.SHAREPurposeDescription != null)
+                                                        {
+                                                            string sMoreInfoModalName = "#moreInfoModal" + item.ID + iRow;
+                                                            iRow++;
+                                                            <span style="font-size:smaller;"><a href="#" data-toggle="modal" data-target="@sMoreInfoModalName" style="vertical-align:text-bottom;">More Info</a></span>
+                                                        }
+                                                        @if (item.SHAREPurposeDescription != null && item.ConsentPath != null)
+                                                        {
+                                                            <span>&nbsp;| &nbsp;</span>
+                                                        }
+                                                        @if (item.ConsentPath != null)
+                                                        {
+                                                            <span style="font-size:smaller;">
+                                                                <a href="@item.ConsentPath" target="_blank" style="vertical-align:text-bottom;">View Consent</a>
+                                                            </span>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-edit" onclick="alert(@item.ID);"></span>
+                                                        <span class="glyphicon glyphicon-remove" onclick="alert(@item.ID);"></span>
+                                                    </td>
+                                                </tr>
+
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <span style="text-align: center;">
+                                    SHARE more by:
+                                    <a class="SHARELinks" id="btnSource" href="#" data-toggle="modal" data-target="#SHAREbySource" onclick="GetShareShourceType();">Source </a> |
+                                    <a class="SHARELinks" id="btnDateRange" href="#" data-toggle="modal" data-target="#SHAREbyDateRange">Date Range </a>@* |
+                                        <a class="SHARELinks" id="btnEvent" href="#animatedModal">Event </a>*@
+                                </span>
+                                <p />
+                                <div class="alert alert-danger marginLeft12percent SHAREAlert centered" role="alert">
+                                    Did you know only the data excpilicity shared by you will be seen by those you authorize? <a href="javascript:void(0);">Learn More...</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Table Selectable -->
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 customBorder panel panel-body">
+                        <!-- Table Selectable -->
+                        <div class="example-wrap">
+                            <div class="example">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="2">
+                                                <span class="SHARETableHeading">I want to keep the following data private...</span>
+                                            </th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null && Model.denies != null && Model.denies.Count > 0)
+                                        {
+                                            foreach (SHARESettings item in Model.denies)
+                                            {
+                                                <tr class="ShareRow">
+                                                    <td><span class="glyphicon glyphicon-lock"></span></td>
+                                                    <td>
+                                                        @if (item.AllData == true)
+                                                        {
+                                                            <div>All data, from all sources </div>
+                                                        }
+                                                        else if (item.OrgName != null)
+                                                        {
+                                                            <div>All data from @item.OrgName</div>
+                                                        }
+                                                        else if (item.ServiceName != null)
+                                                        {
+                                                            <div>All data from @item.ServiceName</div>
+                                                        }
+                                                        else if ((item.StartDateTime != null) || (item.EndDateTime != null))
+                                                        {
+                                                            if (item.StartDateTime != null && item.EndDateTime != null)
+                                                            {
+                                                                <div>All data between @item.StartDateTime.Value.ToString("d") and @item.EndDateTime.Value.ToString("d")</div>
+                                                            }
+                                                            else if (item.StartDateTime == null && item.EndDateTime != null)
+                                                            {
+                                                                <div>All data befored @item.EndDateTime.Value.ToString("d")</div>
+                                                            }
+                                                            else if (item.StartDateTime != null && item.EndDateTime == null)
+                                                            {
+                                                                <div>All data after @item.StartDateTime.Value.ToString("d")</div>
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <span class="glyphicon glyphicon-edit" onclick="alert(@item.ID);"></span>
+                                                        <span class="glyphicon glyphicon-remove" onclick="alert(@item.ID);"></span>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                                <span style="text-align: center;">
+                                    Keep more private by:
+                                    <a class="SHARELinks" id="btnSource" href="#" data-toggle="modal" data-target="#DenybySource">Source </a> |
+                                    <a class="SHARELinks" id="btnDateRange" href="#" data-toggle="modal" data-target="#DenybyDateRange">Date Range </a>@* |
+                                        <a class="SHARELinks" id="btnEvent" href="#animatedModal">Event </a>*@
+                                </span>
+                                <p /><div class="alert alert-danger marginLeft12percent SHAREAlert" role="alert">
+                                    Did you know the exlusions you list here override your SHARE settings? This ensures that the data you want to keep private stays private, regardless of any overlaps with your SHARE settings above. <a href="javascript:void(0);">Learn More...</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Table Selectable -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="background-color:lightblue">
+                    <span>Who has accessed my data?</span>
+                    @*<span class="floatRight showDataRight">Let me see all data seen by others...</span>
+                        <span class="glyphicon glyphicon-eye-open floatRight eyeOpen"></span>*@
+                </div>
+                <div class="panel-body">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-sx-12 customBorder panel panel-body">
+                        <!-- Example Table Selectable -->
+                        <div class="example-wrap">
+                            <div class="example">
+                                <table class="table table-hover">
+                                    <tbody>
+                                        <tr class="ShareRow">
+                                            <td></td>
+                                            <td>
+                                                12/01/2015 09:00 pm ET
+                                            </td>
+                                            <td>You logged into your account</td>
+                                        </tr>
+                                        <tr class="ShareRow">
+                                            <td></td>
+                                            <td>
+                                                10/18/2015 12:00 pm ET
+                                            </td>
+                                            <td>Data on your Cancer event was accessed for research</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <span class="floatRight"><a href="javascript:void(0);">Learn more... </a></span>
+                            </div>
+                        </div>
+                        <!-- End Example Table Selectable -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (Model != null && Model.allows != null && Model.allows.Count > 0)
+    {
+        int iRow = 0;
+        foreach (SHARESettings item in Model.allows)
+        {
+            string sModalID = "moreInfoModal" + item.ID + iRow;
+            iRow++;
+            <div id="@sModalID" class="modal fade in" role="dialog" style="display:none;">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" onclick="$('body, html').css({ 'overflow': 'auto' });">&times;</button>
+                            <h4 class="modal-title">@item.SHAREPurpose</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p id="SHAREPurposeinfo">@item.SHAREPurposeDescription</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    <!--SHARE By Source Modal-->
+    <div id="SHAREbySource" class="modal fade in" role="dialog" style="display:none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('body, html').css({ 'overflow': 'auto' });">&times;</button>
+                    <h4 class="modal-title">SHARE By Source...</h4>
+                </div>
+                <div class="modal-body">
+                    <div>Please choose the data sources from which you would like to SHARE:</div>
+                    <div class="k-content">
+                        <div>
+                            <div id="Sharetreeview"></div>
+                        </div>
+                        <div style="padding-top: 2em;">
+                            <h4>Sources Selected:</h4>
+                            <span id="resultSHARED">&nbsp;</span>
+                            <div class="floatRight">
+                                <button id="btnShareSourceNext" class="btn btn-default" data-toggle="modal" data-target="#SHAREPurpose" onclick="$('body, html').css({ 'overflow': 'auto' }); GetSharePurposeCategory(); " disabled>Next</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+
+                        function GetShareShourceType()
+                        {
+                            $.ajax({
+                                type: "POST",
+                                url: '/User/GetSourceServiceType',
+                                contentType: "application/json; charset=utf-8",
+                                data: null,
+                                dataType: "json",
+                                async: false,
+                                success: function (response) {
+                                    if (response != null && response.length > 0) {
+                                        var array1 = [];
+                                        $.each(response, function (i, obj) {
+                                            var subArray = [];
+                                            $.each(obj.SourcesList, function (i, item) {
+                                                subArray.push({ "id": item.ID, "text": item.ServiceName, "expanded": true, "spriteCssClass": "rootfolder" });
+                                            });
+                                            array1.push({ "id": obj.ID, "text": obj.Type, "expanded": true, "spriteCssClass": "rootfolder", "items": subArray });
+                                        });
+
+                                        //BindKendoTreeView(array1)
+
+                                        $("#Sharetreeview").kendoTreeView({
+                                            checkboxes: {
+                                                checkChildren: true
+                                            },
+                                            check: onCheckSharetreeview,
+                                            dataSource: array1
+                                        });
+                                    }
+                                }
+                            });
+                           }
+                        //$(function () {
+                         
+
+                        //});
+                        //$("#Sharetreeview").kendoTreeView({
+                        //    checkboxes: {
+                        //        checkChildren: true
+                        //    },
+                        //    check: onCheck,
+                        //    dataSource: [{
+
+                        //        id: 1, text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
+                        //             {
+                        //                 id: 2, text: "Kendo UI Project", expanded: false, spriteCssClass: "folder", items: [
+                        //                             { id: 3, text: "about.html", spriteCssClass: "doc" },
+                        //                             { id: 4, text: "index.html", spriteCssClass: "doc" },
+                        //                             { id: 5, text: "logo.png", spriteCssClass: "doc" }
+                        //                 ]
+                        //             },
+                        //             {
+                        //                 id: 6, text: "New Web Site", expanded: false, spriteCssClass: "folder", items: [
+                        //                             { id: 7, text: "mockup.jpg", spriteCssClass: "doc" },
+                        //                             { id: 8, text: "Research.pdf", spriteCssClass: "doc" },
+                        //                 ]
+                        //             },
+                        //             {
+                        //                 id: 9, text: "Reports", expanded: false, spriteCssClass: "folder", items: [
+                        //                             { id: 10, text: "February.pdf", spriteCssClass: "doc" },
+                        //                             { id: 11, text: "March.pdf", spriteCssClass: "doc" },
+                        //                             { id: 12, text: "April.pdf", spriteCssClass: "doc" }
+                        //                 ]
+                        //             }
+                        //        ]
+
+
+                        //    }]
+                        //});
+
+                        // function that gathers IDs of checked nodes
+                       
+
+                        // show checked node IDs on datasource change
+                        function onCheckSharetreeview() {
+                           var nodesIds = [], nodesData;
+                            var checkedNodes = [],
+                                treeView = $("#Sharetreeview").data("kendoTreeView"),
+                                message;
+
+                            checkedNodeIdsinShareTree(treeView.dataSource.view(), nodesIds);
+                            checkTextShareTree(treeView.dataSource.view(), checkedNodes);
+                            if (checkedNodes.length > 0) {
+                                message = checkedNodes.join(",");
+                                nodesData = nodesIds.join(",");
+                                document.getElementById("btnShareSourceNext").disabled = false;
+                            } else {
+                                message = "&nbsp;";
+                                nodesData = "&nbsp;";
+                                document.getElementById("btnShareSourceNext").disabled = true;
+                            }
+
+                            $("#resultSHARED").html(message);
+                            $("#resultpurposeText").html(message);
+                            $("#hfSelectedSource").val(nodesData);
+                        }
+
+
+                        function checkedNodeIdsinShareTree(nodes, nodesIds) {
+                            for (var i = 0; i < nodes.length; i++) {
+
+                                if (nodes[i].checked && nodes[i].hasChildren==false) {
+                                    nodesIds.push(nodes[i].id);
+
+                                }
+
+
+
+                                //if (nodes[i].checked) {
+                                //    nodesIds.push(nodes[i].id);
+
+                                //}
+                                else if (nodes[i].checked == false) {
+                                    var index2 = nodesIds.indexOf(nodes[i].id);
+
+                                    if (index2 > -1) {
+                                        nodesIds.splice(index2, 1);
+
+
+                                    }
+                                }
+
+
+                                if (nodes[i].hasChildren) {
+                                   checkedNodeIdsinShareTree(nodes[i].children.view(), nodesIds);
+                                    
+                                }
+                            }
+                        }
+
+
+                        function checkTextShareTree(nodes, checkedNodes) {
+                            for (var i = 0; i < nodes.length; i++) {
+                                if (nodes[i].checked) {
+                                    checkedNodes.push(nodes[i].text);
+
+                                }
+                                else if (nodes[i].checked == false) {
+                                    var index = checkedNodes.indexOf(nodes[i].text);
+
+                                    if (index > -1) {
+                                        checkedNodes.splice(index, 1);
+
+
+                                    }
+                                }
+
+                                if (nodes[i].hasChildren) {
+                                    checkTextShareTree(nodes[i].children.view(), checkedNodes);
+                                }
+                            }
+                        }
+
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--SHARE By Date Modal-->
+    <div id="SHAREbyDateRange" class="modal fade in" role="dialog" style="display:none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('body, html').css({ 'overflow': 'auto' });">&times;</button>
+                    <h4 class="modal-title">SHARE By Date Range...</h4>
+                </div>
+                <div class="modal-body">
+                    <span>Sharing by date range, shares all data collected across all of your sources for the period of time specified.</span>
+                    <p>&nbsp;</p>
+                    <label class="control-label" for="inputBasicLastName">Please select the date range:</label>
+                    <input type="text" name="daterange" id="txtDateRangeFilter" value="01/01/2010 - 01/01/2020" class="input-sm customDataRange" />
+                    <script type="text/javascript">
+                        $(function () {
+                            $('input[name="daterange"]').daterangepicker();
+                        });
+                    </script></p>
+                    <p>&nbsp;</p>
+                    <button id="btnShareDateNext" class="btn btn-default floatRight" data-toggle="modal" data-target="#SHAREPurpose">Next</button>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--DENY By Source Modal-->
+    <div id="DenybySource" class="modal fade in" role="dialog" style="display:none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('body, html').css({ 'overflow': 'auto' });">&times;</button>
+                    <h4 class="modal-title">Keep Private By Source...</h4>
+                </div>
+                <div class="modal-body">
+                    <div>Please choose the data sources you would like to keep private:</div>
+                    <div class="k-content">
+                        <div>
+                            <div id="Denytreeview"></div>
+                        </div>
+                        <div style="padding-top: 2em;">
+                            <h4>Sources Selected:</h4>
+                            <span id="resultDENIED">&nbsp;</span>
+                            <div class="floatRight">
+                                <button id="btnDenySourceDone" class="btn btn-default" disabled>Done</button>
+                            </div>
+                        </div>
+                    </div>
+                    @*<script>
+                        $("#Denytreeview").kendoTreeView({
+                            checkboxes: {
+                                checkChildren: true
+                            },
+                            check: onCheck,
+                            dataSource: [{
+                                id: 1, text: "My Documents", expanded: true, spriteCssClass: "rootfolder", items: [
+                                    {
+                                        id: 2, text: "Kendo UI Project", expanded: false, spriteCssClass: "folder", items: [
+                                            { id: 3, text: "about.html", spriteCssClass: "doc" },
+                                            { id: 4, text: "index.html", spriteCssClass: "doc" },
+                                            { id: 5, text: "logo.png", spriteCssClass: "doc" }
+                                        ]
+                                    },
+                                    {
+                                        id: 6, text: "New Web Site", expanded: false, spriteCssClass: "folder", items: [
+                                            { id: 7, text: "mockup.jpg", spriteCssClass: "doc" },
+                                            { id: 8, text: "Research.pdf", spriteCssClass: "doc" },
+                                        ]
+                                    },
+                                    {
+                                        id: 9, text: "Reports", expanded: false, spriteCssClass: "folder", items: [
+                                            { id: 10, text: "February.pdf", spriteCssClass: "doc" },
+                                            { id: 11, text: "March.pdf", spriteCssClass: "doc" },
+                                            { id: 12, text: "April.pdf", spriteCssClass: "doc" }
+                                        ]
+                                    }
+                                ]
+                            }]
+                        });
+
+                        // function that gathers IDs of checked nodes
+                        //function checkedNodeIds(nodes, checkedNodes) {
+                        //    debugger;
+                        //    for (var i = 0; i < nodes.length; i++) {
+                        //        if (nodes[i].checked) {
+                        //            checkedNodes.push(nodes[i].id);
+                        //        }
+                        //        else if (nodes[i].checked == false) {
+                        //            var index = checkedNodes.indexOf(nodes[i].id);
+                        //            if (index > -1) {
+                        //                checkedNodes.splice(index, 1);
+                        //            }
+                        //        }
+
+                        //        if (nodes[i].hasChildren) {
+                        //            checkedNodeIds(nodes[i].children.view(), checkedNodes);
+                        //        }
+                        //    }
+                        //}
+
+                        //// show checked node IDs on datasource change
+                        //function onCheck() {
+                        //    debugger;
+                        //    var checkedNodes = [],
+                        //        treeView = $("#Denytreeview").data("kendoTreeView"),
+                        //        message;
+
+                        //    checkedNodeIds(treeView.dataSource.view(), checkedNodes);
+                        //    debugger;
+                        //    if (checkedNodes.length > 0) {
+                        //        message = checkedNodes.join(",");
+                        //        document.getElementById("btnDenySourceDone").disabled = false;
+                        //    } else {
+                        //        message = "&nbsp;";
+                        //        document.getElementById("btnDenySourceDone").disabled = true;
+                        //    }
+
+                        //    $("#resultDENIED").html(message);
+                        //}
+                    </script>*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--DENY By Date Modal-->
+    <div id="DenybyDateRange" class="modal fade in" role="dialog" style="display:none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('body, html').css({ 'overflow': 'auto' });">&times;</button>
+                    <h4 class="modal-title">Keep Private By Date Range...</h4>
+                </div>
+                <div class="modal-body">
+                    <span>Excluding data by date range, prevents any data collected across all of your sources for the period of time specified from being shared.</span>
+                    <p>&nbsp;</p>
+                    <label class="control-label" for="inputBasicLastName">Please select the date range:</label>
+                    <input type="text" name="daterange" id="txtDateRangeFilter" value="01/01/2010 - 01/01/2020" class="input-sm customDataRange" />
+                    <script type="text/javascript">
+                        $(function () {
+                            $('input[name="daterange"]').daterangepicker();
+                        });
+                    </script></p>
+                    <p>&nbsp;</p>
+                    <button id="btnDenyDateDone" class="btn btn-default floatRight">Done</button>
+                    <p>&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--SHARE Purpose Modal-->
+    <div id="SHAREPurpose" class="modal fade in" role="dialog" style="display:none;">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('body, html').css({ 'overflow': 'auto' });">&times;</button>
+                    <h4 class="modal-title">SHARE Purpose...</h4>
+                    You indicated that your are willing to share the following data:
+                    @*<ul class="sharedDataItems" style="margin: 0;">
+                        
+                        <li style="list-style:circle;margin-left:15px;">x data</li>
+                        <li style="list-style:circle;margin-left:15px;">y data</li>
+                        <li style="list-style:circle;margin-left:15px;">z data</li>
+                    </ul>*@
+                    <span id="resultpurposeText">&nbsp;</span>
+                </div>
+                <div class="modal-body">
+                    <div>Please indicate the reasons for which SHARE For Cures is allowed to disclose the above listed data:</div>
+                    <div class="k-content">
+                        <div>
+                            <div id="purposetreeview"></div>
+                        </div>
+                        <div style="padding-top: 2em;">
+                            <h4>Reasons Selected:</h4>
+                            <span id="resultpurpose">&nbsp;</span>
+                            <div class="floatRight">
+                                <button id="btnFinish" class="btn btn-default" data-dismiss="modal" onclick="$('body, html').css({ 'overflow': 'auto' });" disabled>Finish</button> @*SaveSharePurposeData()*@
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                        //$(function () {
+                        //    GetSourceServiceType();
+                        //});
+
+                        function SaveSharePurposeData()
+                        {
+                            var hdSourceValue = $("#hfSelectedSource").val();
+                            var hdpPurposeValue = $("#hfSelectedPurposeId").val();
+                            var jsonData = JSON.stringify({
+                                shareIds: hdSourceValue,
+                                purposeIds: hdpPurposeValue
+                            });
+                            $.ajax({
+                                type: "POST",
+                                url: '/User/SaveSharePurposeData',
+                                contentType: "application/json; charset=utf-8",
+                                data: jsonData,
+                                dataType: "json",
+                                async: false,
+                                success: function (response) {
+                                   
+                                }
+                            });
+                        }
+
+
+                        function GetSharePurposeCategory() {
+                            $.ajax({
+                                type: "POST",
+                                url: '/User/GetSharePurposeData',
+                                contentType: "application/json; charset=utf-8",
+                                data: null,
+                                dataType: "json",
+                                async: false,
+                                success: function (response) {
+                                    $("#SHAREbySource").hide();
+                                    $('#SHAREbySource').modal('hide');
+                                    if (response != null && response.length > 0) {
+                                        var array1 = [];
+                                       
+                                        $.each(response, function (i, obj) {
+                                            var subArray = [];
+                                            $.each(obj.SahrePurposeList, function (i, item) {
+                                                subArray.push({ "id": item.ID, "text": item.Name, "expanded": true, "spriteCssClass": "rootfolder" });
+                                            });
+                                            array1.push({ "id": obj.ID, "text" : obj.Name, "expanded": true, "spriteCssClass": "rootfolder", "items": subArray });
+                                        });
+
+                                     $("#purposetreeview").kendoTreeView({
+                                                checkboxes: {
+                                                    checkChildren: true
+                                                },
+                                                check: onPurposeTreeviewCheck,
+                                                dataSource: array1
+
+                                              });
+
+                                    }
+                                }
+                            });
+                        }
+
+                       
+
+                        // function that gathers IDs of checked nodes
+                        function checkedPurposeNodeIds(nodes, checkedNodes) {
+                            for (var i = 0; i < nodes.length; i++) {
+                                if (nodes[i].checked && nodes[i].hasChildren==false) {
+                                    checkedNodes.push(nodes[i].id);
+                                }
+                                //if (nodes[i].checked) {
+                                //    checkedNodes.push(nodes[i].id);
+                                //}
+                                else if (nodes[i].checked == false) {
+                                    var index = checkedNodes.indexOf(nodes[i].id);
+                                    if (index > -1) {
+                                        checkedNodes.splice(index, 1);
+                                    }
+                                }
+
+                                if (nodes[i].hasChildren) {
+                                    checkedPurposeNodeIds(nodes[i].children.view(), checkedNodes);
+                                }
+                            }
+                        }
+
+                        function checkedPurposeNodeText(nodes, checkedNodesText) {
+                            for (var i = 0; i < nodes.length; i++) {
+                                if (nodes[i].checked) {
+                                    checkedNodesText.push(nodes[i].text);
+                                }
+                                else if (nodes[i].checked == false) {
+                                    var index = checkedNodesText.indexOf(nodes[i].id);
+                                    if (index > -1) {
+                                        checkedNodesText.splice(index, 1);
+                                    }
+                                }
+
+                                if (nodes[i].hasChildren) {
+                                    checkedPurposeNodeText(nodes[i].children.view(), checkedNodesText);
+                                }
+                            }
+                        }
+
+                        // show checked node IDs on datasource change
+                        function onPurposeTreeviewCheck() {
+                          var checkedNodesText = [], nodeText;
+                            var checkedNodes = [],
+                                treeView = $("#purposetreeview").data("kendoTreeView"),
+                                nodeIds;
+                         
+                            checkedPurposeNodeIds(treeView.dataSource.view(), checkedNodes);
+                            checkedPurposeNodeText(treeView.dataSource.view(), checkedNodesText);
+                           if (checkedNodes.length > 0) {
+                                nodeIds = checkedNodes.join(",");
+                                nodeText = checkedNodesText.join(",");
+
+                                document.getElementById("btnFinish").disabled = false;
+                            } else {
+                                nodeIds = "&nbsp;";
+                                document.getElementById("btnFinish").disabled = true;
+                            }
+                           $("#resultpurpose").empty();
+                            $("#resultpurpose").html(nodeText);
+                            $("#hfSelectedPurposeId").val(nodeIds);
+
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*
+        <div id="animatedModal">
+            <!--THIS IS IMPORTANT! to close the modal, the class name has to match the name given on the ID class="close-animatedModal" -->
+            <div id="closebt-container" class="close-animatedModal">
+                <img class="closebt" src="/images/closebt.svg">
+            </div>
+            <div class="container " id="sourceForm">
+
+
+                <div id="div4" class="">
+                    <div class="row">
+                        <div class="col-md-12 col-xs-12 col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    You indicated that your are willing to share the following data:
+                                    <ul class="researchDataItems">
+                                        <li>x data</li>
+                                        <li>y data</li>
+                                        <li>z data</li>
+                                    </ul>
+                                </div>
+                                <div class="panel-body">
+                                    <label class="control-label ">Please select the reason for which SHARE For Cures can disclose the above listed data:</label>
+                                    <div>
+                                        <div id="jstreeReason"></div>
+                                    </div>
+                                    <br />
+                                    <button id="btnFinished" class="btn btn-default floatRight">Finished</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        </div>
+            <script>
+
+
+
+
+                $("#btnSource").animatedModal();
+                $("#btnDateRange").animatedModal();
+                $("#btnEvent").animatedModal();
+                $("#btnSource2").animatedModal();
+                $("#btnDateRange2").animatedModal();
+                $("#btnEvent2").animatedModal();
+
+                $(document).ready(function () {
+                    $('#jstreeReason').jstree({
+                        "checkbox": {
+                            "keep_selected_style": false
+                        },
+                        "plugins": ["checkbox"],
+                        'core': {
+                            'data': [
+                               'Research',
+                               {
+                                   'text': 'Any Research',
+                                   'state': {
+                                       'opened': true,
+                                       'selected': true
+                                   },
+                                   'children': [
+                                     { 'text': 'Cancer Research' },
+                                     'Diabetes Research'
+                                   ]
+                               }
+                            ]
+                        }
+                    });
+
+                    $("#btnSource,#btnSource2").click(function () {
+                        $("#div2").hide();
+                        $("#div3").hide();
+                        $("#div4").hide();
+                        $("#div1").show();
+                    });
+                    $("#btnDateRange,#btnDateRange2").click(function () {
+                        $("#div2").show();
+                        $("#div3").hide();
+                        $("#div4").hide();
+                        $("#div1").hide();
+                    });
+                    $("#btnEvent,#btnEvent2").click(function () {
+                        $("#div2").hide();
+                        $("#div3").show();
+                        $("#div4").hide();
+                        $("#div1").hide();
+                    });
+                    $("#btnShow2").click(function () {
+                        $("#div1").hide();
+                        $("#div3").hide();
+                        $("#div4").show();
+                        $("#div2").hide();
+                    });
+                    $("#btnShow3").click(function () {
+                        $("#div1").hide();
+                        $("#div2").hide();
+                        $("#div4").show();
+                        $("#div3").hide();
+                    });
+                    $("#btnShow4").click(function () {
+                        $("#div1").hide();
+                        $("#div2").hide();
+                        $("#div3").hide();
+                        $("#div4").show();
+                    });
+                });
+
+                $("#btnFinished").click(function () {
+                    CloseModalManually('animatedModal');
+                });
+
+                function CloseModalManually(myModalTarget) {
+                    $('body, html').css({ 'overflow': 'auto' });
+                    var modalId = $('body').find('#' + myModalTarget);
+                    if (modalId.hasClass(myModalTarget + '-on')) {
+                        modalId.removeClass(myModalTarget + '-on');
+                        modalId.addClass(myModalTarget + '-off');
+                    }
+
+                    if (modalId.hasClass(myModalTarget + '-off')) {
+                        modalId.removeClass('zoomIn');
+                        modalId.addClass('zoomOut');
+                        modalId.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function () {
+                            modalId.css({ 'z-index': -9999 });
+                        });
+                    };
+                }
+            </script>
+
+            <script>
+                $("#btn-1").click(function () {
+                    $("#darrow").toggleClass('glyphicon-chevron-right glyphicon-chevron-down');
+                });
+            </script>
+
+            <script>
+
+                $("#btnRefreshAccounts").click(function () {
+                    /*Implement Async call to refresh data*/
+                });
+
+                $("#btnEditAccounts").click(function () {
+                    /*Implement show/edit accounts modal*/
+                });
+
+            </script>
+    *@
